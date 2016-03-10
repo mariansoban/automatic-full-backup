@@ -8,7 +8,7 @@ setup(name = 'enigma2-plugin-extensions-automatic-fullbackup',
 		author_email='dima-73@inbox.lv',
 		package_dir = {'Extensions.FullBackup': 'src'},
 		packages=['Extensions.FullBackup'],
-		package_data={'Extensions.FullBackup': ['*.png']},
+		package_data={'Extensions.FullBackup': ['*.png', '*.sh']},
 		description = 'automatic full backup and manual flashing image',
 		cmdclass = setup_translate.cmdclass,
 	)
