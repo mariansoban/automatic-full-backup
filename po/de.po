@@ -1,0 +1,310 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: package version\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-08-02 15:20+0200\n"
+"PO-Revision-Date: 2013-08-23 17:50+0100\n"
+"Last-Translator: ed\n"
+"Language-Team: language <Dima-73@inbox.lv>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid ""
+"\n"
+"Backup only for NAS mounted to /media/net"
+msgstr ""
+"\n"
+"Backup nur für NAS gemountet nach /media/net"
+
+msgid ""
+"\n"
+"The found files:"
+msgstr ""
+"\n"
+"Gefundene Dateien:"
+
+msgid "  %s (maybe error)"
+msgstr "  %s (vielleicht fehlerhaft)"
+
+msgid "  %s (maybe ok)"
+msgstr "  %s (vielleicht ok)"
+
+msgid " nothing!"
+msgstr " Nichts !"
+
+msgid " ver. "
+msgstr " Version "
+
+msgid "< Needs create file *(any name).fbackup in USB device >"
+msgstr "(Datei mit *(Name egal).fbackup dazu am USB-LW benötigt)"
+
+msgid ""
+"A recording is currently running. Please stop the recording before trying to "
+"start a flashing."
+msgstr ""
+"Aktuell läuft eine Aufnahme. Bitte die Aufnahme stoppen bevor versucht wird\n"
+"einen Flashvorgang zu starten !"
+
+msgid "Auto-full-backup for ET/VU+/XP1000"
+msgstr "Auto Voll-Backup für ET/VU+/XP1000"
+
+msgid "Automatic cleanup backups"
+msgstr "Automatisches Löschen von Backups"
+
+msgid "Automatic full backup"
+msgstr "Automatisches Voll-Backup"
+
+msgid "Automatic start time"
+msgstr "Automatische Start Zeit"
+
+msgid "Background mode"
+msgstr "Hintergrund Modus"
+
+msgid "Backup location"
+msgstr "Backup Ort"
+
+msgid "Behaviour in deep standby"
+msgstr "Verhalten im Deep Standby"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Choice days for create backup"
+msgstr "Tage für Backup Erstellung wählen"
+
+msgid "Console log"
+msgstr "Konsolen Log"
+
+msgid "Console mode"
+msgstr "Konsolen Modus"
+
+msgid "Create a full backup image"
+msgstr "Erstelle ein Voll-Backup Image"
+
+msgid "Create backup"
+msgstr "Erstelle Backup"
+
+msgid "Daily automatic backup"
+msgstr "Tägliches automatisches Backup"
+
+msgid "Days Profile"
+msgstr "Tages Profil"
+
+msgid "Disabled"
+msgstr "Deaktiviert"
+
+msgid "Do you really want to create a full backup of directory %s ?"
+msgstr "Möchten sie ein Voll-Backup vom Verzeichnis %s erstellen ?"
+
+msgid "Do you really want to unpack %s ?"
+msgstr "Möchten sie %s wirklich entpacken ?"
+
+msgid "Done"
+msgstr "Fertig"
+
+msgid "Exit"
+msgstr "Beenden"
+
+msgid "Failed"
+msgstr "fehlgeschlagen"
+
+msgid "Flashing: "
+msgstr "Flash läuft... "
+
+msgid "For flashing your receiver files are needed:\n"
+msgstr "Benötigte Dateien um zu flashen:\n"
+
+msgid "Friday"
+msgstr "Freitag"
+
+msgid "FullBackup Configuration"
+msgstr "Voll-Backup Konfiguration"
+
+msgid "Harddisk"
+msgstr "HDD"
+
+msgid ""
+"In the next few seconds to start Automatic Full Backup!\n"
+"Options control panel will not be available 5-7 minutes.\n"
+"Run backup now?"
+msgstr ""
+"In wenigen Sekunden startet ein automatisches Voll-Backup !\n"
+"Bedienung der Box für 5 - 7 Minuten nicht möglich.\n"
+"Backup jetzt starten ?"
+
+msgid "Last backup date"
+msgstr "Letztes Backup-Datum"
+
+msgid "Manual"
+msgstr "manuell"
+
+msgid "Monday"
+msgstr "Montag"
+
+msgid "NOT found files for flashing!\n"
+msgstr "Keine Dateien zum Flashen gefunden !\n"
+
+msgid "No backup present"
+msgstr "Kein Backup vorhanden !"
+
+msgid "Not selected directory backup"
+msgstr "Kein Backup Verzeichnis gewählt !"
+
+msgid "Only kernel"
+msgstr "Nur Kernel"
+
+msgid "Only root"
+msgstr "Nur root"
+
+msgid "Please: DO NOT reboot your STB and turn off the power.\n"
+msgstr "Bitte die Box keinesfalls neustarten bzw. in Power OFF versetzen !\n"
+
+msgid "Press OK"
+msgstr "Drücke OK"
+
+msgid "Read error current dir, sorry."
+msgstr "Aktuelles Verzeichnis nicht lesbar !"
+
+msgid "Restore backup"
+msgstr "IMG/Backup herstellen"
+
+msgid "Run flash"
+msgstr "Starte Flash"
+
+msgid "Running"
+msgstr "Läuft..."
+
+msgid "Saturday"
+msgstr "Samstag"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Scan at automount for create backup"
+msgstr "Suche nach Automount um Backup zu erstellen"
+
+msgid "Select parameter for start flash!\n"
+msgstr "Wähle die Art zu flashen !\n"
+
+msgid "Select the folder with backup"
+msgstr "Wähle den Ordner mit dem Backup"
+
+msgid "Select the option to create a backup:"
+msgstr "Wähle die Möglichkeit ein Backup zu erstellen:"
+
+msgid "Show message during the start"
+msgstr "Nachricht bei Start zeigen"
+
+msgid "Show only found image and mtd partitions.\n"
+msgstr "Zeige verfügbare Images und MTD Partitionen.\n"
+
+msgid "Simulate (no write)"
+msgstr "Simulation (kein Schreibvorgang)"
+
+msgid "Standart (root and kernel)"
+msgstr "Standard (root und Kernel)"
+
+msgid ""
+"Starting Automatic Full Backup!\n"
+"Options control panel will not be available 5-7 minutes.\n"
+"Run backup now?"
+msgstr ""
+"Starte automatisches Voll-Backup !\n"
+"Bedienung der Box für 5 - 7 Minuten nicht möglich.\n"
+"Backup jetzt starten ?"
+
+msgid "Sunday"
+msgstr "Sonntag"
+
+msgid "The image or kernel will be flashing and auto booted in few minutes.\n"
+msgstr ""
+"Das Image oder der Kernel wird geflasht - Box startet in wenigen Minuten "
+"neu..\n"
+
+msgid "Thursday"
+msgstr "Donnerstag"
+
+msgid "Tuesday"
+msgstr "Dienstag"
+
+msgid "Unzip"
+msgstr "Entpacken"
+
+msgid "Wake up from deep standby"
+msgstr "Aufwachen aus Deep Standby"
+
+msgid ""
+"Warning!\n"
+"Use at your own risk! Make always a backup before use!\n"
+"Don't use it if you use multiple ubi volumes in ubi layer!"
+msgstr ""
+"Warnung !\n"
+"!!! Verwendung auf eigene Gefahr !!!\n"
+"Zuvor immer ein Backup erstellen\n"
+"Nicht anwenden bei multiple ubi volumes in ubi layer"
+
+msgid "Wednesday"
+msgstr "Mittwoch"
+
+msgid ""
+"You may not use this settings!\n"
+"At least one day a week should be included!"
+msgstr ""
+"Diese Einstellungen können nicht verwendet werden !\n"
+"Mindestens ein Tag in der Woche muss angegeben werden !"
+
+msgid "Your STB will freeze during the flashing process.\n"
+msgstr "Während dem Flashvorgang ist die Box unbedienbar.\n"
+
+msgid "cleanup disabled"
+msgstr "Löschen deaktiviert"
+
+msgid "current:  %s"
+msgstr "Aktuell:  %s"
+
+msgid "disabled"
+msgstr "deaktiviert"
+
+msgid "no"
+msgstr "Nein"
+
+msgid "ofgwrite will stop enigma2 now to run the flash.\n"
+msgstr "Das Programm ofgwrite stoppt jetzt Enigma2 um den Flash zu starten.\n"
+
+msgid "older than 1 week"
+msgstr "älter als 1 Woche"
+
+msgid "older than 2 days"
+msgstr "älter als 2 Tage"
+
+msgid "older than 2 weeks"
+msgstr "älter als 2 Wochen"
+
+msgid "older than 3 days"
+msgstr "älter als 3 Tage"
+
+msgid "older than 3 months"
+msgstr "älter als 3 Monate"
+
+msgid "older than 3 weeks"
+msgstr "älter als 3 Wochen"
+
+msgid "older than 4 weeks"
+msgstr "älter als 4 Wochen"
+
+msgid "type info"
+msgstr "Typ Info"
+
+msgid "type yes/no"
+msgstr "Typ ja/nein"
+
+msgid "wake up and shutdown after backup"
+msgstr "Aufwachen und Herunterfahren nach Backup"
+
+msgid "wake up for backup"
+msgstr "Aufwachen für Backup"

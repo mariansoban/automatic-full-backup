@@ -1,0 +1,464 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-10 20:43+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: plugin.py:1021
+#, python-format
+msgid ""
+"\n"
+"Pack in zip archive current folder and add to '%s' OMB?"
+msgstr ""
+
+#: plugin.py:694 plugin.py:999
+msgid ""
+"\n"
+"The found files:"
+msgstr ""
+
+#: plugin.py:664
+msgid ""
+"\n"
+"You are using dual multiboot!"
+msgstr ""
+
+#: plugin.py:700 plugin.py:1009
+#, python-format
+msgid "  %s (maybe error)"
+msgstr ""
+
+#: plugin.py:697 plugin.py:1003 plugin.py:1006
+#, python-format
+msgid "  %s (maybe ok)"
+msgstr ""
+
+#: plugin.py:703 plugin.py:1012
+msgid " nothing!"
+msgstr ""
+
+#: plugin.py:53
+msgid " ver. "
+msgstr ""
+
+#: plugin.py:1049
+#, python-format
+msgid "'%s' archive was successfully added to '%s' OMB!"
+msgstr ""
+
+#: plugin.py:788 plugin.py:852
+msgid "'ofgwrite' not installed!"
+msgstr ""
+
+#: plugin.py:1023
+msgid "'zip' not installed!"
+msgstr ""
+
+#: plugin.py:266
+msgid "< Needs create file *(any name).fbackup in USB device >"
+msgstr ""
+
+#: plugin.py:736 plugin.py:800
+msgid ""
+"A recording is currently running. Please stop the recording before trying to "
+"start a flashing."
+msgstr ""
+
+#: plugin.py:946 plugin.py:955 plugin.py:961
+msgid "Add to OMB"
+msgstr ""
+
+#: plugin.py:1503
+msgid "Automatic Full Backup"
+msgstr ""
+
+#: plugin.py:259
+msgid "Automatic cleanup backups"
+msgstr ""
+
+#: plugin.py:264
+msgid "Automatic full backup"
+msgstr ""
+
+#: plugin.py:256
+msgid "Automatic start time"
+msgstr ""
+
+#: plugin.py:466
+msgid "Background mode"
+msgstr ""
+
+#: plugin.py:263
+msgid "Backup location"
+msgstr ""
+
+#: plugin.py:258
+msgid "Behaviour in deep standby"
+msgstr ""
+
+#: plugin.py:273 plugin.py:577 plugin.py:894 plugin.py:1362
+msgid "Cancel"
+msgstr ""
+
+#: plugin.py:257
+msgid "Choice days for create backup"
+msgstr ""
+
+#: plugin.py:478 plugin.py:1441
+msgid "Console log"
+msgstr ""
+
+#: plugin.py:467
+msgid "Console mode"
+msgstr ""
+
+#: plugin.py:1487
+msgid "Create a full backup image"
+msgstr ""
+
+#: plugin.py:470
+msgid "Create backup"
+msgstr ""
+
+#: plugin.py:1375
+msgid "Days Profile"
+msgstr ""
+
+#: plugin.py:407
+msgid "Disabled"
+msgstr ""
+
+#: plugin.py:1415
+#, python-format
+msgid "Do you really want to create a full backup of directory %s ?"
+msgstr ""
+
+#: plugin.py:554
+msgid "Do you really want to stop the creation of backup?"
+msgstr ""
+
+#: plugin.py:865 plugin.py:1069
+#, python-format
+msgid "Do you really want to unpack %s ?"
+msgstr ""
+
+#: plugin.py:502
+msgid "Done"
+msgstr ""
+
+#: plugin.py:1034
+msgid "Error creating zip archive!"
+msgstr ""
+
+#: plugin.py:546
+msgid "Error unmounting devices!"
+msgstr ""
+
+#: plugin.py:534 plugin.py:723
+msgid "Exit"
+msgstr ""
+
+#: plugin.py:534
+msgid "Exit and eject device"
+msgstr ""
+
+#: plugin.py:500
+msgid "Failed"
+msgstr ""
+
+#: plugin.py:740 plugin.py:804
+msgid "Flashing: "
+msgstr ""
+
+#: plugin.py:968
+msgid "For backup your receiver files are needed:\n"
+msgstr ""
+
+#: plugin.py:674
+msgid "For flashing your receiver files are needed:\n"
+msgstr ""
+
+#: plugin.py:128
+msgid "Friday"
+msgstr ""
+
+#: plugin.py:1491
+msgid "Full backup for all recievers"
+msgstr ""
+
+#: plugin.py:236
+msgid "FullBackup Configuration"
+msgstr ""
+
+#: plugin.py:1314
+msgid ""
+"In the next few seconds to start Automatic Full Backup!\n"
+"Options control panel will not be available 5-7 minutes.\n"
+"Run backup now?"
+msgstr ""
+
+#: plugin.py:403
+msgid "Last backup date"
+msgstr ""
+
+#: plugin.py:275
+msgid "Manual"
+msgstr ""
+
+#: plugin.py:124
+msgid "Monday"
+msgstr ""
+
+#: plugin.py:769 plugin.py:833
+msgid "NOT found files for flashing!\n"
+msgstr ""
+
+#: plugin.py:398
+msgid "No backup present"
+msgstr ""
+
+#: plugin.py:393 plugin.py:463 plugin.py:487
+msgid "Not selected directory backup"
+msgstr ""
+
+#: plugin.py:711 plugin.py:752 plugin.py:816
+msgid "Only kernel"
+msgstr ""
+
+#: plugin.py:710 plugin.py:749 plugin.py:813
+msgid "Only root"
+msgstr ""
+
+#: plugin.py:1027
+msgid ""
+"Please wait!\n"
+"Greating zip archive..."
+msgstr ""
+
+#: plugin.py:781 plugin.py:845
+msgid "Please: DO NOT reboot your STB and turn off the power.\n"
+msgstr ""
+
+#: plugin.py:93
+msgid "Press OK"
+msgstr ""
+
+#: plugin.py:1471
+msgid "Read error current dir, sorry."
+msgstr ""
+
+#: plugin.py:279
+msgid "Restore backup"
+msgstr ""
+
+#: plugin.py:645 plugin.py:659 plugin.py:668
+msgid "Run flash"
+msgstr ""
+
+#: plugin.py:491
+msgid "Running"
+msgstr ""
+
+#: plugin.py:129
+msgid "Saturday"
+msgstr ""
+
+#: plugin.py:274 plugin.py:1363
+msgid "Save"
+msgstr ""
+
+#: plugin.py:265
+msgid "Scan at automount for create backup"
+msgstr ""
+
+#: plugin.py:717 plugin.py:764 plugin.py:828
+msgid "Second partition (only kernel)"
+msgstr ""
+
+#: plugin.py:716 plugin.py:761 plugin.py:825
+msgid "Second partition (only root)"
+msgstr ""
+
+#: plugin.py:715 plugin.py:758 plugin.py:822
+msgid "Second partition (root and kernel)"
+msgstr ""
+
+#: plugin.py:533
+msgid "Select action:"
+msgstr ""
+
+#: plugin.py:893
+msgid "Select backup for add to OpenMultiboot"
+msgstr ""
+
+#: plugin.py:673
+msgid "Select parameter for start flash!\n"
+msgstr ""
+
+#: plugin.py:576
+msgid "Select the folder with backup"
+msgstr ""
+
+#: plugin.py:469
+msgid "Select the option to create a backup:"
+msgstr ""
+
+#: plugin.py:260
+msgid "Show message during the start"
+msgstr ""
+
+#: plugin.py:774 plugin.py:838
+msgid "Show only found image and mtd partitions.\n"
+msgstr ""
+
+#: plugin.py:708 plugin.py:743 plugin.py:807
+msgid "Simulate (no write)"
+msgstr ""
+
+#: plugin.py:714 plugin.py:755 plugin.py:819
+msgid "Simulate second partition (no write)"
+msgstr ""
+
+#: plugin.py:423
+msgid ""
+"Sorry!\n"
+"This boot is not flash image!"
+msgstr ""
+
+#: plugin.py:709 plugin.py:746 plugin.py:810
+msgid "Standard (root and kernel)"
+msgstr ""
+
+#: plugin.py:1308
+msgid ""
+"Starting Automatic Full Backup!\n"
+"Options control panel will not be available 5-7 minutes.\n"
+"Please wait ..."
+msgstr ""
+
+#: plugin.py:130
+msgid "Sunday"
+msgstr ""
+
+#: plugin.py:544
+msgid "The device was successfully unmounted!"
+msgstr ""
+
+#: plugin.py:782 plugin.py:846
+msgid "The image or kernel will be flashing and auto booted in few minutes.\n"
+msgstr ""
+
+#: plugin.py:127
+msgid "Thursday"
+msgstr ""
+
+#: plugin.py:125
+msgid "Tuesday"
+msgstr ""
+
+#: plugin.py:643 plugin.py:862 plugin.py:944 plugin.py:1066
+msgid "Unzip"
+msgstr ""
+
+#: plugin.py:665
+msgid ""
+"Warning!\n"
+"Use at your own risk! Make always a backup before use!\n"
+"Don't use it if you use multiple ubi volumes in ubi layer!"
+msgstr ""
+
+#: plugin.py:126
+msgid "Wednesday"
+msgstr ""
+
+#: plugin.py:1386
+msgid ""
+"You may not use this settings!\n"
+"At least one day a week should be included!"
+msgstr ""
+
+#: plugin.py:780 plugin.py:844
+msgid "Your STB will freeze during the flashing process.\n"
+msgstr ""
+
+#: plugin.py:362 plugin.py:981
+msgid "Your reciever not supported!"
+msgstr ""
+
+#: plugin.py:109
+msgid "cleanup disabled"
+msgstr ""
+
+#: plugin.py:580 plugin.py:637 plugin.py:897 plugin.py:938
+#, python-format
+msgid "current:  %s"
+msgstr ""
+
+#: plugin.py:95
+msgid "disabled"
+msgstr ""
+
+#: plugin.py:101
+msgid "no"
+msgstr ""
+
+#: plugin.py:779 plugin.py:843
+msgid "ofgwrite will stop enigma2 now to run the flash.\n"
+msgstr ""
+
+#: plugin.py:112
+msgid "older than 1 week"
+msgstr ""
+
+#: plugin.py:110
+msgid "older than 2 days"
+msgstr ""
+
+#: plugin.py:113
+msgid "older than 2 weeks"
+msgstr ""
+
+#: plugin.py:111
+msgid "older than 3 days"
+msgstr ""
+
+#: plugin.py:116
+msgid "older than 3 months"
+msgstr ""
+
+#: plugin.py:114
+msgid "older than 3 weeks"
+msgstr ""
+
+#: plugin.py:115
+msgid "older than 4 weeks"
+msgstr ""
+
+#: plugin.py:102
+msgid "type info"
+msgstr ""
+
+#: plugin.py:103
+msgid "type yes/no"
+msgstr ""
+
+#: plugin.py:97
+msgid "wake up and shutdown after backup"
+msgstr ""
+
+#: plugin.py:96
+msgid "wake up for backup"
+msgstr ""

@@ -1,0 +1,389 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-02-28 19:54+0100\n"
+"PO-Revision-Date: 2016-03-10 19:15+0200\n"
+"Language-Team: LANGUAGE <Dima-73@inbox.lv>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Dimitrij <Dima-73@inbox.lv>\n"
+"Language: ru\n"
+"X-Generator: Poedit 1.8.4\n"
+
+msgid ""
+"\n"
+"Backup only for NAS mounted to /media/net"
+msgstr ""
+"\n"
+"Бекап только для на NAS смонтированных в /media/net"
+
+msgid ""
+"\n"
+"Pack in zip archive current folder and add to '%s' OMB?"
+msgstr ""
+"\n"
+"Запаковать в zip архив текущую папку и добавить в '%s' OMB?"
+
+msgid ""
+"\n"
+"The found files:"
+msgstr ""
+"\n"
+"Найденные файлы:"
+
+msgid ""
+"\n"
+"You are using dual multiboot!"
+msgstr ""
+"\n"
+"Вы используете двойной мульти загрузчик!"
+
+msgid "  %s (maybe error)"
+msgstr "  %s (может быть ошибка)"
+
+msgid "  %s (maybe ok)"
+msgstr "  %s (может быть ок)"
+
+msgid " nothing!"
+msgstr " ничего!"
+
+msgid " ver. "
+msgstr " вер. "
+
+msgid "'%s' archive was successfully added to '%s' OMB!"
+msgstr "'%s' архив был успешно добавлен в '%s' OMB!"
+
+msgid "< Needs create file *(any name).fbackup in USB device >"
+msgstr "< Необходим файл *(любое имя).fbackup в корне USB >"
+
+msgid ""
+"A recording is currently running. Please stop the recording before trying to "
+"start a flashing."
+msgstr ""
+"В текущее время идет запись. Пожалуйста остановите запись перед началом "
+"быстрой прошивки."
+
+msgid "Add to OMB"
+msgstr "Добавить в OMB"
+
+msgid "Automatic cleanup backups"
+msgstr "Автоматическая очистка бекапов"
+
+msgid "Automatic full backup"
+msgstr "Автоматический полный бекап"
+
+msgid "Automatic start time"
+msgstr "Время автоматического старта"
+
+msgid "Background mode"
+msgstr "Фоновый режим"
+
+msgid "Backup location"
+msgstr "Место хранения бекапа"
+
+msgid "Behaviour in deep standby"
+msgstr "Поведение в глубоком ожидании"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Choice days for create backup"
+msgstr "Выбор дней для создания бекапа"
+
+msgid "Console log"
+msgstr "Консольный лог"
+
+msgid "Console mode"
+msgstr "Режим консоли"
+
+msgid "Create a full backup image"
+msgstr "Создать полный бекап имиджа"
+
+msgid "Create backup"
+msgstr "Создать бекап"
+
+msgid "Daily automatic backup"
+msgstr "Ежедневный автоматический бекап"
+
+msgid "Days Profile"
+msgstr "Профили дней"
+
+msgid "Disabled"
+msgstr "Отключено"
+
+msgid "Do you really want to create a full backup of directory %s ?"
+msgstr "Вы действительно хотите создать полный бекап в директорию %s ?"
+
+msgid "Do you really want to stop the creation of backup?"
+msgstr "Вы действительно хотите остановить создание бекапа?"
+
+msgid "Do you really want to unpack %s ?"
+msgstr "Вы действительно хотите распаковать %s ?"
+
+msgid "Done"
+msgstr "Готово"
+
+msgid "Error creating zip archive!"
+msgstr "Ошибка создания зип архива!"
+
+msgid "Error unmounting devices!"
+msgstr "Ошибка отмонтирования устройства!"
+
+msgid "Exit"
+msgstr "Выход"
+
+msgid "Exit and eject device"
+msgstr "Выход и извлечь устройство"
+
+msgid "Failed"
+msgstr "Ошибка"
+
+msgid "Flashing: "
+msgstr "Быстрая прошивка: "
+
+msgid "For backup your receiver files are needed:\n"
+msgstr "Для бекапа Вашего ресивера необходимы файлы:\n"
+
+msgid "For flashing your receiver files are needed:\n"
+msgstr "Для прошивки Вашего ресивера необходимы файлы:\n"
+
+msgid "Friday"
+msgstr "Пятница"
+
+msgid "Full backup for all recievers"
+msgstr "Полный бекап для всех ресиверов"
+
+msgid "FullBackup Configuration"
+msgstr "Настройки FullBackup"
+
+msgid "Harddisk"
+msgstr "Жесткий диск"
+
+msgid ""
+"In the next few seconds to start Automatic Full Backup!\n"
+"Options control panel will not be available 5-7 minutes.\n"
+"Run backup now?"
+msgstr ""
+"В ближайшие несколько секунд начнется Automatic Full Backup!\n"
+"В течении 5-7 минут управление ресивером будет не доступно.\n"
+"Выполнить бекап сейчас?"
+
+msgid "Last backup date"
+msgstr "Дата последнего бекапа"
+
+msgid "Manual"
+msgstr "В ручную"
+
+msgid "Monday"
+msgstr "Понедельник"
+
+msgid "NOT found files for flashing!\n"
+msgstr "НЕТ найденных файлов для быстрой прошивки!\n"
+
+msgid "No backup present"
+msgstr "Нет бекапа для показа"
+
+msgid "Not selected directory backup"
+msgstr "Не выбрана директория бекапа"
+
+msgid "Only kernel"
+msgstr "Только ядро"
+
+msgid "Only root"
+msgstr "Только имидж"
+
+msgid ""
+"Please wait!\n"
+"Greating zip archive..."
+msgstr ""
+"Пожалуйста, подождите!\n"
+"Создаем zip архив..."
+
+msgid "Please: DO NOT reboot your STB and turn off the power.\n"
+msgstr ""
+"Пожалуйста: НЕ делайте перезагрузку вашего STB и не выключайте питание.\n"
+
+msgid "Press OK"
+msgstr "Нажмите ОК"
+
+msgid "Read error current dir, sorry."
+msgstr "Ошибка чтения текущей директории, извините."
+
+msgid "Restore backup"
+msgstr "Прошить бекап/имидж"
+
+msgid "Run flash"
+msgstr "Быстрая прошивка"
+
+msgid "Running"
+msgstr "Запущен"
+
+msgid "Saturday"
+msgstr "Суббота"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Scan at automount for create backup"
+msgstr "Сканирование при авто монтировании (создать бекап)"
+
+msgid "Second partition (only kernel)"
+msgstr "Второй раздел (только ядро)"
+
+msgid "Second partition (only root)"
+msgstr "Второй раздел (только имидж)"
+
+msgid "Second partition (root and kernel)"
+msgstr "Второй раздел (имидж и ядро)"
+
+msgid "Select action:"
+msgstr "Выберите действие:"
+
+msgid "Select backup for add to OpenMultiboot"
+msgstr "Выберите бекап для загрузки его в OpenMultiboot"
+
+msgid "Select parameter for start flash!\n"
+msgstr "Выберите параметр для запуска быстрой прошивки!\n"
+
+msgid "Select the folder with backup"
+msgstr "Выберите папку с бекапом"
+
+msgid "Select the option to create a backup:"
+msgstr "Выберите вариант создания бекапа:"
+
+msgid "Show message during the start"
+msgstr "Показать сообщение при начале бекапа"
+
+msgid "Show only found image and mtd partitions.\n"
+msgstr "Показать только найденный имидж и разделы mtd.\n"
+
+msgid "Simulate (no write)"
+msgstr "Имитация (без записи)"
+
+msgid "Simulate second partition (no write)"
+msgstr "Имитация второго раздела (без записи)"
+
+msgid ""
+"Sorry!\n"
+"This boot is not flash image!"
+msgstr ""
+"Извините!\n"
+"Это загрузка не является flash имиджем!"
+
+msgid "Standard (root and kernel)"
+msgstr "Дефолт (имидж и ядро)"
+
+msgid ""
+"Starting Automatic Full Backup!\n"
+"Options control panel will not be available 5-7 minutes.\n"
+"Run backup now?"
+msgstr ""
+"Начинается Automatic Full Backup!\n"
+"В течении 5-7 минут управление ресивером будет не доступно.\n"
+"Пожалуйста подождите ..."
+
+msgid "Sunday"
+msgstr "Воскресенье"
+
+msgid "The device was successfully unmounted!"
+msgstr "Устройство успешно отмонтировано!"
+
+msgid "The image or kernel will be flashing and auto booted in few minutes.\n"
+msgstr ""
+"Имидж или ядро сейчас будут перезаписаны и ресивер автоматически "
+"перезагрузится через несколько минут.\n"
+
+msgid "Thursday"
+msgstr "Четверг"
+
+msgid "Tuesday"
+msgstr "Вторник"
+
+msgid "Unzip"
+msgstr "Распаковать"
+
+msgid "Wake up from deep standby"
+msgstr "Включать из режима глубокого ожидания"
+
+msgid ""
+"Warning!\n"
+"Use at your own risk! Make always a backup before use!\n"
+"Don't use it if you use multiple ubi volumes in ubi layer!"
+msgstr ""
+"Внимание!\n"
+"Используйте быструю прошивку на свой страх и риск!\n"
+"Рекомендуем сделать бекап перед каждым применением!\n"
+"Не применять, если вы используете множественные тома ubi!"
+
+msgid "Wednesday"
+msgstr "Среда"
+
+msgid ""
+"You may not use this settings!\n"
+"At least one day a week should be included!"
+msgstr ""
+"Вы не можете использовать эти настройки!\n"
+"По крайней мере один день недели должен быть активирован!"
+
+msgid "Your STB will freeze during the flashing process.\n"
+msgstr "Ваш STB будет заблокирован на время процесса быстрой прошивки.\n"
+
+msgid "Your reciever not supported!"
+msgstr "Ваш ресивер не поддерживается!"
+
+msgid "cleanup disabled"
+msgstr "очистка отключена"
+
+msgid "current:  %s"
+msgstr "текущая:  %s"
+
+msgid "disabled"
+msgstr "отключено"
+
+msgid "no"
+msgstr "нет"
+
+msgid "ofgwrite will stop enigma2 now to run the flash.\n"
+msgstr ""
+"утилита ofgwrite остановит сейчас enigma2 для выполнения быстрой прошивки.\n"
+
+msgid "older than 1 week"
+msgstr "старше одной недели"
+
+msgid "older than 2 days"
+msgstr "старше 2 дней"
+
+msgid "older than 2 weeks"
+msgstr "старше 2 недель"
+
+msgid "older than 3 days"
+msgstr "старше 3 дней"
+
+msgid "older than 3 months"
+msgstr "старше 3 месяцев"
+
+msgid "older than 3 weeks"
+msgstr "старше 3 недель"
+
+msgid "older than 4 weeks"
+msgstr "старше 4 недель"
+
+msgid "type info"
+msgstr "тип инфо"
+
+msgid "type yes/no"
+msgstr "тип да/нет"
+
+msgid "wake up and shutdown after backup"
+msgstr "вкл. и выкл. после бекапа"
+
+msgid "wake up for backup"
+msgstr "вкл. для бекапа"
+
+msgid "'ofgwrite' not installed!"
+msgstr "'ofgwrite' не установлен!"
+
+msgid "'zip' not installed!"
+msgstr "'zip' не установлен!"

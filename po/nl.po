@@ -1,0 +1,304 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Automatic-Full_Backup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-08 21:41+0300\n"
+"PO-Revision-Date: 2013-08-24 15:03+0100\n"
+"Last-Translator: Pedro_Newbie <backupsuite@outlook.com>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+msgid ""
+"\n"
+"Backup only for NAS mounted to /media/net"
+msgstr ""
+"\n"
+"Backup alleen op NAS verbonden naar /media/net"
+
+msgid ""
+"\n"
+"The found files:"
+msgstr ""
+"\n"
+"De gevonden bestanden:"
+
+msgid "  %s (maybe error)"
+msgstr "  %s (misschien fout)"
+
+msgid "  %s (maybe ok)"
+msgstr "  %s (misschien ok)"
+
+msgid " nothing!"
+msgstr " niets"
+
+msgid " ver. "
+msgstr " versie "
+
+msgid "< Needs create file *(any name).fbackup in USB device >"
+msgstr "< Maak een tekstbestand *(elke naam).fbackup in USB apparaat >"
+
+msgid ""
+"A recording is currently running. Please stop the recording before trying to "
+"start a flashing."
+msgstr ""
+"Er loopt momenteel een opname. Stop deze opname voordat geprobeerd wordt om "
+"te flashen"
+
+msgid "Auto-full-backup for ET/VU+/XP1000"
+msgstr "Automatische-volledige-backup voor ET/VU+/XP1000"
+
+msgid "Automatic Full Backup"
+msgstr "Automatische volledige backup"
+
+msgid "Automatic cleanup backups"
+msgstr "Automatisch schonen backups"
+
+msgid "Automatic full backup"
+msgstr "Automatische volledige backup"
+
+msgid "Automatic start time"
+msgstr "Automatische start tijd"
+
+msgid "Background mode"
+msgstr "Achtergrond modus"
+
+msgid "Backup location"
+msgstr "Plaats van de backup"
+
+msgid "Behaviour in deep standby"
+msgstr "Gedrag in deep standbye"
+
+msgid "Cancel"
+msgstr "Annuleer"
+
+msgid "Choice days for create backup"
+msgstr "Kies dagen voor het maken van een backup"
+
+msgid "Console log"
+msgstr "Console log"
+
+msgid "Console mode"
+msgstr "Console mode"
+
+msgid "Create a full backup image"
+msgstr "Maak een volledige backup"
+
+msgid "Create backup"
+msgstr "Maak backup"
+
+msgid "Days Profile"
+msgstr "Dagen profiel"
+
+msgid "Disabled"
+msgstr "Gedeactiveerd"
+
+msgid "Do you really want to create a full backup of directory %s ?"
+msgstr "Wil je echt een volledige backup maken van de map %s ?"
+
+msgid "Do you really want to unpack %s ?"
+msgstr "Wil je echt %s uitpakken?"
+
+msgid "Done"
+msgstr "Klaar"
+
+msgid "Exit"
+msgstr "Einde"
+
+msgid "Failed"
+msgstr "Mislukt"
+
+msgid "Flashing: "
+msgstr "Flashing"
+
+msgid "For flashing your receiver files are needed:\n"
+msgstr "Benodigde bestanden om de ontvanger te flashen:\n"
+
+msgid "Friday"
+msgstr "Vrijdag"
+
+msgid "FullBackup Configuration"
+msgstr "Volledige backup configuratie"
+
+msgid ""
+"In the next few seconds to start Automatic Full Backup!\n"
+"Options control panel will not be available 5-7 minutes.\n"
+"Run backup now?"
+msgstr ""
+"Binnen een paar seconden start een automatische volledige backup!\n"
+"Het controlepanel zal niet beschikbaar zijn voor ongeveer 5-7 minuten.\n"
+"Nu een backup maken?"
+
+msgid "Last backup date"
+msgstr "Datum laatste backup"
+
+msgid "Manual"
+msgstr "Handmatig"
+
+msgid "Monday"
+msgstr "Maandag"
+
+msgid "NAS"
+msgstr "NAS"
+
+msgid "NOT found files for flashing!\n"
+msgstr "GEEN bestanden gevonden om te flashen!\n"
+
+msgid "No backup present"
+msgstr "Geen backup aanwezig"
+
+msgid "Not selected directory backup"
+msgstr "Geen backup map geselecteerd"
+
+msgid "Only kernel"
+msgstr "Alleen kernel"
+
+msgid "Only root"
+msgstr "Alleen root"
+
+msgid "Please: DO NOT reboot your STB and turn off the power.\n"
+msgstr "AUB: De ontvanger NIET HERSTARTEN en NIET de stroom onderbreken.\n"
+
+msgid "Press OK"
+msgstr "Druk op OK"
+
+msgid "Read error current dir, sorry."
+msgstr "Leesfout huidige map, sorry."
+
+msgid "Restore backup"
+msgstr "Backup terugzetten"
+
+msgid "Run flash"
+msgstr "Start flash"
+
+msgid "Running"
+msgstr "Bezig..."
+
+msgid "Saturday"
+msgstr "Zaterdag"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Scan at automount for create backup"
+msgstr "Scan automount om backup te maken"
+
+msgid "Select parameter for start flash!\n"
+msgstr "Selecteer parameter om flash te starten! \n"
+
+msgid "Select the folder with backup"
+msgstr "Selecter de map met de backup"
+
+msgid "Select the option to create a backup:"
+msgstr "Selecteer de optie om een backup te maken"
+
+msgid "Show message during the start"
+msgstr "Toon boodschap tijdens de start"
+
+msgid "Show only found image and mtd partitions.\n"
+msgstr "Toon alleen dee gevonden image en mtd partities.\n"
+
+msgid "Simulate (no write)"
+msgstr "Simuleren (niet schrijven)"
+
+msgid "Standart (root and kernel)"
+msgstr "Standaard (root en kernel)"
+
+msgid ""
+"Starting Automatic Full Backup!\n"
+"Options control panel will not be available 5-7 minutes.\n"
+"Please wait ..."
+msgstr ""
+"Het opties paneel zal niet beschikbaar zijn voor 5-7 minuten.\n"
+"Even wachten aub..."
+
+msgid "Sunday"
+msgstr "Zondag"
+
+msgid "The image or kernel will be flashing and auto booted in few minutes.\n"
+msgstr ""
+"De image en/of de kernel worden geflasht en automatsch herstart binnen een "
+"paar minuten.\n"
+
+msgid "Thursday"
+msgstr "Donderdag"
+
+msgid "Tuesday"
+msgstr "Dinsdag"
+
+msgid "Unzip"
+msgstr "Unzip"
+
+msgid ""
+"Warning!\n"
+"Use at your own risk! Make always a backup before use!\n"
+"Don't use it if you use multiple ubi volumes in ubi layer!"
+msgstr ""
+"Waarschuwing!\n"
+"Gebruik op eigen risico! Maak altijd een backup voor gebruik!\n"
+"Niet gebruiken als je meervoudige ubi volumes gebruikt in de ubi laag!"
+
+msgid "Wednesday"
+msgstr "Woensdag"
+
+msgid ""
+"You may not use this settings!\n"
+"At least one day a week should be included!"
+msgstr ""
+"Deze instelling kan niet gebruikt worden!\n"
+"Minstens een dag van de week moet gebruikt worden!"
+
+msgid "Your STB will freeze during the flashing process.\n"
+msgstr "Je STB zal bevriezen gedurende de flash procedure.\n"
+
+msgid "cleanup disabled"
+msgstr "opruimen gedeactiveerd"
+
+msgid "current:  %s"
+msgstr "huidig:  %s"
+
+msgid "disabled"
+msgstr "gedeactiveerd"
+
+msgid "no"
+msgstr "nee"
+
+msgid "ofgwrite will stop enigma2 now to run the flash.\n"
+msgstr "ofgwrite zal enigma2 stoppen om te kunnen flashen.\n"
+
+msgid "older than 1 week"
+msgstr "ouder dan een week"
+
+msgid "older than 2 days"
+msgstr "ouder dan 2 dagen"
+
+msgid "older than 2 weeks"
+msgstr "ouder dan 2 weken"
+
+msgid "older than 3 days"
+msgstr "ouder dan 3 dagen"
+
+msgid "older than 3 months"
+msgstr "ouder dan 3 maanden"
+
+msgid "older than 3 weeks"
+msgstr "ouder dan 3 weken"
+
+msgid "older than 4 weeks"
+msgstr "ouder dan 4 weken"
+
+msgid "type info"
+msgstr "type info"
+
+msgid "type yes/no"
+msgstr "type ja/nee"
+
+msgid "wake up and shutdown after backup"
+msgstr "ontwaken en uitschakelen na backup"
+
+msgid "wake up for backup"
+msgstr "ontwaken voor backup"
