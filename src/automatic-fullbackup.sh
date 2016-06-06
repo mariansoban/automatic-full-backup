@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-VERSION="07/03/2016\ncreators of the script Pedro_Newbie and Dimitrij (http://forums.openpli.org)\n"
+VERSION="06/06/2016\ncreators of the script Pedro_Newbie and Dimitrij (http://forums.openpli.org)\n"
 DIRECTORY="$1"
 START=$(date +%s)
 DATE=`date +%Y%m%d_%H%M`
@@ -72,19 +72,19 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		MAINDEST="$DIRECTORY/$MODEL"
 		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
 		echo "Destination        = $MAINDEST\n"
-	elif grep fusionhd /proc/stb/info/boxtype > /dev/null ; then
-		TYPE=FUSION
-		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096 -F"
-		UBINIZE_ARGS="-m 2048 -p 128KiB"
-		SHOWNAME="Xsarius $MODEL"
-		MAINDEST="$DIRECTORY/update/$MODEL/cfe"
-		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE/update"
-		echo "Destination        = $MAINDEST\n"
 	elif grep formuler /proc/stb/info/boxtype > /dev/null ; then
 		TYPE=FORMULER
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 8192"
 		UBINIZE_ARGS="-m 2048 -p 128KiB"
-		SHOWNAME="Openbox (Formuler1 or Formuler3) $MODEL"
+		SHOWNAME="Openbox (Formuler1/3/4) $MODEL"
+		MAINDEST="$DIRECTORY/$MODEL"
+		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
+		echo "Destination        = $MAINDEST\n"
+	elif grep spycat /proc/stb/info/boxtype > /dev/null ; then
+		TYPE=SPYCAT
+		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096 -F"
+		UBINIZE_ARGS="-m 2048 -p 128KiB"
+		SHOWNAME="Spycat (mini)"
 		MAINDEST="$DIRECTORY/$MODEL"
 		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
 		echo "Destination        = $MAINDEST\n"
@@ -122,13 +122,13 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		echo "Destination        = $MAINDEST\n"
 	elif grep hd /proc/stb/info/boxtype > /dev/null ; then
 		TYPE=MUTANT
-		if [ $MODEL = "hd2400" ] || [ $MODEL = "hd1200" ] || [ $MODEL = "hd1500" ]  ; then 
+		if [ $MODEL = "hd2400" ] || [ $MODEL = "hd1200" ] || [ $MODEL = "hd1500" ] || [ $MODEL = "hd1265" ] ; then 
 			MKUBIFS_ARGS="-m 2048 -e 126976 -c 8192"
 		else
 			MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096"
 		fi
 		UBINIZE_ARGS="-m 2048 -p 128KiB"
-		SHOWNAME="HD2400/HD1100/HD500C/HD1200 $MODEL"
+		SHOWNAME="HD2400/HD1100/HD500C/HD1200/HD1500/HD1265 $MODEL"
 		MAINDEST="$DIRECTORY/$MODEL"
 		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
 		echo "Destination        = $MAINDEST\n"
@@ -168,6 +168,27 @@ elif [ -f /proc/stb/info/vumodel ] ; then
 	fi
 	UBINIZE_ARGS="-m 2048 -p 128KiB"
 	echo "Destination        = $MAINDEST\n"
+elif [ -f /proc/stb/info/hwmodel ] ; then
+	if grep purehd /proc/stb/info/hwmodel > /dev/null ; then
+		TYPE=FUSION
+		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096 -F"
+		UBINIZE_ARGS="-m 2048 -p 128KiB"
+		SHOWNAME="Xsarius $MODEL"
+		MAINDEST="$DIRECTORY/update/$MODEL/cfe"
+		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE/update"
+		echo "Destination        = $MAINDEST\n"
+	elif grep fusion /proc/stb/info/hwmodel > /dev/null ; then
+		TYPE=FUSION
+		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096 -F"
+		UBINIZE_ARGS="-m 2048 -p 128KiB"
+		SHOWNAME="Xsarius $MODEL"
+		MAINDEST="$DIRECTORY/update/$MODEL/cfe"
+		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE/update"
+		echo "Destination        = $MAINDEST\n"
+	else
+		echo "No supported receiver found!\n"
+		exit 0
+	fi
 else
 	echo "No supported receiver found!\n"
 	exit 0
@@ -237,7 +258,7 @@ fi
 
 TSTAMP="$(date "+%Y-%m-%d-%Hh%Mm")"
 
-if [ $TYPE = "ET" -o $MODEL = "xp1000" -o $TYPE = "EDISION" ] ; then
+if [ $TYPE = "ET" -o $MODEL = "xp1000" -o $TYPE = "EDISION" -o $TYPE = "SPYCAT" ] ; then
 	rm -rf "$MAINDEST"
 	echo "Removed directory  = $MAINDEST\n"
 	mkdir -p "$MAINDEST"

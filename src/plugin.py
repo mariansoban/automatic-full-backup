@@ -50,7 +50,7 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-PLUGIN_VERSION = _(" ver. ") + "4.2"
+PLUGIN_VERSION = _(" ver. ") + "4.3"
 
 BOX_NAME = "none"
 MODEL_NAME = "none"
@@ -363,7 +363,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 					return
 				if BOX_NAME == 'all':
 					files = "^.*\.(zip|bin)"
-					if MODEL_NAME == "fusionhd" or MODEL_NAME == "fusionhdse":
+					if MODEL_NAME == "fusionhd" or MODEL_NAME == "fusionhdse" or MODEL_NAME == "purehd":
 						files = "^.*\.(zip|bin|update)"
 				elif BOX_NAME == "vu":
 					if MODEL_NAME == "solo2" or MODEL_NAME == "duo2":
@@ -433,7 +433,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 		else:
 			return
 		if model != "":
-			if model == "solo2" or model == "duo2" or model == "fusionhd" or model == "fusionhdse":
+			if model == "solo2" or model == "duo2" or model == "fusionhd" or model == "fusionhdse" or model == "purehd":
 				files = "^.*\.(zip|bin|update)"
 			else:
 				files = "^.*\.(zip|bin|jffs2)"
