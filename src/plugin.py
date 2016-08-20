@@ -50,7 +50,7 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-PLUGIN_VERSION = _(" ver. ") + "4.3"
+PLUGIN_VERSION = _(" ver. ") + "4.4"
 
 BOX_NAME = "none"
 MODEL_NAME = "none"
@@ -273,7 +273,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Save"))
 		self["key_yellow"] = Button(_("Manual"))
-		if BOX_NAME == 'none' or BOX_NAME == 'dmm' or (BOX_NAME == 'vu' and MODEL_NAME == "solo4k"):
+		if BOX_NAME == 'none' or BOX_NAME == 'dmm':
 			self["key_blue"] = Button()
 		else:
 			self["key_blue"] = Button(_("Restore backup"))
@@ -358,7 +358,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 								break
 			if found_dir:
 				files = "^.*\.zip"
-				if BOX_NAME == 'none' or (BOX_NAME == 'vu' and MODEL_NAME == "solo4k"):
+				if BOX_NAME == 'none':
 					self.session.open(MessageBox, _("Your reciever not supported!"), MessageBox.TYPE_ERROR)
 					return
 				if BOX_NAME == 'all':
@@ -366,7 +366,9 @@ class FullBackupConfig(ConfigListScreen,Screen):
 					if MODEL_NAME == "fusionhd" or MODEL_NAME == "fusionhdse" or MODEL_NAME == "purehd":
 						files = "^.*\.(zip|bin|update)"
 				elif BOX_NAME == "vu":
-					if MODEL_NAME == "solo2" or MODEL_NAME == "duo2":
+					if MODEL_NAME == "solo4k":
+						files = "^.*\.(zip|bz2|bin)"
+					elif MODEL_NAME == "solo2" or MODEL_NAME == "duo2" or MODEL_NAME == "solose" or MODEL_NAME == "zero":
 						files = "^.*\.(zip|bin|update)"
 					else:
 						files = "^.*\.(zip|bin|jffs2)"
@@ -417,15 +419,16 @@ class FullBackupConfig(ConfigListScreen,Screen):
 			self.session.open(DaysProfile)
 
 	def flashimage(self):
-		if BOX_NAME == 'none' or BOX_NAME == 'dmm' or (BOX_NAME == 'vu' and MODEL_NAME == "solo4k"):
+		if BOX_NAME == 'none' or BOX_NAME == 'dmm':
 			return
 		if fileExists("/omb/open-multiboot"):
 			self.session.open(MessageBox, _("Sorry!\nThis boot is not flash image!"), MessageBox.TYPE_ERROR)
 			return
-		model = ""
+		model = ''
 		files = "^.*\.zip"
 		if os.path.exists("/proc/stb/info/boxtype"):
 			files = "^.*\.(zip|bin)"
+			model = MODEL_NAME
 		elif os.path.exists("/proc/stb/info/vumodel"):
 			model = MODEL_NAME
 		elif os.path.exists("/proc/stb/info/hwmodel"):
@@ -433,7 +436,9 @@ class FullBackupConfig(ConfigListScreen,Screen):
 		else:
 			return
 		if model != "":
-			if model == "solo2" or model == "duo2" or model == "fusionhd" or model == "fusionhdse" or model == "purehd":
+			if MODEL_NAME == "solo4k":
+				files = "^.*\.(zip|bz2|bin)"
+			elif MODEL_NAME == "solo2" or MODEL_NAME == "duo2" or MODEL_NAME == "solose" or MODEL_NAME == "zero" or MODEL_NAME == "fusionhd" or MODEL_NAME == "fusionhdse" or MODEL_NAME == "purehd":
 				files = "^.*\.(zip|bin|update)"
 			else:
 				files = "^.*\.(zip|bin|jffs2)"
@@ -681,7 +686,11 @@ class FlashImageConfig(Screen):
 					no_backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
 					text += 'kernel.bin, rootfs.bin'
 				elif os.path.exists("/proc/stb/info/vumodel"):
-					if MODEL_NAME in ["solo2", "duo2", "solose", "zero"]:
+					if MODEL_NAME in ["solo4k"]:
+						backup_files = ["kernel_auto.bin", "rootfs.tar.bz2"]
+						no_backup_files = ["kernel.bin", "kernel_cfe_auto.bin", "root_cfe_auto.bin" "root_cfe_auto.jffs2", "rootfs.bin"]
+						text += 'kernel_auto.bin, rootfs.tar.bz2'
+					elif MODEL_NAME in ["solo2", "duo2", "solose", "zero"]:
 						backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.bin"]
 						no_backup_files = ["kernel.bin", "root_cfe_auto.jffs2", "rootfs.bin"]
 						text += 'kernel_cfe_auto.bin, root_cfe_auto.bin'
@@ -962,39 +971,35 @@ class SearchOMBfile(Screen):
 			dirname = self.getCurrentSelected()
 			if dirname:
 				founds = False
-				model = ''
 				backup_files = []
 				no_backup_files = []
 				text = _('For backup your receiver files are needed:\n')
 				if BOX_NAME == 'all':
-					f = open("/proc/stb/info/boxtype")
-					model = f.read().strip()
-					f.close()
-					backup_files = [("kernel.bin"), ("rootfs.bin")]
-					no_backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
-					text += 'kernel.bin, rootfs.bin'
+					if MODEL_NAME.startswith('fusion'):
+						backup_files = [("oe_kernel.bin"), ("oe_rootfs.bin")]
+						no_backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin", "rootfs.bin", "kernel.bin", "rootfs.tar.bz2"]
+						text += 'oe_kernel.bin, oe_rootfs.bin'
+					else:
+						backup_files = [("kernel.bin"), ("rootfs.bin")]
+						no_backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin", "rootfs.tar.bz2"]
+						text += 'kernel.bin, rootfs.bin'
 				elif BOX_NAME == "vu":
-					f = open("/proc/stb/info/vumodel")
-					model = f.read().strip()
-					f.close()
-					if model == "solo4k":
-						self.session.open(MessageBox, _("Your reciever not supported!"), MessageBox.TYPE_ERROR)
-						return
-					if model in ["solo2", "duo2"]:
+					if MODEL_NAME == "solo4k":
+						backup_files = ["kernel_auto.bin", "rootfs.tar.bz2"]
+						no_backup_files = ["kernel.bin", "kernel_cfe_auto.bin", "root_cfe_auto.bin" "root_cfe_auto.jffs2", "rootfs.bin"]
+						text += 'kernel_auto.bin, rootfs.tar.bz2'
+					elif MODEL_NAME in ["duo2", "solose", "solo2", "zero"]:
 						backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.bin"]
-						no_backup_files = ["kernel.bin", "root_cfe_auto.jffs2", "rootfs.bin"]
+						no_backup_files = ["kernel.bin", "kernel_auto.bin", "root_cfe_auto.jffs2", "rootfs.bin", "rootfs.tar.bz2"]
 						text += 'kernel_cfe_auto.bin, root_cfe_auto.bin'
 					else:
 						backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.jffs2"]
-						no_backup_files = ["kernel.bin", "root_cfe_auto.bin", "rootfs.bin"]
+						no_backup_files = ["kernel.bin", "kernel_auto.bin", "root_cfe_auto.bin", "rootfs.bin", "rootfs.tar.bz2"]
 						text += 'kernel_cfe_auto.bin, root_cfe_auto.jffs2'
 				elif BOX_NAME == "dmm":
-					f = open("/proc/stb/info/model")
-					model = f.read().strip()
-					f.close()
 					backup_files = ["*.nfi"]
 					text += '*.nfi'
-				self.model = model
+				self.model = MODEL_NAME
 				try:
 					text += _('\nThe found files:')
 					for name in os.listdir(dirname):
