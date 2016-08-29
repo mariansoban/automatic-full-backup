@@ -12,7 +12,7 @@ ROOTFSTYPE="rootfs.tar.bz2"
 KERNELNAME="kernel_auto.bin"
 WORKDIR="$DIRECTORY/bi"
 
-echo "Plugin version = $VERSION\n"
+echo "Script date = $VERSION\n"
 echo "Back-up media = $DIRECTORY\n"
 df -h "$DIRECTORY"
 echo "Back-up date_time = $DATE\n"

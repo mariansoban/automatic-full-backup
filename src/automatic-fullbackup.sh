@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-VERSION="06/06/2016\ncreators of the script Pedro_Newbie and Dimitrij (http://forums.openpli.org)\n"
+VERSION="29/08/2016\ncreators of the script Pedro_Newbie and Dimitrij (http://forums.openpli.org)\n"
 DIRECTORY="$1"
 START=$(date +%s)
 DATE=`date +%Y%m%d_%H%M`
@@ -11,7 +11,7 @@ UBINIZE=/usr/sbin/ubinize
 NANDDUMP=/usr/sbin/nanddump
 WORKDIR="$DIRECTORY/bi"
 
-echo "Plugin version = $VERSION\n"
+echo "Script date = $VERSION\n"
 echo "Back-up media = $DIRECTORY\n"
 df -h "$DIRECTORY"
 echo "Back-up date_time = $DATE\n"
@@ -31,8 +31,13 @@ if [ -f /proc/stb/info/boxtype ] ; then
 	if grep et /proc/stb/info/boxtype > /dev/null ; then
 		TYPE=ET
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096"
-		if [ $MODEL = "et10000" -o $MODEL = "et8000" -o $MODEL = "et8500" -o $MODEL = "et7000" -o $MODEL = "et7500" ] ; then 
+		if [ $MODEL = "et10000" -o $MODEL = "et8000" -o $MODEL = "et8500" -o $MODEL = "et7000" -o $MODEL = "et7500" -o $MODEL = "et7000mini" ] ; then
 			MKUBIFS_ARGS="-m 2048 -e 126976 -c 8192"
+		fi
+		if [ $MODEL = "et10000" -o $MODEL = "et8000" -o $MODEL = "et8500" ] ; then
+			echo " "
+		elif [ $MODEL = "et7000mini" ] ; then
+			MODEL="et7x00"
 		else
 			MODEL=${MODEL:0:3}x00
 		fi
@@ -100,7 +105,7 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		TYPE=EDISION
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096 -F"
 		UBINIZE_ARGS="-m 2048 -p 128KiB"
-		SHOWNAME="Edision OS mini"
+		SHOWNAME="Edision OS mini(+)"
 		MAINDEST="$DIRECTORY/$MODEL"
 		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
 		echo "Destination        = $MAINDEST\n"
@@ -122,13 +127,17 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		echo "Destination        = $MAINDEST\n"
 	elif grep hd /proc/stb/info/boxtype > /dev/null ; then
 		TYPE=MUTANT
-		if [ $MODEL = "hd2400" ] || [ $MODEL = "hd1200" ] || [ $MODEL = "hd1500" ] || [ $MODEL = "hd1265" ] ; then 
+		if [ $MODEL = "hd51" ] || [ $MODEL = "hd52" ] ; then
+			echo "No supported receiver found!\nSorri, please wait new version this plugin!\n"
+			exit 0
+		fi
+		if [ $MODEL = "hd2400" ] || [ $MODEL = "hd1200" ] || [ $MODEL = "hd1500" ] || [ $MODEL = "hd1265" ] || [ $MODEL = "hd11" ] ; then
 			MKUBIFS_ARGS="-m 2048 -e 126976 -c 8192"
 		else
 			MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096"
 		fi
 		UBINIZE_ARGS="-m 2048 -p 128KiB"
-		SHOWNAME="HD2400/HD1100/HD500C/HD1200/HD1500/HD1265 $MODEL"
+		SHOWNAME="HD2400/HD1100/HD500C/HD1200/HD1500/HD1265/HD11 $MODEL"
 		MAINDEST="$DIRECTORY/$MODEL"
 		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
 		echo "Destination        = $MAINDEST\n"
@@ -159,7 +168,7 @@ elif [ -f /proc/stb/info/vumodel ] ; then
 	SHOWNAME="Vu+ $MODEL"
 	MAINDEST="$DIRECTORY/vuplus/$MODEL"
 	EXTRA="$DIRECTORY/automatic_fullbackup/$DATE/vuplus"
-	if [ $MODEL = "solo2" ] || [ $MODEL = "duo2" ] || [ $MODEL = "solose" ] ; then
+	if [ $MODEL = "solo2" ] || [ $MODEL = "duo2" ] || [ $MODEL = "solose" ] || [ $MODEL = "solo4k" ] ; then
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096"
 	elif [ $MODEL = "zero" ] ; then
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 8192"

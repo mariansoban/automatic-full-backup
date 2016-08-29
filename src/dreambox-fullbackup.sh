@@ -10,7 +10,7 @@ IMAGEVERSION=`date +%Y%m%d`
 CREATE_ZIP="$2"
 IMAGENAME="$3"
 
-echo "Plugin version = $VERSION\n"
+echo "Script date = $VERSION\n"
 echo "Back-up media = $DIRECTORY\n"
 df -h "$DIRECTORY"
 echo "Back-up date_time = $DATE\n"
