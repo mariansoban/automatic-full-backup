@@ -684,7 +684,7 @@ class FlashImageConfig(Screen):
 			self.founds = False
 			self.pausetimer = eTimer() 
 			self.pausetimer.callback.append(self.showparameterlist)
-			self.pausetimer.start(1000, True)
+			self.pausetimer.start(500, True)
 
 	def keyGreen(self):
 		if self["key_green"].getText() == _("Run flash"):
@@ -757,12 +757,9 @@ class FlashImageConfig(Screen):
 					open_list = [
 						(_("Exit"), "exit"),
 					]
-				try:
-					self.session.openWithCallback(self.Callbackflashing, MessageBox, text, simple=True, list=open_list)
-				except:
-					self.session.openWithCallback(self.CallbackflashingOld, ChoiceBox, text, list=open_list)
+				self.session.openWithCallback(self.Callbackflashing, ChoiceBox, text, list=open_list)
 
-	def CallbackflashingOld(self, ret):
+	def Callbackflashing(self, ret):
 		if ret:
 			if ret[1] == "exit":
 				self.close()
@@ -804,70 +801,6 @@ class FlashImageConfig(Screen):
 			message += _('NOT found files for flashing!\n')
 			message += "'"
 			if ret[1] == "simulate" and ret[1] == "simulate2":
-				if self.founds:
-					message = "echo -e '\n"
-					message += _('Show only found image and mtd partitions.\n')
-					message += "'"
-			else:
-				if self.founds:
-					message = "echo -e '\n"
-					message += _('ofgwrite will stop enigma2 now to run the flash.\n')
-					message += _('Your STB will freeze during the flashing process.\n')
-					message += _('Please: DO NOT reboot your STB and turn off the power.\n')
-					message += _('The image or kernel will be flashing and auto booted in few minutes.\n')
-					message += "'"
-			try:
-				if os.path.exists(ofgwrite_bin):
-					os.chmod(ofgwrite_bin, 0755)
-				else:
-					self.session.open(MessageBox, _("'ofgwrite' not installed!"), MessageBox.TYPE_ERROR)
-					return
-			except:
-				pass
-			self.session.open(Console, text,[message, cmd])
-
-	def Callbackflashing(self, ret):
-		if ret:
-			if ret == "exit":
-				self.close()
-				return
-			if self.session.nav.getRecordings():
-				self.session.open(MessageBox, _("A recording is currently running. Please stop the recording before trying to start a flashing."), MessageBox.TYPE_ERROR)
-				self.founds = False
-				return
-			dir_flash = self.getCurrentSelected()
-			text = _("Flashing: ")
-			cmd = "echo -e"
-			if ret == "simulate":
-				text += _("Simulate (no write)")
-				cmd = "%s -n '%s'" % (ofgwrite_bin, dir_flash)
-			elif ret == "standard":
-				text += _("Standard (root and kernel)")
-				cmd = "%s -r -k '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
-			elif ret == "root":
-				text += _("Only root")
-				cmd = "%s -r '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
-			elif ret == "kernel":
-				text += _("Only kernel")
-				cmd = "%s -k '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
-			elif ret == "simulate2":
-				text += _("Simulate second partition (no write)")
-				cmd = "%s -kmtd3 -rmtd4 -n '%s'" % (ofgwrite_bin, dir_flash)
-			elif ret == "standard2":
-				text += _("Second partition (root and kernel)")
-				cmd = "%s -kmtd3 -rmtd4 '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
-			elif ret == "root2":
-				text += _("Second partition (only root)")
-				cmd = "%s -rmtd4 '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
-			elif ret == "kernel2":
-				text += _("Second partition (only kernel)")
-				cmd = "%s -kmtd3 '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
-			else:
-				return
-			message = "echo -e '\n"
-			message += _('NOT found files for flashing!\n')
-			message += "'"
-			if ret == "simulate" or ret == "simulate2":
 				if self.founds:
 					message = "echo -e '\n"
 					message += _('Show only found image and mtd partitions.\n')
