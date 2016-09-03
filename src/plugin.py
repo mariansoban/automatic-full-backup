@@ -50,7 +50,7 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-PLUGIN_VERSION = _(" ver. ") + "4.4"
+PLUGIN_VERSION = _(" ver. ") + "4.5"
 
 BOX_NAME = "none"
 MODEL_NAME = "none"
@@ -130,18 +130,32 @@ weekdays = [
 	_("Sunday"),
 	]
 
-# Global variables
 autoStartTimer = None
 _session = None
-
-##################################
-# Configuration GUI
 
 BACKUP_SCRIPT = "/usr/lib/enigma2/python/Plugins/Extensions/FullBackup/automatic-fullbackup.sh"
 DREAM_BACKUP_SCRIPT = "/usr/lib/enigma2/python/Plugins/Extensions/FullBackup/dreambox-fullbackup.sh"
 SOLO4K_BACKUP_SCRIPT = "/usr/lib/enigma2/python/Plugins/Extensions/FullBackup/automatic-fullbackup-solo4k.sh"
-ofgwrite_bin = "/usr/bin/ofgwrite"
 zip_bin = "/usr/bin/zip"
+ofgwrite_bin = "/usr/bin/ofgwrite"
+
+if not os.path.exists(ofgwrite_bin):
+	arch = os.popen("uname -m").read()
+	if 'mips' in arch:
+		MIPS = "/usr/lib/enigma2/python/Plugins/Extensions/FullBackup/bin/mips/ofgwrite"
+		if os.path.exists(MIPS):
+			os.chmod(MIPS, 0755)
+			ofgwrite_bin = MIPS
+	elif 'armv7l' in arch:
+		ARMV71 = "/usr/lib/enigma2/python/Plugins/Extensions/FullBackup/bin/armv7l/ofgwrite"
+		if os.path.exists(ARMV71):
+			os.chmod(ARMV71, 0755)
+			ofgwrite_bin = ARMV71
+	elif 'sh4' in arch:
+		SH4 = "/usr/lib/enigma2/python/Plugins/Extensions/FullBackup/bin/sh4/ofgwrite"
+		if os.path.exists(SH4):
+			os.chmod(SH4, 0755)
+			ofgwrite_bin = SH4
 
 def backupCommand():
 	try:
@@ -160,7 +174,7 @@ def backupCommand():
 	except:
 		pass
 	if BOX_NAME == 'none':
-		return "echo 'Your box not supported!'\n"
+		return ''
 	cmd = BACKUP_SCRIPT
 	if BOX_NAME == 'dmm':
 		cmd = DREAM_BACKUP_SCRIPT
@@ -175,9 +189,15 @@ def runBackup():
 		return
 	if destination:
 		try:
-			os.system(backupCommand())
+			cmd = backupCommand()
+			if cmd:
+				os.system(cmd)
+			else:
+				print "[FullBackup] not supported reciever!"
+				return
 		except Exception, e:
 			print "[FullBackup] FAIL:", e
+			return
 		if Standby.inStandby and config.plugins.fullbackup.after_create.value and getFPWasTimerWakeup() and config.plugins.fullbackup.deepstandby.value == "2":
 			if not os.path.exists("/tmp/.fullbackup"):
 				try:
@@ -358,7 +378,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 								break
 			if found_dir:
 				files = "^.*\.zip"
-				if BOX_NAME == 'none':
+				if BOX_NAME == 'none' or MODEL_NAME == "hd51":
 					self.session.open(MessageBox, _("Your reciever not supported!"), MessageBox.TYPE_ERROR)
 					return
 				if BOX_NAME == 'all':
@@ -419,9 +439,10 @@ class FullBackupConfig(ConfigListScreen,Screen):
 			self.session.open(DaysProfile)
 
 	def flashimage(self):
-		if BOX_NAME == 'none' or BOX_NAME == 'dmm':
+		if BOX_NAME == 'none'  or BOX_NAME == 'dmm' or MODEL_NAME == "hd51":
+			self.session.open(MessageBox, _("Your reciever not supported!"), MessageBox.TYPE_ERROR)
 			return
-		if fileExists("/omb/open-multiboot"):
+		if fileExists("/omb/open-multiboot") and os.path.ismount('/usr/lib/enigma2/python/Plugins/Extensions/OpenMultiboot'):
 			self.session.open(MessageBox, _("Sorry!\nThis boot is not flash image!"), MessageBox.TYPE_ERROR)
 			return
 		model = ''
@@ -466,6 +487,9 @@ class FullBackupConfig(ConfigListScreen,Screen):
 	def dobackup(self):
 		if config.plugins.fullbackup.where.value == "none":
 			self["status"].setText(_('Not selected directory backup'))
+			return
+		if MODEL_NAME == "hd51":
+			self.session.open(MessageBox, _("Your reciever not supported!"), MessageBox.TYPE_ERROR)
 			return
 		list = [
 			(_("Background mode"), "background"),
@@ -658,7 +682,9 @@ class FlashImageConfig(Screen):
 	def confirmedWarning(self, result):
 		if result:
 			self.founds = False
-			self.showparameterlist()
+			self.pausetimer = eTimer() 
+			self.pausetimer.callback.append(self.showparameterlist)
+			self.pausetimer.start(1000, True)
 
 	def keyGreen(self):
 		if self["key_green"].getText() == _("Run flash"):
@@ -732,9 +758,9 @@ class FlashImageConfig(Screen):
 						(_("Exit"), "exit"),
 					]
 				try:
-					self.session.openWithCallback(self.Callbackflashing, MessageBox, text, simple = True, list = open_list)
+					self.session.openWithCallback(self.Callbackflashing, MessageBox, text, simple=True, list=open_list)
 				except:
-					self.session.openWithCallback(self.CallbackflashingOld, ChoiceBox, text, list = open_list)
+					self.session.openWithCallback(self.CallbackflashingOld, ChoiceBox, text, list=open_list)
 
 	def CallbackflashingOld(self, ret):
 		if ret:

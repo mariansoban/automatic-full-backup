@@ -1,0 +1,8 @@
+#!/bin/sh
+
+mkdir /newroot
+mount -t tmpfs tmpfs /newroot
+chmod 755 /usr/lib/enigma2/python/Plugins/Extensions/FullBackup/bin/mips/ofgwrite_bin
+chmod 755 /usr/lib/enigma2/python/Plugins/Extensions/FullBackup/bin/mips/ofgwrite_test
+cp /usr/lib/enigma2/python/Plugins/Extensions/FullBackup/bin/mips/ofgwrite_bin /newroot/
+/newroot/ofgwrite_bin $*
