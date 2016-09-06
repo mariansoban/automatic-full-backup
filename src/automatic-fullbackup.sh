@@ -259,7 +259,7 @@ $UBINIZE -o "$WORKDIR/root.ubifs" $UBINIZE_ARGS "$WORKDIR/ubinize.cfg" >/dev/nul
 
 chmod 644 "$WORKDIR/root.ubifs"
 echo "Start creating kerneldump\n"
-if [ $MODEL = "solo2" ] || [ $MODEL = "duo2" ]; then
+if [ $MODEL = "solo2" ] || [ $MODEL = "duo2" ] || [ $MODEL = "solose" ] || [ $MODEL = "zero" ] ; then
 	$NANDDUMP /dev/mtd2 -q > "$WORKDIR/vmlinux.gz"
 else 
 	$NANDDUMP /dev/mtd1 -q > "$WORKDIR/vmlinux.gz"
