@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-VERSION="29/08/2016\ncreators of the script Pedro_Newbie and Dimitrij (http://forums.openpli.org)\n"
+VERSION="01/10/2016\ncreators of the script Pedro_Newbie and Dimitrij (http://forums.openpli.org)\n"
 DIRECTORY="$1"
 START=$(date +%s)
 DATE=`date +%Y%m%d_%H%M`
@@ -101,7 +101,7 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		MAINDEST="$DIRECTORY/zgemma/$MODEL"
 		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE/zgemma"
 		echo "Destination        = $MAINDEST\n"
-	elif grep osmini /proc/stb/info/boxtype > /dev/null ; then
+	elif grep osm /proc/stb/info/boxtype > /dev/null ; then
 		TYPE=EDISION
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096 -F"
 		UBINIZE_ARGS="-m 2048 -p 128KiB"
