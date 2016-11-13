@@ -168,9 +168,9 @@ elif [ -f /proc/stb/info/vumodel ] ; then
 	SHOWNAME="Vu+ $MODEL"
 	MAINDEST="$DIRECTORY/vuplus/$MODEL"
 	EXTRA="$DIRECTORY/automatic_fullbackup/$DATE/vuplus"
-	if [ $MODEL = "solo2" ] || [ $MODEL = "duo2" ] || [ $MODEL = "solose" ] ; then
+	if [ $MODEL = "solo2" ] || [ $MODEL = "solose" ] ; then
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096"
-	elif [ $MODEL = "zero" ] ; then
+	elif [ $MODEL = "zero" ] || [ $MODEL = "duo2" ] ; then
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 8192"
 	else
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096 -F"
