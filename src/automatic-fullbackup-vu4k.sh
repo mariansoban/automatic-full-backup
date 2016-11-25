@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-VERSION="solo4k - 15/02/2016\ncreator of the script Dimitrij (http://forums.openpli.org)\n"
+VERSION="vu4k models- 25/11/2016\ncreator of the script Dimitrij (http://forums.openpli.org)\n"
 DIRECTORY="$1"
 START=$(date +%s)
 DATE=`date +%Y%m%d_%H%M`
@@ -9,7 +9,6 @@ IMAGEVERSION=`date +%Y%m%d`
 MKFS=/bin/tar
 BZIP2=/usr/bin/bzip2
 ROOTFSTYPE="rootfs.tar.bz2"
-KERNELNAME="kernel_auto.bin"
 WORKDIR="$DIRECTORY/bi"
 
 echo "Script date = $VERSION\n"
@@ -17,6 +16,8 @@ echo "Back-up media = $DIRECTORY\n"
 df -h "$DIRECTORY"
 echo "Back-up date_time = $DATE\n"
 echo "Working directory = $WORKDIR\n"
+echo -n "Drivers = "
+opkg list-installed | grep dvb-proxy
 CREATE_ZIP="$2"
 IMAGENAME="$3"
 
@@ -24,6 +25,16 @@ if [ -f /proc/stb/info/vumodel ] ; then
 	MODEL=$( cat /proc/stb/info/vumodel )
 	if [ $MODEL = "solo4k" ] ; then
 		echo "Found VU+ Solo 4K\n"
+		MTD_KERNEL="mmcblk0p1"
+		KERNELNAME="kernel_auto.bin"
+	elif [ $MODEL = "uno4k" ] ; then
+		echo "Found VU+ Uno 4K\n"
+		MTD_KERNEL="mmcblk0p1"
+		KERNELNAME="kernel_auto.bin"
+	elif [ $MODEL = "ultimo4k" ] ; then
+		echo "Found VU+ Ultimo 4K\n"
+		MTD_KERNEL="mmcblk0p1"
+		KERNELNAME="kernel_auto.bin"
 	else
 		echo "No supported receiver found!\n"
 		exit 0
@@ -32,8 +43,6 @@ if [ -f /proc/stb/info/vumodel ] ; then
 	SHOWNAME="Vu+ $MODEL"
 	MAINDEST="$DIRECTORY/vuplus/$MODEL"
 	EXTRA="$DIRECTORY/automatic_fullbackup/$DATE/vuplus"
-	MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096"
-	UBINIZE_ARGS="-m 2048 -p 128KiB"
 	echo "Destination        = $MAINDEST\n"
 else
 	echo "No supported receiver found!\n"
@@ -80,8 +89,8 @@ echo "Create directory   = /tmp/bi/root\n"
 sync
 mount --bind / /tmp/bi/root
 
-dd if=/dev/mmcblk0p1 of=$WORKDIR/$KERNELNAME
-echo "Kernel resides on /dev/mmcblk0p1\n" 
+dd if=/dev/$MTD_KERNEL of=$WORKDIR/$KERNELNAME
+echo "Kernel resides on /dev/$MTD_KERNEL\n" 
 
 echo "Start creating rootfs.tar\n"
 $MKFS -cf $WORKDIR/rootfs.tar -C /tmp/bi/root --exclude=/var/nmbd/* .

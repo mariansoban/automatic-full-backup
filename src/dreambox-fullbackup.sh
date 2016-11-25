@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-VERSION="Dreambox- 15/02/2016\ncreator of the script athoik (http://forums.openpli.org)\n"
+VERSION="Dreambox- 25/11/2016\ncreator of the script athoik (http://forums.openpli.org)\n"
 DIRECTORY="$1"
 START=$(date +%s)
 DATE=`date +%Y%m%d_%H%M`
@@ -14,6 +14,8 @@ echo "Script date = $VERSION\n"
 echo "Back-up media = $DIRECTORY\n"
 df -h "$DIRECTORY"
 echo "Back-up date_time = $DATE\n"
+echo -n "Drivers = "
+opkg list-installed | grep dvb-modules
 
 log() {
    echo "$(date +%H:%M) $*"

@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-VERSION="01/10/2016\ncreators of the script Pedro_Newbie and Dimitrij (http://forums.openpli.org)\n"
+VERSION="25/25/2016\ncreators of the script Pedro_Newbie and Dimitrij (http://forums.openpli.org)\n"
 DIRECTORY="$1"
 START=$(date +%s)
 DATE=`date +%Y%m%d_%H%M`
@@ -16,6 +16,8 @@ echo "Back-up media = $DIRECTORY\n"
 df -h "$DIRECTORY"
 echo "Back-up date_time = $DATE\n"
 echo "Working directory = $WORKDIR\n"
+echo -n "Drivers = "
+opkg list-installed | grep dvb-modules
 CREATE_ZIP="$2"
 IMAGENAME="$3"
 
