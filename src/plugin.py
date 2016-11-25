@@ -432,7 +432,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 			try:
 				st = os.stat(os.path.join(path, ".timestamp"))
 				self.isActive = True
-				self["status"].setText(_("Last backup date") + ": " + " ".join(FuzzyTime(st.st_mtime, inPast=True)))
+				self["status"].setText(_("Last backup date") + ": " + " ".join(FuzzyTime(st.st_mtime)))
 			except Exception, ex:
 				print "Failed to stat %s: %s" % (path, ex)
 				self.isActive = False
