@@ -28,7 +28,7 @@ if [ -f cat /proc/stb/info/boxtype ] ; then
 	if [ $MODEL = "hd51" ] ; then
 		echo "Found Mutant HD51 4K\n"
 		MTD_KERNEL="mmcblk0p2"
-		KERNELNAME="kernel.bin"
+		KERNELNAME="kernel1.bin"
 	else
 		echo "No supported receiver found!\n"
 		exit 0

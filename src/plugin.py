@@ -456,9 +456,8 @@ class FullBackupConfig(ConfigListScreen,Screen):
 			self.session.open(MessageBox, _("Sorry!\nThis boot is not flash image!"), MessageBox.TYPE_ERROR)
 			return
 		model = ""
-		files = "^.*\.zip"
+		files = "^.*\.(zip|bin)"
 		if os.path.exists("/proc/stb/info/boxtype"):
-			files = "^.*\.(zip|bin)"
 			model = MODEL_NAME
 		elif os.path.exists("/proc/stb/info/vumodel"):
 			model = MODEL_NAME
@@ -719,9 +718,9 @@ class FlashImageConfig(Screen):
 					text += 'oe_kernel.bin, oe_rootfs.bin'
 				elif os.path.exists("/proc/stb/info/boxtype"):
 					if MODEL_NAME in ["hd51"]:
-						backup_files = [("kernel.bin"), ("rootfs.tar.bz2")]
-						no_backup_files = ["kernel_cfe_auto.bin", "kernel1.bin", "rootfs.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
-						text += 'kernel.bin, rootfs.tar.bz2'
+						backup_files = [("kernel1.bin"), ("rootfs.tar.bz2")]
+						no_backup_files = ["kernel_cfe_auto.bin", "kernel.bin", "rootfs.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
+						text += 'kernel1.bin, rootfs.tar.bz2'
 					else:
 						backup_files = [("kernel.bin"), ("rootfs.bin")]
 						no_backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
@@ -787,20 +786,18 @@ class FlashImageConfig(Screen):
 			text = _("Flashing: ")
 			cmd = "echo -e"
 			xtra = ""
-			if MODEL_NAME in ["hd51"]:
-				xtra = '-m1 '
 			if ret[1] == "simulate":
 				text += _("Simulate (no write)")
-				cmd = "%s -n %s'%s'" % (ofgwrite_bin, xtra, dir_flash)
+				cmd = "%s -n '%s'" % (ofgwrite_bin, dir_flash)
 			elif ret[1] == "standard":
 				text += _("Standard (root and kernel)")
-				cmd = "%s -r -k %s'%s' > /dev/null 2>&1 &" % (ofgwrite_bin, xtra, dir_flash)
+				cmd = "%s -r -k '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
 			elif ret[1] == "root":
 				text += _("Only root")
-				cmd = "%s -r %s'%s' > /dev/null 2>&1 &" % (ofgwrite_bin, xtra, dir_flash)
+				cmd = "%s -r '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
 			elif ret[1] == "kernel":
 				text += _("Only kernel")
-				cmd = "%s -k %s'%s' > /dev/null 2>&1 &" % (ofgwrite_bin, xtra, dir_flash)
+				cmd = "%s -k '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
 			elif ret[1] == "simulate2":
 				text += _("Simulate second partition (no write)")
 				cmd = "%s -kmtd3 -rmtd4 -n '%s'" % (ofgwrite_bin, dir_flash)
@@ -957,9 +954,9 @@ class SearchOMBfile(Screen):
 						no_backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin", "rootfs.bin", "kernel.bin", "rootfs.tar.bz2"]
 						text += 'oe_kernel.bin, oe_rootfs.bin'
 					elif MODEL_NAME == "hd51":
-						backup_files = [("kernel.bin"), ("rootfs.tar.bz2")]
-						no_backup_files = ["kernel_cfe_auto.bin", "kernel1.bin", "rootfs.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
-						text += 'kernel.bin, rootfs.tar.bz2'
+						backup_files = [("kernel1.bin"), ("rootfs.tar.bz2")]
+						no_backup_files = ["kernel_cfe_auto.bin", "kernel.bin", "rootfs.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
+						text += 'kernel1.bin, rootfs.tar.bz2'
 					else:
 						backup_files = [("kernel.bin"), ("rootfs.bin")]
 						no_backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin", "rootfs.tar.bz2"]
