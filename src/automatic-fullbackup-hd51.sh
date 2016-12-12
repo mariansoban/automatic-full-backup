@@ -23,7 +23,7 @@ opkg list-installed | grep dvb-modules
 CREATE_ZIP="$2"
 IMAGENAME="$3"
 
-if [ -f cat /proc/stb/info/boxtype ] ; then
+if [ -f /proc/stb/info/boxtype ] ; then
 	MODEL=$( cat cat /proc/stb/info/boxtype )
 	if [ $MODEL = "hd51" ] ; then
 		echo "Found Mutant HD51 4K\n"
