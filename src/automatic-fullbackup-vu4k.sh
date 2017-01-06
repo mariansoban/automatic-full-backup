@@ -107,7 +107,7 @@ if [ $TYPE = "VU" ] ; then
 	mv "$WORKDIR/$ROOTFSTYPE" "$MAINDEST/$ROOTFSTYPE"
 	echo "$MODEL-$IMAGEVERSION" > "$MAINDEST/imageversion"
 	if [ $MODEL = "ultimo4k" -o $MODEL = "uno4k" ] ; then
-		echo "rename this file to 'noforce.update' when need confirmation" > "$MAINDEST/force.update"
+		echo "rename this file to 'force.update' when need confirmation" > "$MAINDEST/noforce.update"
 	else
 		echo "rename this file to 'force.update' to force an update without confirmation" > "$MAINDEST/reboot.update"
 	fi
