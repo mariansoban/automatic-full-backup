@@ -141,7 +141,7 @@ msgid "Last backup date"
 msgstr "Letztes Backup-Datum"
 
 msgid "Manual"
-msgstr "manuell"
+msgstr "Manuell"
 
 msgid "Monday"
 msgstr "Montag"
