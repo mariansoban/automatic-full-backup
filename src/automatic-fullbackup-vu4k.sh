@@ -123,7 +123,7 @@ if [ $TYPE = "VU" ] ; then
 			cd
 		fi
 	fi
-	if [ -f "$MAINDEST/rootfs.tar.bz2" -a -f "$MAINDEST/reboot.update" -a -f "$MAINDEST/$KERNELNAME" ] ; then
+	if [ -f "$MAINDEST/rootfs.tar.bz2" -a -f "$MAINDEST/$KERNELNAME" ] ; then
 		echo " "
 		echo "BACK-UP MADE SUCCESSFULLY IN: $MAINDEST\n"
 	else
