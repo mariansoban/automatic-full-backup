@@ -95,6 +95,14 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		MAINDEST="$DIRECTORY/$MODEL"
 		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
 		echo "Destination        = $MAINDEST\n"
+	elif grep osm /proc/stb/info/boxtype > /dev/null ; then
+		TYPE=EDISION
+		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096 -F"
+		UBINIZE_ARGS="-m 2048 -p 128KiB"
+		SHOWNAME="Edision OS mega / mini(+)"
+		MAINDEST="$DIRECTORY/$MODEL"
+		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
+		echo "Destination        = $MAINDEST\n"
 	elif grep h3 /proc/stb/info/boxtype > /dev/null ; then
 		TYPE=ZGEMMA
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 8192"
@@ -102,14 +110,6 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		SHOWNAME="Zgemma H.S / H.2S / H.2H $MODEL"
 		MAINDEST="$DIRECTORY/zgemma/$MODEL"
 		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE/zgemma"
-		echo "Destination        = $MAINDEST\n"
-	elif grep osm /proc/stb/info/boxtype > /dev/null ; then
-		TYPE=EDISION
-		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096 -F"
-		UBINIZE_ARGS="-m 2048 -p 128KiB"
-		SHOWNAME="Edision OS mini(+)"
-		MAINDEST="$DIRECTORY/$MODEL"
-		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
 		echo "Destination        = $MAINDEST\n"
 	elif grep h5 /proc/stb/info/boxtype > /dev/null ; then
 		TYPE=ZGEMMA
@@ -124,6 +124,14 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096"
 		UBINIZE_ARGS="-m 2048 -p 128KiB"
 		SHOWNAME="Zgemma Star S / Star 2S $MODEL"
+		MAINDEST="$DIRECTORY/zgemma/$MODEL"
+		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE/zgemma"
+		echo "Destination        = $MAINDEST\n"
+	elif grep i55 /proc/stb/info/boxtype > /dev/null ; then
+		TYPE=ZGEMMA
+		MKUBIFS_ARGS="-m 2048 -e 126976 -c 8192"
+		UBINIZE_ARGS="-m 2048 -p 128KiB"
+		SHOWNAME="Zgemma I 55"
 		MAINDEST="$DIRECTORY/zgemma/$MODEL"
 		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE/zgemma"
 		echo "Destination        = $MAINDEST\n"

@@ -26,9 +26,11 @@ IMAGENAME="$3"
 if [ -f /proc/stb/info/boxtype ] ; then
 	MODEL=$( cat cat /proc/stb/info/boxtype )
 	if [ $MODEL = "hd51" ] ; then
-		echo "Found Mutant HD51 4K\n"
+		echo "Found Mutant HD/AX 51 4K\n"
 		MTD_KERNEL="mmcblk0p2"
-		KERNELNAME="kernel1.bin"
+		python findkerneldevice.py
+		KERNEL=`cat /sys/firmware/devicetree/base/chosen/kerneldev` 
+		KERNELNAME=${KERNEL:11:7}.bin
 	else
 		echo "No supported receiver found!\n"
 		exit 0
@@ -83,8 +85,9 @@ echo "Create directory   = /tmp/bi/root\n"
 sync
 mount --bind / /tmp/bi/root
 
-dd if=/dev/$MTD_KERNEL of=$WORKDIR/$KERNELNAME
-echo "Kernel resides on /dev/$MTD_KERNEL\n" 
+#dd if=/dev/$MTD_KERNEL of=$WORKDIR/$KERNELNAME
+dd if=/dev/kernel of=$WORKDIR/$KERNELNAME > /dev/null 2>&1
+echo "Kernel resides on /dev/kernel\n" 
 
 echo "Start creating rootfs.tar\n"
 $MKFS -cf $WORKDIR/rootfs.tar -C /tmp/bi/root --exclude=/var/nmbd/* .
