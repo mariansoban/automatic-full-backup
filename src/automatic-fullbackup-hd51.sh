@@ -28,9 +28,10 @@ if [ -f /proc/stb/info/boxtype ] ; then
 	if [ $MODEL = "hd51" ] ; then
 		echo "Found Mutant HD/AX 51 4K\n"
 		MTD_KERNEL="mmcblk0p2"
-		python findkerneldevice.py
+		python /usr/lib/enigma2/python/Plugins/Extensions/FullBackup/findkerneldevice.py
 		KERNEL=`cat /sys/firmware/devicetree/base/chosen/kerneldev` 
 		KERNELNAME=${KERNEL:11:7}.bin
+		echo "$KERNELNAME = STARTUP_${KERNEL:17:1}"
 	else
 		echo "No supported receiver found!\n"
 		exit 0
