@@ -26,12 +26,17 @@ IMAGENAME="$3"
 if [ -f /proc/stb/info/boxtype ] ; then
 	MODEL=$( cat cat /proc/stb/info/boxtype )
 	if [ $MODEL = "hd51" ] ; then
-		echo "Found Mutant HD/AX 51 4K\n"
-		MTD_KERNEL="mmcblk0p2"
+		echo "Found Mutant HD51 4K\n"
+		#MTD_KERNEL="mmcblk0p2"
+		MTD_KERNEL="kernel"
 		python /usr/lib/enigma2/python/Plugins/Extensions/FullBackup/findkerneldevice.py
 		KERNEL=`cat /sys/firmware/devicetree/base/chosen/kerneldev` 
 		KERNELNAME=${KERNEL:11:7}.bin
 		echo "$KERNELNAME = STARTUP_${KERNEL:17:1}"
+	elif [ $MODEL = "sf4008" ] ; then
+		echo "Found Octagon SF4008 4K\n"
+		MTD_KERNEL="mmcblk0p3"
+		KERNELNAME="kernel.bin"
 	else
 		echo "No supported receiver found!\n"
 		exit 0
@@ -86,9 +91,8 @@ echo "Create directory   = /tmp/bi/root\n"
 sync
 mount --bind / /tmp/bi/root
 
-#dd if=/dev/$MTD_KERNEL of=$WORKDIR/$KERNELNAME
-dd if=/dev/kernel of=$WORKDIR/$KERNELNAME > /dev/null 2>&1
-echo "Kernel resides on /dev/kernel\n" 
+dd if=/dev/$MTD_KERNEL of=$WORKDIR/$KERNELNAME > /dev/null 2>&1
+echo "Kernel resides on /dev/$MTD_KERNEL\n" 
 
 echo "Start creating rootfs.tar\n"
 $MKFS -cf $WORKDIR/rootfs.tar -C /tmp/bi/root --exclude=/var/nmbd/* .
