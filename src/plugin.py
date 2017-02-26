@@ -50,7 +50,7 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-PLUGIN_VERSION = _(" ver. ") + "4.9"
+PLUGIN_VERSION = _(" ver. ") + "5.0"
 
 BOX_NAME = "none"
 MODEL_NAME = "none"
@@ -273,7 +273,10 @@ class FullBackupConfig(ConfigListScreen,Screen):
 			if os.path.exists(p.mountpoint) and os.access(p.mountpoint, os.F_OK|os.R_OK):
 				if p.mountpoint != '/':
 					d = os.path.normpath(p.mountpoint)
-					hddchoises.append((d , p.mountpoint))
+					mountpoint = p.mountpoint
+					if mountpoint.endswith('/'):
+						mountpoint = mountpoint[:-1]
+					hddchoises.append((d , mountpoint))
 		if (current_path, current_path) in hddchoises:
 			default_path = current_path
 		else:
