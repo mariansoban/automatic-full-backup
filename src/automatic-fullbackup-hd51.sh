@@ -13,6 +13,25 @@ IMAGETYPE="disk.img"
 WORKDIR="$DIRECTORY/bi"
 RESIZE2FS=/sbin/resize2fs
 
+if [ -f /etc/issue ] ; then
+	ISSUE=`cat /etc/issue | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /etc/bhversion ] ; then
+	ISSUE=`cat /etc/bhversion | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /etc/vtiversion.info ] ; then
+	ISSUE=`cat /etc/vtiversion.info | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /etc/vtiversion.info ] ; then
+	ISSUE=`cat /etc/vtiversion.info | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /proc/stb/info/vumodel ] && [ -f /etc/version ] ; then
+	ISSUE=`cat /etc/version | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+else
+	IMVER="unknown"
+fi
+
 echo "Script date = $VERSION\n"
 echo "Back-up media = $DIRECTORY\n"
 df -h "$DIRECTORY"
@@ -37,6 +56,13 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		echo "Found Octagon SF4008 4K\n"
 		MTD_KERNEL="mmcblk0p3"
 		KERNELNAME="kernel.bin"
+	elif [ $MODEL = "vs1500" ] ; then
+		echo "Found VIMASTEC VS1500 4K\n"
+		#MTD_KERNEL="mmcblk0p2"
+		MTD_KERNEL="kernel"
+		python /usr/lib/enigma2/python/Plugins/Extensions/FullBackup/findkerneldevice.py
+		KERNEL=`cat /sys/firmware/devicetree/base/chosen/kerneldev` 
+		KERNELNAME=${KERNEL:11:7}.bin
 	else
 		echo "No supported receiver found!\n"
 		exit 0
@@ -134,7 +160,8 @@ if [ $TYPE = "MUTANT" ] ; then
 	if [ -z "$CREATE_ZIP" ] ; then
 		mkdir -p "$EXTRA/$MODEL"
 		echo "Created directory  = $EXTRA/$MODEL\n"
-		cp -r "$MAINDEST" "$EXTRA" 
+		touch "$MAINDEST/$IMVER"
+		cp -r "$MAINDEST" "$EXTRA"
 		touch "$DIRECTORY/automatic_fullbackup/.timestamp"
 	else
 		if [ $CREATE_ZIP != "none" ] ; then

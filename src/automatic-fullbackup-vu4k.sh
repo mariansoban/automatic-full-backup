@@ -11,6 +11,25 @@ BZIP2=/usr/bin/bzip2
 ROOTFSTYPE="rootfs.tar.bz2"
 WORKDIR="$DIRECTORY/bi"
 
+if [ -f /etc/issue ] ; then
+	ISSUE=`cat /etc/issue | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /etc/bhversion ] ; then
+	ISSUE=`cat /etc/bhversion | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /etc/vtiversion.info ] ; then
+	ISSUE=`cat /etc/vtiversion.info | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /etc/vtiversion.info ] ; then
+	ISSUE=`cat /etc/vtiversion.info | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /proc/stb/info/vumodel ] && [ -f /etc/version ] ; then
+	ISSUE=`cat /etc/version | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+else
+	IMVER="unknown"
+fi
+
 echo "Script date = $VERSION\n"
 echo "Back-up media = $DIRECTORY\n"
 df -h "$DIRECTORY"
@@ -114,6 +133,7 @@ if [ $TYPE = "VU" ] ; then
 	if [ -z "$CREATE_ZIP" ] ; then
 		mkdir -p "$EXTRA/$MODEL"
 		echo "Created directory  = $EXTRA/$MODEL\n"
+		touch "$MAINDEST/$IMVER"
 		cp -r "$MAINDEST" "$EXTRA" 
 		touch "$DIRECTORY/automatic_fullbackup/.timestamp"
 	else

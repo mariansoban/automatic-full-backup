@@ -11,6 +11,25 @@ UBINIZE=/usr/sbin/ubinize
 NANDDUMP=/usr/sbin/nanddump
 WORKDIR="$DIRECTORY/bi"
 
+if [ -f /etc/issue ] ; then
+	ISSUE=`cat /etc/issue | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /etc/bhversion ] ; then
+	ISSUE=`cat /etc/bhversion | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /etc/vtiversion.info ] ; then
+	ISSUE=`cat /etc/vtiversion.info | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /etc/vtiversion.info ] ; then
+	ISSUE=`cat /etc/vtiversion.info | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /proc/stb/info/vumodel ] && [ -f /etc/version ] ; then
+	ISSUE=`cat /etc/version | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+else
+	IMVER="unknown"
+fi
+
 echo "Script date = $VERSION\n"
 echo "Back-up media = $DIRECTORY\n"
 df -h "$DIRECTORY"
@@ -188,6 +207,7 @@ elif [ -f /proc/stb/info/vumodel ] ; then
 	UBINIZE_ARGS="-m 2048 -p 128KiB"
 	echo "Destination        = $MAINDEST\n"
 elif [ -f /proc/stb/info/hwmodel ] ; then
+	MODEL=$( cat /proc/stb/info/hwmodel )
 	if grep purehd /proc/stb/info/hwmodel > /dev/null ; then
 		TYPE=FUSION
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096 -F"
@@ -203,6 +223,20 @@ elif [ -f /proc/stb/info/hwmodel ] ; then
 		SHOWNAME="Xsarius $MODEL"
 		MAINDEST="$DIRECTORY/update/$MODEL/cfe"
 		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE/update"
+		echo "Destination        = $MAINDEST\n"
+	else
+		echo "No supported receiver found!\n"
+		exit 0
+	fi
+elif [ -f /proc/stb/info/gbmodel ] ; then
+	MODEL=$( cat /proc/stb/info/gbmodel )
+	if grep gbquadplus /proc/stb/info/gbmodel > /dev/null ; then
+		TYPE=GIGABLUE
+		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096 -F"
+		UBINIZE_ARGS="-m 2048 -p 128KiB"
+		SHOWNAME="Gigablue Quad $MODEL"
+		MAINDEST="$DIRECTORY/gigablue/quadplus"
+		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE/gigablue/quadplus"
 		echo "Destination        = $MAINDEST\n"
 	else
 		echo "No supported receiver found!\n"
@@ -277,7 +311,7 @@ fi
 
 TSTAMP="$(date "+%Y-%m-%d-%Hh%Mm")"
 
-if [ $TYPE = "ET" -o $MODEL = "xp1000" -o $TYPE = "EDISION" -o $TYPE = "SPYCAT" ] ; then
+if [ $TYPE = "ET" -o $MODEL = "xp1000" -o $TYPE = "EDISION" -o $TYPE = "SPYCAT" -o $TYPE = "GIGABLUE" ] ; then
 	rm -rf "$MAINDEST"
 	echo "Removed directory  = $MAINDEST\n"
 	mkdir -p "$MAINDEST"
@@ -289,6 +323,7 @@ if [ $TYPE = "ET" -o $MODEL = "xp1000" -o $TYPE = "EDISION" -o $TYPE = "SPYCAT" 
 	if [ -z "$CREATE_ZIP" ] ; then
 		mkdir -p "$EXTRA"
 		echo "Created directory  = $EXTRA\n"
+		touch "$MAINDEST/$IMVER"
 		cp -r "$MAINDEST" "$EXTRA"
 		touch "$DIRECTORY/automatic_fullbackup/.timestamp"
 	else
@@ -318,6 +353,7 @@ if [ $TYPE = "FUSION" ] ; then
 	if [ -z "$CREATE_ZIP" ] ; then
 		mkdir -p "$EXTRA"
 		echo "Created directory  = $EXTRA\n"
+		touch "$MAINDEST/$IMVER"
 		cp -r "$MAINDEST" "$EXTRA"
 		touch "$DIRECTORY/automatic_fullbackup/.timestamp"
 	else
@@ -348,6 +384,7 @@ if [ $TYPE = "FORMULER" -o $TYPE = "MUTANT" -o $TYPE = "XPEED" -o $TYPE = "ZGEMM
 	if [ -z "$CREATE_ZIP" ] ; then
 		mkdir -p "$EXTRA"
 		echo "Created directory  = $EXTRA\n"
+		touch "$MAINDEST/$IMVER"
 		cp -r "$MAINDEST" "$EXTRA"
 		touch "$DIRECTORY/automatic_fullbackup/.timestamp"
 	else
@@ -390,6 +427,7 @@ if [ $TYPE = "VU" ] ; then
 	if [ -z "$CREATE_ZIP" ] ; then
 		mkdir -p "$EXTRA/$MODEL"
 		echo "Created directory  = $EXTRA/$MODEL\n"
+		touch "$MAINDEST/$IMVER"
 		cp -r "$MAINDEST" "$EXTRA" 
 		touch "$DIRECTORY/automatic_fullbackup/.timestamp"
 	else

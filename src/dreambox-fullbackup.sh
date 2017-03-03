@@ -7,6 +7,25 @@ START=$(date +%s)
 DATE=`date +%Y%m%d_%H%M`
 IMAGEVERSION=`date +%Y%m%d`
 
+if [ -f /etc/issue ] ; then
+	ISSUE=`cat /etc/issue | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /etc/bhversion ] ; then
+	ISSUE=`cat /etc/bhversion | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /etc/vtiversion.info ] ; then
+	ISSUE=`cat /etc/vtiversion.info | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /etc/vtiversion.info ] ; then
+	ISSUE=`cat /etc/vtiversion.info | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+elif [ -f /proc/stb/info/vumodel ] && [ -f /etc/version ] ; then
+	ISSUE=`cat /etc/version | grep . | tail -n 1 ` 
+	IMVER=${ISSUE%?????}
+else
+	IMVER="unknown"
+fi
+
 CREATE_ZIP="$2"
 IMAGENAME="$3"
 
@@ -387,6 +406,7 @@ log "$(du -h $NFI)"
 
 if [ -z "$CREATE_ZIP" ] ; then
    mkdir -p "$EXTRA"
+   touch "$NFI/$IMVER"
    cp -r "$NFI" "$EXTRA"
    touch "$BACKUP_LOCATION/automatic_fullbackup/.timestamp"
 else
