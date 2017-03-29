@@ -43,7 +43,7 @@ CREATE_ZIP="$2"
 IMAGENAME="$3"
 
 if [ -f /proc/stb/info/boxtype ] ; then
-	MODEL=$( cat cat /proc/stb/info/boxtype )
+	MODEL=$( cat /proc/stb/info/boxtype )
 	if [ $MODEL = "hd51" ] ; then
 		echo "Found Mutant HD51 4K\n"
 		#MTD_KERNEL="mmcblk0p2"
