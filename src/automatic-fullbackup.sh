@@ -57,8 +57,6 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		fi
 		if [ $MODEL = "et10000" -o $MODEL = "et8000" -o $MODEL = "et8500" ] ; then
 			echo " "
-		elif [ $MODEL = "et7000mini" ] ; then
-			MODEL="et7x00"
 		else
 			MODEL=${MODEL:0:3}x00
 		fi
