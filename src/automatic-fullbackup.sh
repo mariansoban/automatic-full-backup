@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-VERSION="25/25/2016\ncreators of the script Pedro_Newbie and Dimitrij (http://forums.openpli.org)\n"
+VERSION="20/04/2016\ncreators of the script Pedro_Newbie and Dimitrij (http://forums.openpli.org)\n"
 DIRECTORY="$1"
 START=$(date +%s)
 DATE=`date +%Y%m%d_%H%M`
@@ -184,6 +184,14 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		MAINDEST="$DIRECTORY/miraclebox/twinplus"
 		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
 		echo "Destination        = $MAINDEST\n"
+	elif grep tiviarmin /proc/stb/info/boxtype > /dev/null ; then
+		TYPE=TIVIARMIN
+		MKUBIFS_ARGS="-m 2048 -e 126976 -c 8192"
+		UBINIZE_ARGS="-m 2048 -p 128KiB"
+		SHOWNAME="Tiviar mini plus"
+		MAINDEST="$DIRECTORY/$MODEL"
+		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
+		echo "Destination        = $MAINDEST\n"
 	else
 		echo "No supported receiver found!\n"
 		exit 0
@@ -309,7 +317,7 @@ fi
 
 TSTAMP="$(date "+%Y-%m-%d-%Hh%Mm")"
 
-if [ $TYPE = "ET" -o $MODEL = "xp1000" -o $TYPE = "EDISION" -o $TYPE = "SPYCAT" -o $TYPE = "GIGABLUE" ] ; then
+if [ $TYPE = "ET" -o $MODEL = "xp1000" -o $TYPE = "EDISION" -o $TYPE = "SPYCAT" -o $TYPE = "GIGABLUE" -o $TYPE = "TIVIARMIN" ] ; then
 	rm -rf "$MAINDEST"
 	echo "Removed directory  = $MAINDEST\n"
 	mkdir -p "$MAINDEST"
