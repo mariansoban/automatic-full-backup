@@ -466,7 +466,7 @@ msgstr ""
 msgid "AFB\nNot found mount device for create full backup!"
 msgstr ""
 
-msgid ""AFB\nNot enough free space on device!\nYou need at least 1500Mb free space!"
+msgid "AFB\nNot enough free space on device!\nYou need at least 1500Mb free space!"
 msgstr """
 
 msgid "AFB\nNot enough free space on device!\nYou need at least 300Mb free space!"
