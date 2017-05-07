@@ -40,6 +40,7 @@ opkg list-installed | grep dvb-modules
 CREATE_ZIP="$2"
 IMAGENAME="$3"
 
+
 if grep rootfs /proc/mounts | grep ubifs > /dev/null; then
 	ROOTFSTYPE=ubifs
 else
@@ -421,11 +422,8 @@ if [ $TYPE = "VU" ] ; then
 		mv "$WORKDIR/root.ubifs" "$MAINDEST/root_cfe_auto.jffs2"
 	fi
 	mv "$WORKDIR/vmlinux.gz" "$MAINDEST/kernel_cfe_auto.bin"
-	if [ $MODEL = "solo2" -o $MODEL = "duo2" -o $MODEL = "ultimo" -o $MODEL = "uno" ] ; then
-		touch "$MAINDEST/reboot.update"
-		echo "rename this file to 'force.update' to force an update without confirmation" > "$MAINDEST/noforce.update"
-		echo "and remove reboot.update, otherwise the box is flashed again after completion" >> "$MAINDEST/noforce.update"
-		chmod 644 "$MAINDEST/reboot.update"
+	if [ $MODEL = "duo" -o $MODEL = "solo" -o $MODEL = "solo2" -o $MODEL = "duo2" -o $MODEL = "ultimo" -o $MODEL = "uno" ] ; then
+		echo "This file forces a reboot after the update and remove reboot.update, otherwise the box is flashed again after completion" >> "$MAINDEST/reboot.update"
 	fi
 	if [ $MODEL = "solose" -o $MODEL = "zero" ] ; then
 		echo "rename this file to 'force.update' to be able to flash this backup" > "$MAINDEST/noforce.update"

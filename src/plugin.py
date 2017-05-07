@@ -50,7 +50,7 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-PLUGIN_VERSION = _(" ver. ") + "5.2"
+PLUGIN_VERSION = _(" ver. ") + "5.3"
 
 BOX_NAME = "none"
 MODEL_NAME = "none"
@@ -165,6 +165,32 @@ if not os.path.exists(ofgwrite_bin):
 		if os.path.exists(SH4):
 			os.chmod(SH4, 0755)
 			ofgwrite_bin = SH4
+
+def Freespace(dev):
+	try:
+		statdev = os.statvfs(dev)
+		space = (statdev.f_bavail * statdev.f_frsize) / 1024
+		print "[AFB] Free space on %s = %i kilobytes" %(dev, space)
+		return space
+	except:
+		return 0
+
+def check_hdd(dir=""):
+	if not os.path.exists(dir):
+		if Standby.inStandby is None:
+			_session and _session.open(MessageBox, _("AFB\nNot found mount device for create full backup!"), type = MessageBox.TYPE_ERROR)
+		return False
+	if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500":
+		if Freespace(dir) < 1500000:
+			if Standby.inStandby is None:
+				_session and _session.open(MessageBox, _("AFB\nNot enough free space on device!\nYou need at least 1500Mb free space!"), type = MessageBox.TYPE_ERROR)
+			return False
+	else:
+		if Freespace(dir) < 300000:
+			if Standby.inStandby is None:
+				_session and _session.open(MessageBox, _("AFB\nNot enough free space on device!\nYou need at least 300Mb free space!"), type = MessageBox.TYPE_ERROR)
+			return False
+	return True
 
 def backupCommand():
 	try:
@@ -501,14 +527,21 @@ class FullBackupConfig(ConfigListScreen,Screen):
 		if config.plugins.fullbackup.where.value == "none":
 			self["status"].setText(_('Not selected directory backup'))
 			return
-		#if MODEL_NAME == "hd51":
-		#	self.session.open(MessageBox, _("Your reciever not supported!"), MessageBox.TYPE_ERROR)
-		#	return
+		if MODEL_NAME == "none":
+			self.session.open(MessageBox, _("Your reciever not supported!"), MessageBox.TYPE_ERROR)
+			return
+		if not check_hdd(config.plugins.fullbackup.where.value):
+			return
 		list = [
 			(_("Background mode"), "background"),
 			(_("Console mode"), "console"),
 		]
-		dlg = self.session.openWithCallback(self.CallbackMode,ChoiceBox,title= _("Select the option to create a backup:"), list = list)
+		if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500":
+			list += [
+				(_("Background mode") + _(" as recovery"), "background_recovery"),
+				(_("Console mode") + _(" as recovery"), "console_recovery"),
+			]
+		dlg = self.session.openWithCallback(self.CallbackMode, ChoiceBox, title= _("Select the option to create a backup:"), list = list)
 		dlg.setTitle(_("Create backup"))
 
 	def CallbackMode(self, ret):
@@ -516,22 +549,25 @@ class FullBackupConfig(ConfigListScreen,Screen):
 		if ret:
 			if ret == "background":
 				self.backgroundMode()
-			elif ret == "console":
-				text = _('Console log')
+			elif ret == "background_recovery":
+				self.backgroundMode(recovery=True)
+			elif ret == "console_recovery" or ret == "console":
+				text = _('Console log') + _(' - OK show/nide')
 				cmd = backupCommand()
+				if ret == "console_recovery":
+					cmd += " %s" % "recovery"
 				self.session.openWithCallback(self.consoleClosed, BackupConsole, text, [cmd])
 
 	def consoleClosed(self, answer=None): 
 		self.changedWhere(config.plugins.fullbackup.where)
 
-	def backgroundMode(self):
-		if config.plugins.fullbackup.where.value == "none":
-			self["status"].setText(_('Not selected directory backup'))
-			return
+	def backgroundMode(self, recovery=False):
 		self.data = ''
 		self.showOutput()
 		self["statusbar"].setText(_('Running'))
 		cmd = backupCommand()
+		if recovery:
+			cmd += " %s" % "recovery"
 		if self.container.execute(cmd):
 			print "[FullBackup] failed to execute"
 			self.showOutput()
@@ -561,15 +597,27 @@ class BackupConsole(Console):
 		}, -2)
 		self.stop_run = False
 		self.dir = dir
+		self.is_hide = False
 
 	def cancel(self):
 		if (self.run == len(self.cmdlist)) or self.stop_run:
+			if self.is_hide:
+				self.is_hide = False
+				self.show()
+				return
 			if self.dir is not None:
 				self.extendedClosed()
 			else:
 				self.close()
 				self.container.appClosed.remove(self.runFinished)
 				self.container.dataAvail.remove(self.dataAvail)
+		else:
+			if not self.is_hide:
+				self.hide()
+				self.is_hide = True
+			else:
+				self.is_hide = False
+				self.show()
 
 	def extendedClosed(self):
 		text = _("Select action:")
@@ -593,7 +641,8 @@ class BackupConsole(Console):
 		self.session.openWithCallback(extraAction, ChoiceBox, title=text, list=menu)
 
 	def stopRunBackup(self):
-		self.session.openWithCallback(self.stopRunBackupAnswer, MessageBox,_("Do you really want to stop the creation of backup?"), MessageBox.TYPE_YESNO)
+		if (self.run != len(self.cmdlist)):
+			self.session.openWithCallback(self.stopRunBackupAnswer, MessageBox,_("Do you really want to stop the creation of backup?"), MessageBox.TYPE_YESNO)
 
 	def stopRunBackupAnswer(self, answer):
 		if answer:
@@ -625,6 +674,8 @@ class FlashImageConfig(Screen):
 		self.filelist.onSelectionChanged.append(self.__selChanged)
 		self["filelist"] = self.filelist
 		self.dualboot = self.dualBoot()
+		self.imbeddedMiltiBoot = self.imbeddedMiltiBoot()
+		self.stop_enigma = True
 		self["FilelistActions"] = ActionMap(["SetupActions", "ColorActions"],
 			{
 				"green": self.keyGreen,
@@ -656,6 +707,24 @@ class FlashImageConfig(Screen):
 			except:
 				pass
 		return False
+
+	def imbeddedMiltiBoot(self):
+		list = []
+		if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500":
+			try:
+				ret = os.popen("sfdisk -l /dev/mmcblk0").readlines()
+				for line in ret:
+					if '/dev/mmcblk0p3' in line and 'Linux filesystem' in line:
+						list.append(('mmcblk0p3'))
+					if '/dev/mmcblk0p5' in line and 'Linux filesystem' in line:
+						list.append(('mmcblk0p5'))
+					if '/dev/mmcblk0p7' in line and 'Linux filesystem' in line:
+						list.append(('mmcblk0p7'))
+					if '/dev/mmcblk0p9' in line and 'Linux filesystem' in line:
+						list.append(('mmcblk0p9'))
+			except:
+				pass
+		return list
 
 	def getCurrentSelected(self):
 		dirname = self.filelist.getCurrentDirectory()
@@ -706,6 +775,8 @@ class FlashImageConfig(Screen):
 				warning_text = "\n"
 				if self.dualboot:
 					warning_text += _("\nYou are using dual multiboot!")
+				if len(self.imbeddedMiltiBoot) > 1:
+					warning_text += _("\nYou are using  built-in multiboot from %s sections!") % len(self.imbeddedMiltiBoot)
 				self.session.openWithCallback(lambda r: self.confirmedWarning(r), MessageBox, _("Warning!\nUse at your own risk! Make always a backup before use!\nDon't use it if you use multiple ubi volumes in ubi layer!") + warning_text, MessageBox.TYPE_INFO)
 
 	def showparameterlist(self):
@@ -773,8 +844,26 @@ class FlashImageConfig(Screen):
 						(_("Second partition (only root)"), "root2"),
 						(_("Second partition (only kernel)"), "kernel2"),
 					]
+					num_sector = len(self.imbeddedMiltiBoot)
+					if num_sector > 1:
+						open_list3 = [
+							(_("Simulate second partition (no write)"), "imbedded_simulate2"),
+							(_("Second partition"), "imbedded_standard2"),
+						]
+						if num_sector > 2:
+							open_list3 += [
+								(_("Simulate third partition (no write)"), "imbedded_simulate3"),
+								(_("Third partition"), "imbedded_standard3"),
+							]
+						if num_sector > 3:
+							open_list3 += [
+								(_("Simulate fourth partition (no write)"), "imbedded_simulate4"),
+								(_("Fourth partition"), "imbedded_standard4"),
+							]
 					if self.dualboot:
 						open_list += open_list2
+					if len(self.imbeddedMiltiBoot) > 1:
+						open_list += open_list3
 				else:
 					open_list = [
 						(_("Exit"), "exit"),
@@ -791,51 +880,95 @@ class FlashImageConfig(Screen):
 				self.founds = False
 				return
 			dir_flash = self.getCurrentSelected()
+			mount_part = ""
+			self.stop_enigma = True
+			if len(self.imbeddedMiltiBoot) > 1:
+				mount_part = os.popen("readlink /dev/root").read()
 			text = _("Flashing: ")
 			cmd = "echo -e"
-			xtra = ""
 			if ret[1] == "simulate":
 				text += _("Simulate (no write)")
 				cmd = "%s -n '%s'" % (ofgwrite_bin, dir_flash)
 			elif ret[1] == "standard":
 				text += _("Standard (root and kernel)")
-				cmd = "%s -r -k '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
+				if len(self.imbeddedMiltiBoot) > 1:
+					if 'mmcblk0p3' not in mount_part:
+						os.system('mkfs.ext4 -F /dev/mmcblk0p3')
+						self.stop_enigma = False
+				cmd = "%s -r -k '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
 			elif ret[1] == "root":
 				text += _("Only root")
-				cmd = "%s -r '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
+				cmd = "%s -r '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
 			elif ret[1] == "kernel":
+				if len(self.imbeddedMiltiBoot) > 1:
+					if 'mmcblk0p3' not in mount_part:
+						os.system('mkfs.ext4 -F /dev/mmcblk0p3')
+						self.stop_enigma = False
 				text += _("Only kernel")
-				cmd = "%s -k '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
+				cmd = "%s -k '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
 			elif ret[1] == "simulate2":
 				text += _("Simulate second partition (no write)")
 				cmd = "%s -kmtd3 -rmtd4 -n '%s'" % (ofgwrite_bin, dir_flash)
 			elif ret[1] == "standard2":
 				text += _("Second partition (root and kernel)")
-				cmd = "%s -kmtd3 -rmtd4 '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
+				cmd = "%s -kmtd3 -rmtd4 '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
 			elif ret[1] == "root2":
 				text += _("Second partition (only root)")
 				cmd = "%s -rmtd4 '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
 			elif ret[1] == "kernel2":
 				text += _("Second partition (only kernel)")
-				cmd = "%s -kmtd3 '%s' > /dev/null 2>&1 &" % (ofgwrite_bin, dir_flash)
+				cmd = "%s -kmtd3 '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
+			elif ret[1] == "imbedded_simulate2":
+				text += _("Simulate second partition (no write)")
+				cmd = "%s -n -r -k -m2 '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
+			elif ret[1] == "imbedded_standard2":
+				text += _("Second partition")
+				if 'mmcblk0p5' not in mount_part:
+					os.system('mkfs.ext4 -F /dev/mmcblk0p5')
+					self.stop_enigma = False
+				cmd = "%s -r -k -m2 '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
+			elif ret[1] == "imbedded_simulate3":
+				text += _("Simulate third partition (no write)")
+				cmd = "%s -n -r -k -m3 '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
+			elif ret[1] == "imbedded_standard3":
+				text += _("Third partition")
+				if 'mmcblk0p7' not in mount_part:
+					os.system('mkfs.ext4 -F /dev/mmcblk0p7')
+					self.stop_enigma = False
+				cmd = "%s -r -k -m3 '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
+			elif ret[1] == "imbedded_simulate4":
+				text += _("Simulate fourth partition (no write)")
+				cmd = "%s -n -r -k -m4 '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
+			elif ret[1] == "imbedded_standard4":
+				text += _("Fourth partition")
+				if 'mmcblk0p9' not in mount_part:
+					os.system('mkfs.ext4 -F /dev/mmcblk0p9')
+					self.stop_enigma = False
+				cmd = "%s -r -k -m4 '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
 			else:
 				return
 			message = "echo -e '\n"
 			message += _('NOT found files for flashing!\n')
 			message += "'"
-			if ret[1] == "simulate" and ret[1] == "simulate2":
+			if "simulate" in ret[1]:
 				if self.founds:
 					message = "echo -e '\n"
 					message += _('Show only found image and mtd partitions.\n')
 					message += "'"
 			else:
 				if self.founds:
-					message = "echo -e '\n"
-					message += _('ofgwrite will stop enigma2 now to run the flash.\n')
-					message += _('Your STB will freeze during the flashing process.\n')
-					message += _('Please: DO NOT reboot your STB and turn off the power.\n')
-					message += _('The image or kernel will be flashing and auto booted in few minutes.\n')
-					message += "'"
+					if len(self.imbeddedMiltiBoot) > 1 and not self.stop_enigma:
+						message = "echo -e '\n"
+						message += _('ofgwrite flashing ready.\n')
+						message += _('please press exit to go back to the menu.\n')
+						message += "'"
+					else:
+						message = "echo -e '\n"
+						message += _('ofgwrite will stop enigma2 now to run the flash.\n')
+						message += _('Your STB will freeze during the flashing process.\n')
+						message += _('Please: DO NOT reboot your STB and turn off the power.\n')
+						message += _('The image or kernel will be flashing and auto booted in few minutes.\n')
+						message += "'"
 			try:
 				if os.path.exists(ofgwrite_bin):
 					os.chmod(ofgwrite_bin, 0755)
@@ -844,7 +977,13 @@ class FlashImageConfig(Screen):
 					return
 			except:
 				pass
-			self.session.open(Console, text,[message, cmd])
+			self.session.openWithCallback(self.doClosed, Console, text,cmdlist = [message, cmd])
+
+	def doClosed(self):
+		if (len(self.imbeddedMiltiBoot) > 1 and not self.stop_enigma) or self.dualboot:
+			os.system('umount -fl /oldroot_bind')
+			os.system('umount -fl /newroot')
+			self.close()
 
 	def keyRed(self):
 		self.close()
@@ -1403,7 +1542,14 @@ def WakeupDayOfWeek():
 
 class GreatingManualBackup(MessageBox):
 	def __init__(self, session, dir):
-		MessageBox.__init__(self, session, _("Do you really want to create a full backup of directory %s ?") % dir, MessageBox.TYPE_YESNO)
+		try:
+			if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500":
+				list = [ (_("Yes"), True), (_("Yes") + _(" as recovery"), "recovery"), (_("No"), False) ]
+				MessageBox.__init__(self, session, text = _("Do you really want to create a full backup of directory %s ?") % dir, list=list)
+			else:
+				MessageBox.__init__(self, session, _("Do you really want to create a full backup of directory %s ?") % dir, MessageBox.TYPE_YESNO)
+		except:
+			MessageBox.__init__(self, session, _("Do you really want to create a full backup of directory %s ?") % dir, MessageBox.TYPE_YESNO)
 		self.skinName = "MessageBox"
 
 def msgManualBackupClosed(ret, curdir=None):
@@ -1413,6 +1559,8 @@ def msgManualBackupClosed(ret, curdir=None):
 			if BOX_NAME == 'none':
 				cmd = "echo 'Your box not supported!'\n"
 			else:
+				if not check_hdd(curdir):
+					return
 				cmd = BACKUP_SCRIPT
 				if BOX_NAME == 'dmm':
 					cmd = DREAM_BACKUP_SCRIPT
@@ -1429,9 +1577,11 @@ def msgManualBackupClosed(ret, curdir=None):
 					name = about.getImageTypeString()
 					image_name = name.replace(' ', '').replace('\n', '').replace('\l', '').replace('\t', '')
 				except:
-					image_name = ''
+					image_name = 'unknown'
 				cmd += " %s" % image_name
-			text = _('Console log')
+				if ret == "recovery":
+					cmd += " %s" % ret
+			text = _('Console log') + _(' - OK show/nide')
 			global _session
 			if _session is not None:
 				_session.open(BackupConsole, text, [cmd], dir=curdir)

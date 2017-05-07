@@ -125,10 +125,10 @@ if [ $TYPE = "VU" ] ; then
 	mv "$WORKDIR/$KERNELNAME" "$MAINDEST/$KERNELNAME"
 	mv "$WORKDIR/$ROOTFSTYPE" "$MAINDEST/$ROOTFSTYPE"
 	echo "$MODEL-$IMAGEVERSION" > "$MAINDEST/imageversion"
-	if [ $MODEL = "ultimo4k" -o $MODEL = "uno4k" ] ; then
+	if [ $MODEL = "uno4k" ] ; then
 		echo "rename this file to 'force.update' when need confirmation" > "$MAINDEST/noforce.update"
 	else
-		echo "rename this file to 'force.update' to force an update without confirmation" > "$MAINDEST/reboot.update"
+		echo "This file forces a reboot after the update" > "$MAINDEST/reboot.update"
 	fi
 	if [ -z "$CREATE_ZIP" ] ; then
 		mkdir -p "$EXTRA/$MODEL"

@@ -462,3 +462,42 @@ msgstr ""
 #: plugin.py:96
 msgid "wake up for backup"
 msgstr ""
+
+msgid "AFB\nNot found mount device for create full backup!"
+msgstr ""
+
+msgid ""AFB\nNot enough free space on device!\nYou need at least 1500Mb free space!"
+msgstr """
+
+msgid "AFB\nNot enough free space on device!\nYou need at least 300Mb free space!"
+msgstr ""
+
+msgid " as recovery"
+msgstr ""
+
+msgid " - OK show/nide"
+msgstr ""
+
+msgid "\nYou are using  built-in multiboot from %s sections!"
+msgstr ""
+
+msgid "Simulate third partition (no write)"
+msgstr ""
+
+msgid "Third partition"
+msgstr ""
+
+msgid "Second partition"
+msgstr ""
+
+msgid "Simulate fourth partition (no write)"
+msgstr ""
+
+msgid "Fourth partition"
+msgstr ""
+
+msgid "ofgwrite flashing ready.\n"
+msgstr ""
+
+msgid "please press exit to go back to the menu.\n"
+msgstr ""
