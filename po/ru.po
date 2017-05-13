@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-02-28 19:54+0100\n"
-"PO-Revision-Date: 2017-05-05 21:11+0300\n"
+"PO-Revision-Date: 2017-05-13 21:23+0300\n"
 "Language-Team: LANGUAGE <Dima-73@inbox.lv>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -149,7 +149,7 @@ msgid "Friday"
 msgstr "Пятница"
 
 msgid "Full backup for all recievers"
-msgstr "Полный бекап для всех ресиверов"
+msgstr "Полный бекап/прошивка для всех ресиверов"
 
 msgid "FullBackup Configuration"
 msgstr "Настройки FullBackup"
@@ -198,7 +198,7 @@ msgstr ""
 "Создаем zip архив..."
 
 msgid "Please: DO NOT reboot your STB and turn off the power.\n"
-msgstr "Пожалуйста: НЕ делайте перезагрузку вашего STB и не выключайте питание.\n"
+msgstr "Пожалуйста: НЕ делайте перезагрузку Вашего ресивера и не выключайте питание.\n"
 
 msgid "Press OK"
 msgstr "Нажмите ОК"
@@ -286,8 +286,7 @@ msgid "The device was successfully unmounted!"
 msgstr "Устройство успешно отмонтировано!"
 
 msgid "The image or kernel will be flashing and auto booted in few minutes.\n"
-msgstr ""
-"Имидж или ядро сейчас будут перезаписаны и ресивер автоматически перезагрузится через несколько минут.\n"
+msgstr "Имидж или ядро сейчас будут перезаписаны и ресивер автоматически перезагрузится через несколько минут.\n"
 
 msgid "Thursday"
 msgstr "Четверг"
@@ -340,7 +339,7 @@ msgid "no"
 msgstr "нет"
 
 msgid "ofgwrite will stop enigma2 now to run the flash.\n"
-msgstr "утилита ofgwrite остановит сейчас enigma2 для выполнения быстрой прошивки.\n"
+msgstr "утилита 'ofgwrite' остановит сейчас enigma2 для выполнения быстрой прошивки.\n"
 
 msgid "older than 1 week"
 msgstr "старше одной недели"
@@ -435,7 +434,135 @@ msgid "Fourth partition"
 msgstr "Четвертый раздел"
 
 msgid "ofgwrite flashing ready.\n"
-msgstr "ofgwrite - быстрая прошивка закончена.\n"
+msgstr "'ofgwrite' - быстрая прошивка закончена.\n"
 
 msgid "please press exit to go back to the menu.\n"
 msgstr "Нажмите 'Выход', чтобы вернуться в меню.\n"
+
+msgid "Install util-linux-blkid?"
+msgstr "Установить util-linux-blkid?"
+
+msgid " (unknown mode)"
+msgstr " (неизвестный режим)"
+
+msgid "2160p50 with PiP"
+msgstr "2160p50 с PiP"
+
+msgid "2160p60 without PiP (default)"
+msgstr "2160p60 без PiP (дефолт)"
+
+msgid "Alternative Image 1 partition for boot repair not found."
+msgstr "Альтернативный имидж первого раздела для восстановления загрузки не найден."
+
+msgid "Can not repair file %s"
+msgstr "Не удается восстановить файл %s"
+
+msgid "Can not write file %s"
+msgstr "Не удается перезаписать файл %s"
+
+msgid "Caution, next boot is starts with these settings!"
+msgstr "Внимание, следующая загрузка начнется с этих настроек!"
+
+msgid "Command line error!"
+msgstr "Ошибка командной строки!"
+
+msgid "Current bootsettings: %s (%s)%s"
+msgstr "Текущие настройки загрузки: %s (%s)%s"
+
+msgid "Current load boxmode: %s"
+msgstr "Текущий загруженный режим ресивера: %s"
+
+msgid "Do you want to reboot now with selected image?"
+msgstr "Вы хотите сделать перезагрузку ресивера сейчас с выбранным имиджем?"
+
+msgid "Do you want to reboot now?"
+msgstr "Вы хотите сделать перезагрузку ресивера сейчас?"
+
+msgid "Error in file %s"
+msgstr "Ошибка в файле %s"
+
+msgid ""
+"Error reading image from file '/boot/%s'!\n"
+"Please flashing another image for this partition."
+msgstr ""
+"Ошибка чтения имиджа из файла '/boot/%s'!\n"
+"Пожалуйста, прошейте другой имидж для этого раздела."
+
+msgid "File '/boot/%s' copy to '/boot/STARTUP' failed!"
+msgstr "Ошибка при копировании файла '/boot/%s' в '/boot/STARTUP' !"
+
+msgid "File not found - rename failed!"
+msgstr "Файл не найден - ошибка при переименовании!"
+
+msgid "Image %s"
+msgstr "Имидж %s"
+
+msgid "MultiBoot STARTUP switcher"
+msgstr "Мультибут - STARTUP переключатель"
+
+msgid "Name already exists - rename failed!"
+msgstr "Такое название уже существует - ошибка при переименовании!"
+
+msgid "Next boot will start from Image 1."
+msgstr "Следующая загрузка начнется с имижда 1."
+
+msgid "Please enter new name:"
+msgstr "Пожалуйста, введите новое название имиджа:"
+
+msgid "Rename"
+msgstr "Переименовать"
+
+msgid "Rename failed!"
+msgstr "Ошибка при переименовании!"
+
+msgid "Select Image: %s"
+msgstr "Выбор имиджа: %s"
+
+msgid "Select bootoption: %s"
+msgstr "Выбор настроек загрузки: %s"
+
+msgid "Select bootoption: not supported - see info"
+msgstr "Настройки загрузки: не поддерживается - см. инфо"
+
+msgid "Unable to read image number"
+msgstr "Невозможно прочитать номер имиджа"
+
+msgid "Warning!Please install util-linux-blkid."
+msgstr "Внимание!Необходимо установить util-linux-blkid."
+
+msgid "Write error!"
+msgstr "Ошибка при записи!"
+
+msgid "Wrong Bootsettings detected!"
+msgstr "Обнаружены неправильные настройки загрузки!"
+
+msgid ""
+"Your box needs Bootloaderversion(s)\n"
+"\n"
+"%s\n"
+"\n"
+"to make compatible with Bootoptions!"
+msgstr ""
+"Для Вашего ресивера необходим Bootloader версии\n"
+"\n"
+"%s\n"
+"\n"
+"для совместимости с настройками загрузки!"
+
+msgid "no image found"
+msgstr "не найден имидж"
+
+msgid "placeholder message 2"
+msgstr "Заполнитель сообщения 2"
+
+msgid "unknown"
+msgstr "неизвестно"
+
+msgid "MultiBoot switcher"
+msgstr "Мультибут - переключатель"
+
+msgid "Show multiBoot switcher in menu shutdown"
+msgstr "Показать 'Мультибут - переключатель' в меню выключения"
+
+msgid "Open multiBoot switcher"
+msgstr "Открыть 'Мультибут - переключатель'"

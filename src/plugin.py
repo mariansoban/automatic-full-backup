@@ -1,11 +1,7 @@
 import time
 import os
 import gettext
-import enigma
-from Components.config import config, configfile, \
-			ConfigEnableDisable, ConfigSubsection, \
-			ConfigYesNo, ConfigClock, getConfigListEntry, \
-			ConfigSelection, ConfigOnOff, ConfigSubDict, ConfigNothing, NoSave, ConfigText
+from Components.config import config, configfile, ConfigEnableDisable, ConfigSubsection, ConfigYesNo, ConfigClock, getConfigListEntry, ConfigSelection, ConfigOnOff, ConfigSubDict, ConfigNothing, NoSave, ConfigText
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
@@ -30,7 +26,7 @@ try:
 	from Tools.StbHardware import getFPWasTimerWakeup
 except:
 	from Tools.DreamboxHardware import getFPWasTimerWakeup
-from enigma import eTimer
+from enigma import eTimer, eConsoleAppContainer
 import NavigationInstance
 from Tools import Notifications
 from Tools.HardwareInfo import HardwareInfo
@@ -50,7 +46,7 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-PLUGIN_VERSION = _(" ver. ") + "5.3"
+PLUGIN_VERSION = _(" ver. ") + "5.4"
 
 BOX_NAME = "none"
 MODEL_NAME = "none"
@@ -138,6 +134,9 @@ weekdays = [
 	_("Sunday"),
 	]
 
+config.plugins.fullbackup.multiboot_switcher_standbymenu = ConfigYesNo(default = False)
+config.plugins.fullbackup.run_multbboot_switcher = ConfigSelection(choices = [("1", _("Press OK"))], default = "1")
+
 autoStartTimer = None
 _session = None
 
@@ -170,7 +169,7 @@ def Freespace(dev):
 	try:
 		statdev = os.statvfs(dev)
 		space = (statdev.f_bavail * statdev.f_frsize) / 1024
-		print "[AFB] Free space on %s = %i kilobytes" %(dev, space)
+		print "[FullBackup] Free space on %s = %i kilobytes" %(dev, space)
 		return space
 	except:
 		return 0
@@ -191,6 +190,45 @@ def check_hdd(dir=""):
 				_session and _session.open(MessageBox, _("AFB\nNot enough free space on device!\nYou need at least 300Mb free space!"), type = MessageBox.TYPE_ERROR)
 			return False
 	return True
+
+emmc_multiboot = MODEL_NAME in ("hd51", "vs1500")
+
+def runBlkid():
+	list = []
+	if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500":
+		blkid_linux = os.popen("blkid -v").read()
+		if 'util-linux' in blkid_linux and os.path.exists("/sbin/blkid.util-linux"):
+			ret = os.popen("blkid").readlines()
+			for line in ret:
+				if '/dev/mmcblk0p3' in line:
+					if 'TYPE' not in line:
+						os.system('mkfs.ext2 -F /dev/mmcblk0p3')
+					list.append(('mmcblk0p3'))
+				if '/dev/mmcblk0p5' in line:
+					if 'TYPE' not in line:
+						os.system('mkfs.ext2 -F /dev/mmcblk0p5')
+					list.append(('mmcblk0p5'))
+				if '/dev/mmcblk0p7' in line:
+					if 'TYPE' not in line:
+						os.system('mkfs.ext2 -F /dev/mmcblk0p7')
+					list.append(('mmcblk0p7'))
+				if '/dev/mmcblk0p9' in line:
+					if 'TYPE' not in line:
+						os.system('mkfs.ext2 -F /dev/mmcblk0p9')
+					list.append(('mmcblk0p9'))
+				if '/dev/mmcblk0p10' in line:
+					if 'TYPE' not in line and 'swap' in line:
+						os.system('mkswap /dev/mmcblk0p10')
+					if not os.path.exists("/etc/init.d/createswap.sh") and 'swap' in line:
+						os.system('cp /usr/lib/enigma2/python/Plugins/Extensions/FullBackup/createswap.sh /etc/init.d/createswap.sh && chmod 755 /etc/init.d/createswap.sh')
+						os.system("ln -sf /etc/init.d/createswap.sh /etc/rc3.d/S98createswap")
+		elif _session:
+			_session.openWithCallback(installUtilblkidCallback, MessageBox, _("Install util-linux-blkid?"), MessageBox.TYPE_YESNO)
+	return list
+
+def installUtilblkidCallback(answer):
+		if answer:
+			os.system("opkg update && opkg install util-linux-blkid")
 
 def backupCommand():
 	try:
@@ -283,7 +321,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 	<widget name="key_yellow" position="320,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
 	<widget name="key_blue" position="480,0" size="140,40" valign="center" halign="center" zPosition="4"  foregroundColor="white" font="Regular;18" transparent="1" shadowColor="background" shadowOffset="-2,-2" />
 
-	<widget name="config" position="10,40" size="630,230" scrollbarMode="showOnDemand" />
+	<widget name="config" position="10,40" size="630,227" scrollbarMode="showOnDemand" />
 	<widget name="status" position="10,280" size="630,140" font="Regular;16" />
 	<widget name="ButtonMenu" position="10,420" size="35,25" zPosition="3" pixmap="skin_default/buttons/key_menu.png" alphatest="on" />
 	<ePixmap alphatest="on" pixmap="skin_default/icons/clock.png" position="560,433" size="14,14" zPosition="3"/>
@@ -292,7 +330,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 	</widget>
 	<widget name="statusbar" position="10,430" size="550,20" font="Regular;18" />
 </screen>"""
-		
+
 	def __init__(self, session, args = 0):
 		self.session = session
 		self.setup_title = _("FullBackup Configuration")
@@ -334,6 +372,9 @@ class FullBackupConfig(ConfigListScreen,Screen):
 			list = self.configList + self.appendList
 		else:
 			list = self.configList
+		if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500":
+			list.append(getConfigListEntry(_("Show multiBoot switcher in menu shutdown"), cfg.multiboot_switcher_standbymenu))
+			list.append(getConfigListEntry(_("Open multiBoot switcher"), cfg.run_multbboot_switcher))
 		ConfigListScreen.__init__(self, list, session=session, on_change = self.changedEntry)
 		self["key_red"] = Button(_("Cancel"))
 		self["key_green"] = Button(_("Save"))
@@ -357,7 +398,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 		}, -2)
 		self.onChangedEntry = [self.onEntryChanged]
 		self.data = ''
-		self.container = enigma.eConsoleAppContainer()
+		self.container = eConsoleAppContainer()
 		self.container.appClosed.append(self.appClosed)
 		self.container.dataAvail.append(self.dataAvail)
 		cfg.add_to_where.addNotifier(self.changedWhere)
@@ -481,9 +522,12 @@ class FullBackupConfig(ConfigListScreen,Screen):
 
 	def keyOk(self):
 		ConfigListScreen.keyOK(self)
-		sel = self["config"].getCurrent()[1]
+		sel = self["config"].getCurrent() and self["config"].getCurrent()[1]
+		if sel is None:return
 		if sel == config.plugins.fullbackup.day_profile:
 			self.session.open(DaysProfile)
+		elif sel == config.plugins.fullbackup.run_multbboot_switcher:
+			self.session.open(MultiBootSwitcher)
 
 	def flashimage(self):
 		if BOX_NAME == 'none' or BOX_NAME == 'dmm':
@@ -674,7 +718,9 @@ class FlashImageConfig(Screen):
 		self.filelist.onSelectionChanged.append(self.__selChanged)
 		self["filelist"] = self.filelist
 		self.dualboot = self.dualBoot()
-		self.imbeddedMiltiBoot = self.imbeddedMiltiBoot()
+		self.waitTimer = eTimer()
+		self.waitTimer.callback.append(self.checkMount)
+		self.waitTimer.start(500, True)
 		self.stop_enigma = True
 		self["FilelistActions"] = ActionMap(["SetupActions", "ColorActions"],
 			{
@@ -688,6 +734,9 @@ class FlashImageConfig(Screen):
 
 	def __layoutFinished(self):
 		pass
+
+	def checkMount(self):
+		self.imbeddedMiltiBoot = runBlkid()
 
 	def dualBoot(self):
 		if MODEL_NAME == "et8500":
@@ -1223,12 +1272,12 @@ def doneConfiguring(session, retval):
 class AutoStartTimer:
 	def __init__(self, session):
 		self.session = session
-		self.timer = enigma.eTimer() 
+		self.timer = eTimer() 
 		self.timer.callback.append(self.onTimer)
-		self.pause_timer = enigma.eTimer() 
+		self.pause_timer = eTimer() 
 		self.pause_timer.callback.append(self.setPauseStart)
 		self.pause_timer.startLongTimer(60)
-		self.waitGreatetimer = enigma.eTimer()
+		self.waitGreatetimer = eTimer()
 		self.waitGreatetimer.timeout.get().append(self.checkStatusAfterBackup)
 
 	def setPauseStart(self):
@@ -1257,7 +1306,7 @@ class AutoStartTimer:
 						if Standby.inStandby is None:
 							Notifications.AddNotification(Standby.Standby)
 						if not config.plugins.fullbackup.after_create.value:
-							self.waitStandby_timer = enigma.eTimer()
+							self.waitStandby_timer = eTimer()
 							self.waitStandby_timer.timeout.get().append(self.checkStartStandbyStatus)
 							self.waitStandby_timer.start(5000, True)
 		except:
@@ -1370,9 +1419,7 @@ class AutoStartTimer:
 						except:
 							pass
 				if start_deepstandy and Standby.inTryQuitMainloop == False:
-					if not self.session.nav.RecordTimer.isRecording():
-						self.session.open(Standby.TryQuitMainloop, 1)
-
+					self.session.open(Standby.TryQuitMainloop, 1)
 
 	def getWakeTime(self):
 		if config.plugins.fullbackup.enabled.value:
@@ -1429,7 +1476,6 @@ class AutoStartTimer:
 		self.timer.stop()
 		now = int(time.time())
 		wake = self.getWakeTime()
-		# If we're close enough, we're okay...
 		atLeast = 0
 		if abs(wake - now) < 60:
 			runCleanup()
@@ -1512,7 +1558,6 @@ class DaysProfile(ConfigListScreen,Screen):
 						if not config.plugins.extra_fullbackup.day_backup[4].value:
 							if not config.plugins.extra_fullbackup.day_backup[5].value:
 								if not config.plugins.extra_fullbackup.day_backup[6].value:
-									from Screens.MessageBox import MessageBox
 									self.session.open(MessageBox, _("You may not use this settings!\nAt least one day a week should be included!"), MessageBox.TYPE_INFO, timeout = 6)
 									return
 		for x in self["config"].list:
@@ -1534,11 +1579,10 @@ def WakeupDayOfWeek():
 		cur_day = -1
 
 	if cur_day >= 0:
-		for i in range(1,8):
+		for i in range(1, 8):
 			if config.plugins.extra_fullbackup.day_backup[(cur_day+i)%7].value:
 				return i
 	return start_day
-
 
 class GreatingManualBackup(MessageBox):
 	def __init__(self, session, dir):
@@ -1588,6 +1632,16 @@ def msgManualBackupClosed(ret, curdir=None):
 		except:
 			pass
 
+def menu(menuid, **kwargs):
+	if menuid == "shutdown" and config.plugins.fullbackup.multiboot_switcher_standbymenu.value:
+		return [(_("MultiBoot switcher"), openMultiBootSwitcher, "multiboot_switcher", 4)]
+ 	return []
+
+from MultiBootSwitcher import MultiBootSwitcher
+
+def openMultiBootSwitcher(session, **kwargs):
+	session.open(MultiBootSwitcher)
+
 def getNextWakeup():
 	if autoStartTimer:
 		if config.plugins.fullbackup.enabled.value and config.plugins.fullbackup.deepstandby.value != "0" and config.plugins.fullbackup.where.value != 'none':
@@ -1614,7 +1668,6 @@ def filescan_open(list, session, **kwargs):
 			session.open(MessageBox, _("Read error current dir, sorry."), MessageBox.TYPE_ERROR)
 	except:
 		print "[FullBackup] read error current dir, sorry"
-
 
 def start_filescan(**kwargs):
 	from Components.Scanner import Scanner, ScanPath
@@ -1653,5 +1706,10 @@ def Plugins(**kwargs):
 			name="Automatic Full Backup",
 			where = PluginDescriptor.WHERE_FILESCAN,
 			fnc = start_filescan
+		),
+		PluginDescriptor(
+			name="MultiBoot switcher",
+			where = PluginDescriptor.WHERE_MENU, 
+			fnc = menu
 		),
 	]

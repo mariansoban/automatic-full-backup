@@ -10,6 +10,7 @@ MKFS=/bin/tar
 BZIP2=/usr/bin/bzip2
 PARTED=/usr/sbin/parted
 MSDOSNEW=/usr/sbin/mkfs.fat
+USEMCOPY="yes"
 MCOPY=/usr/bin/mcopy
 ROOTFSTYPE="rootfs.tar.bz2"
 IMAGETYPE="disk.img"
@@ -59,6 +60,7 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		echo "Found Mutant HD51 4K\n"
 		#MTD_KERNEL="mmcblk0p2"
 		MTD_KERNEL="kernel"
+		MTDBOOT="mmcblk0p1"
 		python /usr/lib/enigma2/python/Plugins/Extensions/FullBackup/findkerneldevice.py
 		KERNEL=`cat /sys/firmware/devicetree/base/chosen/kerneldev` 
 		KERNELNAME=${KERNEL:11:7}.bin
@@ -73,6 +75,7 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		echo "Found VIMASTEC VS1500 4K\n"
 		#MTD_KERNEL="mmcblk0p2"
 		MTD_KERNEL="kernel"
+		MTDBOOT="mmcblk0p1"
 		python /usr/lib/enigma2/python/Plugins/Extensions/FullBackup/findkerneldevice.py
 		KERNEL=`cat /sys/firmware/devicetree/base/chosen/kerneldev` 
 		KERNELNAME=${KERNEL:11:7}.bin
@@ -166,7 +169,7 @@ if [ -n "$RECOVERY" ] && [ $RECOVERY = "recovery" ] ; then
 		echo "Stop, try again\n"
 		RUN="no"
 	fi
-	if [ ! -f "$MCOPY" ] ; then 
+	if [ ! -f "$MCOPY" ] && [ $USEMCOPY = "yes" ] ; then 
 		echo "$MCOPY not installed yet, now installing\n"
 		opkg update  > /dev/null 2>&1
 		opkg install mtools glibc-gconv-ibm850 libc6  > /dev/null 2>&1
@@ -239,17 +242,21 @@ if [ -n "$RECOVERY" ] && [ $RECOVERY = "recovery" ] ; then
 		parted -s ${EMMC_IMAGE} unit KiB mkpart swap linux-swap ${SWAP_PARTITION_OFFSET} $(expr ${EMMC_IMAGE_SIZE} \- 1024)
 		dd if=/dev/zero of=${WORKDIR}/boot.img bs=1024 count=${BOOT_PARTITION_SIZE}
 		/usr/sbin/mkfs.msdos -S 512 ${WORKDIR}/boot.img
-		echo "boot emmcflash0.kernel1 'brcm_cma=440M@328M brcm_cma=192M@768M root=/dev/mmcblk0p3 rw rootwait ${MODEL}_4.boxmode=1'" > ${WORKDIR}/STARTUP
-		echo "boot emmcflash0.kernel1 'brcm_cma=440M@328M brcm_cma=192M@768M root=/dev/mmcblk0p3 rw rootwait ${MODEL}_4.boxmode=1'" > ${WORKDIR}/STARTUP_1
-		echo "boot emmcflash0.kernel2 'brcm_cma=440M@328M brcm_cma=192M@768M root=/dev/mmcblk0p5 rw rootwait ${MODEL}_4.boxmode=1'" > ${WORKDIR}/STARTUP_2
-		echo "boot emmcflash0.kernel3 'brcm_cma=440M@328M brcm_cma=192M@768M root=/dev/mmcblk0p7 rw rootwait ${MODEL}_4.boxmode=1'" > ${WORKDIR}/STARTUP_3
-		echo "boot emmcflash0.kernel4 'brcm_cma=440M@328M brcm_cma=192M@768M root=/dev/mmcblk0p9 rw rootwait ${MODEL}_4.boxmode=1'" > ${WORKDIR}/STARTUP_4
-		/usr/bin/mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/STARTUP ::
-		/usr/bin/mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/STARTUP_1 ::
-		/usr/bin/mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/STARTUP_2 ::
-		/usr/bin/mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/STARTUP_3 ::
-		/usr/bin/mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/STARTUP_4 ::
-		dd if=${WORKDIR}/boot.img of=${EMMC_IMAGE} bs=1024 seek=${BOOT_PARTITION_OFFSET}
+		if [ $USEMCOPY = "yes" ] ; then 
+			echo "boot emmcflash0.kernel1 'brcm_cma=440M@328M brcm_cma=192M@768M root=/dev/mmcblk0p3 rw rootwait ${MODEL}_4.boxmode=1'" > ${WORKDIR}/STARTUP
+			echo "boot emmcflash0.kernel1 'brcm_cma=440M@328M brcm_cma=192M@768M root=/dev/mmcblk0p3 rw rootwait ${MODEL}_4.boxmode=1'" > ${WORKDIR}/STARTUP_1
+			echo "boot emmcflash0.kernel2 'brcm_cma=440M@328M brcm_cma=192M@768M root=/dev/mmcblk0p5 rw rootwait ${MODEL}_4.boxmode=1'" > ${WORKDIR}/STARTUP_2
+			echo "boot emmcflash0.kernel3 'brcm_cma=440M@328M brcm_cma=192M@768M root=/dev/mmcblk0p7 rw rootwait ${MODEL}_4.boxmode=1'" > ${WORKDIR}/STARTUP_3
+			echo "boot emmcflash0.kernel4 'brcm_cma=440M@328M brcm_cma=192M@768M root=/dev/mmcblk0p9 rw rootwait ${MODEL}_4.boxmode=1'" > ${WORKDIR}/STARTUP_4
+			/usr/bin/mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/STARTUP ::
+			/usr/bin/mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/STARTUP_1 ::
+			/usr/bin/mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/STARTUP_2 ::
+			/usr/bin/mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/STARTUP_3 ::
+			/usr/bin/mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/STARTUP_4 ::
+			dd conv=notrunc if=${WORKDIR}/boot.img of=${EMMC_IMAGE} bs=1024 seek=${BOOT_PARTITION_OFFSET}
+		else
+			dd conv=notrunc if=/dev/${MTDBOOT} of=${EMMC_IMAGE} bs=1024 seek=${BOOT_PARTITION_OFFSET}
+		fi
 		MTDROOTFS=$(readlink /dev/root)
 		if [ $MTDROOTFS = "mmcblk0p3" ]; then
 			MTD_KERNEL="mmcblk0p2"
@@ -264,7 +271,7 @@ if [ -n "$RECOVERY" ] && [ $RECOVERY = "recovery" ] ; then
 			MTD_KERNEL="mmcblk0p8"
 		fi
 		dd conv=notrunc if=/dev/${MTD_KERNEL} of=${EMMC_IMAGE} bs=1024 seek=${KERNEL_PARTITION_OFFSET}
-		dd conv=notrunc if=/dev/${MTDROOTFS} of=${EMMC_IMAGE} bs=1024 seek=${ROOTFS_PARTITION_OFFSET}
+		dd if=/dev/${MTDROOTFS} of=${EMMC_IMAGE} bs=1024 seek=${ROOTFS_PARTITION_OFFSET}
 		#echo "Start e2fsck\n"
 		#e2fsck -f $WORKDIR/$IMAGETYPE
 		#echo "Start resize2fs\n"
