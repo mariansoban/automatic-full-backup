@@ -238,6 +238,7 @@ class MultiBootSwitcher(ConfigListScreen, Screen):
 			idx = 0
 			for x in self.list:
 				line = self.readlineFile('/boot/%s' %x)
+				if line[22:23] == boot[22:23]:
 					bootname = x
 					self.selection = idx
 					break
