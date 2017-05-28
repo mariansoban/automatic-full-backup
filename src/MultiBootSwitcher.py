@@ -330,7 +330,7 @@ class MultiBootSwitcher(ConfigListScreen, Screen):
 			del self["actions"].actions['right']
 			del self["actions"].actions['green']
 			del self["actions"].actions['yellow']
-			del self["actions"].actions['ok']
+			#del self["actions"].actions['ok']
 
 	def checkBootEntry(self, ENTRY):
 		try:
