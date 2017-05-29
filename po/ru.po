@@ -467,7 +467,7 @@ msgid "Command line error!"
 msgstr "Ошибка командной строки!"
 
 msgid "Current bootsettings: %s (%s)%s"
-msgstr "Текущие настройки загрузки: %s (%s)%s"
+msgstr "Текущие настройки: %s (%s)%s"
 
 msgid "Current load boxmode: %s"
 msgstr "Текущий загруженный режим ресивера: %s"
