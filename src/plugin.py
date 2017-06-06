@@ -46,7 +46,7 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-PLUGIN_VERSION = _(" ver. ") + "5.4"
+PLUGIN_VERSION = _(" ver. ") + "5.5"
 
 BOX_NAME = "none"
 MODEL_NAME = "none"
@@ -951,6 +951,7 @@ class FlashImageConfig(Screen):
 			elif ret[1] == "kernel":
 				if len(self.imbeddedMiltiBoot) > 1:
 					if 'mmcblk0p3' not in mount_part:
+						os.system('umount -fl /dev/mmcblk0p3')
 						os.system('mkfs.ext4 -F /dev/mmcblk0p3')
 						self.stop_enigma = False
 				text += _("Only kernel")
@@ -973,6 +974,7 @@ class FlashImageConfig(Screen):
 			elif ret[1] == "imbedded_standard2":
 				text += _("Second partition")
 				if 'mmcblk0p5' not in mount_part:
+					os.system('umount -fl /dev/mmcblk0p5')
 					os.system('mkfs.ext4 -F /dev/mmcblk0p5')
 					self.stop_enigma = False
 				cmd = "%s -r -k -m2 '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
@@ -982,6 +984,7 @@ class FlashImageConfig(Screen):
 			elif ret[1] == "imbedded_standard3":
 				text += _("Third partition")
 				if 'mmcblk0p7' not in mount_part:
+					os.system('umount -fl /dev/mmcblk0p7')
 					os.system('mkfs.ext4 -F /dev/mmcblk0p7')
 					self.stop_enigma = False
 				cmd = "%s -r -k -m3 '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
@@ -991,6 +994,7 @@ class FlashImageConfig(Screen):
 			elif ret[1] == "imbedded_standard4":
 				text += _("Fourth partition")
 				if 'mmcblk0p9' not in mount_part:
+					os.system('umount -fl /dev/mmcblk0p9')
 					os.system('mkfs.ext4 -F /dev/mmcblk0p9')
 					self.stop_enigma = False
 				cmd = "%s -r -k -m4 '%s' > /dev/null 2>&1" % (ofgwrite_bin, dir_flash)
