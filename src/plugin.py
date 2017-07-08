@@ -842,9 +842,9 @@ class FlashImageConfig(Screen):
 					text += 'oe_kernel.bin, oe_rootfs.bin'
 				elif os.path.exists("/proc/stb/info/boxtype"):
 					if MODEL_NAME in ["hd51", "sf4008", "vs1500", "et11000"]:
-						backup_files = [("kernel1.bin"), ("rootfs.tar.bz2")]
-						no_backup_files = ["kernel_cfe_auto.bin", "kernel.bin", "rootfs.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
-						text += 'kernel1.bin, rootfs.tar.bz2'
+						backup_files = [("kernel1.bin"), ("rootfs.tar.bz2"), ("kernel.bin")]
+						no_backup_files = ["kernel_cfe_auto.bin", "rootfs.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
+						text += 'kernel.bin/kernel1.bin, rootfs.tar.bz2'
 					else:
 						backup_files = [("kernel.bin"), ("rootfs.bin")]
 						no_backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
@@ -1154,9 +1154,9 @@ class SearchOMBfile(Screen):
 						no_backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin", "rootfs.bin", "kernel.bin", "rootfs.tar.bz2"]
 						text += 'oe_kernel.bin, oe_rootfs.bin'
 					elif (MODEL_NAME == "hd51" or MODEL_NAME == "sf4008" or MODEL_NAME == "vs1500" or MODEL_NAME == "et11000"):
-						backup_files = [("kernel1.bin"), ("rootfs.tar.bz2")]
-						no_backup_files = ["kernel_cfe_auto.bin", "kernel.bin", "rootfs.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
-						text += 'kernel1.bin, rootfs.tar.bz2'
+						backup_files = [("kernel1.bin"), ("rootfs.tar.bz2"), ("kernel.bin")]
+						no_backup_files = ["kernel_cfe_auto.bin", "rootfs.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
+						text += 'kernel.bin/kernel1.bin, rootfs.tar.bz2'
 					else:
 						backup_files = [("kernel.bin"), ("rootfs.bin")]
 						no_backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin", "rootfs.tar.bz2"]

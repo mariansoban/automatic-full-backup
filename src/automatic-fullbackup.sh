@@ -177,6 +177,14 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		MAINDEST="$DIRECTORY/miraclebox/micro"
 		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
 		echo "Destination        = $MAINDEST\n"
+	elif grep 7005S /proc/stb/info/boxtype > /dev/null ; then
+		TYPE=MIRACLEBOX
+		MKUBIFS_ARGS="-m 2048 -e 126976 -c 8192"
+		UBINIZE_ARGS="-m 2048 -p 128KiB"
+		SHOWNAME="Miraclebox Premium Micro V2"
+		MAINDEST="$DIRECTORY/miraclebox/microv2"
+		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
+		echo "Destination        = $MAINDEST\n"
 	elif grep g300 /proc/stb/info/boxtype > /dev/null ; then
 		TYPE=MIRACLEBOX
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 8192"
