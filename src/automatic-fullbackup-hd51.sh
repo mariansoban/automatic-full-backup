@@ -1,7 +1,7 @@
 #!/bin/sh
 #### BACKUP IMAGE ####
 
-VERSION="HD51 - 30/04/2017\ncreator of the script Dimitrij (http://forums.openpli.org)\n"
+VERSION="ARM - 18/07/2017\ncreator of the script Dimitrij (http://forums.openpli.org)\n"
 DIRECTORY="$1"
 START=$(date +%s)
 DATE=`date +%Y%m%d_%H%M`
@@ -55,6 +55,8 @@ TYPE=UNKNOWN
 
 if [ -f /proc/stb/info/boxtype ] ; then
 	MODEL=$( cat /proc/stb/info/boxtype )
+	MAINDEST="$DIRECTORY/$MODEL"
+	EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
 	if [ $MODEL = "hd51" ] ; then
 		TYPE=MUTANT
 		echo "Found Mutant HD51 4K\n"
@@ -85,12 +87,21 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		echo "Found Galaxy Innovations et11000 4K\n"
 		MTD_KERNEL="mmcblk0p3"
 		KERNELNAME="kernel.bin"
+	elif [ $MODEL = "h7" ] ; then
+		TYPE=ZGEMMA
+		echo "Found Zgemma H7 4K\n"
+		#MTD_KERNEL="mmcblk0p2"
+		MTD_KERNEL="kernel"
+		MTDBOOT="mmcblk0p1"
+		python /usr/lib/enigma2/python/Plugins/Extensions/FullBackup/findkerneldevice.py
+		KERNEL=`cat /sys/firmware/devicetree/base/chosen/kerneldev` 
+		KERNELNAME=${KERNEL:11:7}.bin
+		MAINDEST="$DIRECTORY/zgemma/$MODEL"
+		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE/zgemma"
 	else
 		echo "No supported receiver found!\n"
 		exit 0
 	fi
-	MAINDEST="$DIRECTORY/$MODEL"
-	EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
 	echo "Destination        = $MAINDEST\n"
 else
 	echo "No supported receiver found!\n"
@@ -284,7 +295,7 @@ fi
 mkdir -p /tmp/bi/root
 echo "Create directory   = /tmp/bi/root\n"
 sync
-if [ $MODEL = "hd51" ] || [ $MODEL = "vs1500" ] ; then
+if [ $MODEL = "hd51" ] || [ $MODEL = "vs1500" ] || [ $MODEL = "h7" ] ; then
 	MTDROOTFS=$(readlink /dev/root)
 	if [ $MTDROOTFS = "mmcblk0p3" ]; then
 		MTD_KERNEL="mmcblk0p2"
@@ -313,7 +324,7 @@ $BZIP2 $WORKDIR/rootfs.tar
 
 TSTAMP="$(date "+%Y-%m-%d-%Hh%Mm")"
 
-if [ $TYPE = "MUTANT" -o $TYPE = "VIMASTEC" -o $TYPE = "OCTAGON" -o $TYPE = "GI" ] ; then
+if [ $TYPE = "MUTANT" -o $TYPE = "VIMASTEC" -o $TYPE = "OCTAGON" -o $TYPE = "GI" -o $TYPE = "ZGEMMA" ] ; then
 	rm -rf "$MAINDEST"
 	echo "Removed directory  = $MAINDEST\n"
 	mkdir -p "$MAINDEST" 

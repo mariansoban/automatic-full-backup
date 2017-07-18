@@ -46,7 +46,7 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-PLUGIN_VERSION = _(" ver. ") + "5.5"
+PLUGIN_VERSION = _(" ver. ") + "5.6"
 
 BOX_NAME = "none"
 MODEL_NAME = "none"
@@ -179,7 +179,7 @@ def check_hdd(dir=""):
 		if Standby.inStandby is None:
 			_session and _session.open(MessageBox, _("AFB\nNot found mount device for create full backup!"), type = MessageBox.TYPE_ERROR)
 		return False
-	if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500":
+	if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500" or "h7":
 		if Freespace(dir) < 1500000:
 			if Standby.inStandby is None:
 				_session and _session.open(MessageBox, _("AFB\nNot enough free space on device!\nYou need at least 1500Mb free space!"), type = MessageBox.TYPE_ERROR)
@@ -191,11 +191,11 @@ def check_hdd(dir=""):
 			return False
 	return True
 
-emmc_multiboot = MODEL_NAME in ("hd51", "vs1500")
+emmc_multiboot = MODEL_NAME in ("hd51", "vs1500", "h7")
 
 def runBlkid():
 	list = []
-	if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500":
+	if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500" or MODEL_NAME == "h7":
 		blkid_linux = os.popen("blkid -v").read()
 		if 'util-linux' in blkid_linux and os.path.exists("/sbin/blkid.util-linux"):
 			ret = os.popen("blkid").readlines()
@@ -258,7 +258,7 @@ def backupCommand():
 		cmd = DREAM_BACKUP_SCRIPT
 	if BOX_NAME == 'vu' and (MODEL_NAME == "solo4k" or MODEL_NAME == "uno4k" or MODEL_NAME == "ultimo4k"):
 		cmd = VU4K_BACKUP_SCRIPT
-	if MODEL_NAME == "hd51" or MODEL_NAME == "sf4008" or MODEL_NAME == "vs1500" or MODEL_NAME == "et11000":
+	if MODEL_NAME == "hd51" or MODEL_NAME == "sf4008" or MODEL_NAME == "vs1500" or MODEL_NAME == "et11000" or MODEL_NAME == "h7":
 		cmd = HD51_BACKUP_SCRIPT
 	cmd += " " + config.plugins.fullbackup.where.value
 	return cmd
@@ -372,7 +372,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 			list = self.configList + self.appendList
 		else:
 			list = self.configList
-		if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500":
+		if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500" or MODEL_NAME == "h7":
 			list.append(getConfigListEntry(_("Show multiBoot switcher in menu shutdown"), cfg.multiboot_switcher_standbymenu))
 			list.append(getConfigListEntry(_("Open multiBoot switcher"), cfg.run_multbboot_switcher))
 		ConfigListScreen.__init__(self, list, session=session, on_change = self.changedEntry)
@@ -471,7 +471,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 					files = "^.*\.(zip|bin)"
 					if MODEL_NAME == "fusionhd" or MODEL_NAME == "fusionhdse" or MODEL_NAME == "purehd":
 						files = "^.*\.(zip|bin|update)"
-					if MODEL_NAME == "hd51" or MODEL_NAME == "sf4008" or MODEL_NAME == "vs1500" or MODEL_NAME == "et11000":
+					if MODEL_NAME == "hd51" or MODEL_NAME == "sf4008" or MODEL_NAME == "vs1500" or MODEL_NAME == "et11000" or MODEL_NAME == "h7":
 						files = "^.*\.(zip|bz2|bin)"
 				elif BOX_NAME == "vu":
 					if MODEL_NAME == "solo4k" or MODEL_NAME == "uno4k" or MODEL_NAME == "ultimo4k":
@@ -539,7 +539,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 		if not MODEL_NAME:
 			return
 		files = "^.*\.(zip|bin)"
-		if MODEL_NAME == "hd51" or MODEL_NAME == "solo4k" or MODEL_NAME == "uno4k" or MODEL_NAME == "ultimo4k" or MODEL_NAME == "sf4008" or MODEL_NAME == "vs1500" or MODEL_NAME == "et11000":
+		if MODEL_NAME == "hd51" or MODEL_NAME == "solo4k" or MODEL_NAME == "uno4k" or MODEL_NAME == "ultimo4k" or MODEL_NAME == "sf4008" or MODEL_NAME == "vs1500" or MODEL_NAME == "et11000" or MODEL_NAME == "h7":
 			files = "^.*\.(zip|bz2|bin)"
 		elif BOX_NAME == "vu":
 			if MODEL_NAME == "solo2" or MODEL_NAME == "duo2" or MODEL_NAME == "solose" or MODEL_NAME == "zero" or MODEL_NAME == "fusionhd" or MODEL_NAME == "fusionhdse" or MODEL_NAME == "purehd":
@@ -580,7 +580,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 			(_("Background mode"), "background"),
 			(_("Console mode"), "console"),
 		]
-		if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500":
+		if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500" or MODEL_NAME == "h7":
 			list += [
 				(_("Background mode") + _(" as recovery"), "background_recovery"),
 				(_("Console mode") + _(" as recovery"), "console_recovery"),
@@ -759,7 +759,7 @@ class FlashImageConfig(Screen):
 
 	def imbeddedMiltiBoot(self):
 		list = []
-		if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500":
+		if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500" or MODEL_NAME == "h7":
 			try:
 				ret = os.popen("sfdisk -l /dev/mmcblk0").readlines()
 				for line in ret:
@@ -841,7 +841,7 @@ class FlashImageConfig(Screen):
 					no_backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin", "rootfs.bin", "kernel.bin"]
 					text += 'oe_kernel.bin, oe_rootfs.bin'
 				elif os.path.exists("/proc/stb/info/boxtype"):
-					if MODEL_NAME in ["hd51", "sf4008", "vs1500", "et11000"]:
+					if MODEL_NAME in ["hd51", "sf4008", "vs1500", "et11000", "h7"]:
 						backup_files = [("kernel1.bin"), ("rootfs.tar.bz2"), ("kernel.bin")]
 						no_backup_files = ["kernel_cfe_auto.bin", "rootfs.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
 						text += 'kernel.bin/kernel1.bin, rootfs.tar.bz2'
@@ -1153,7 +1153,7 @@ class SearchOMBfile(Screen):
 						backup_files = [("oe_kernel.bin"), ("oe_rootfs.bin")]
 						no_backup_files = ["kernel_cfe_auto.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin", "rootfs.bin", "kernel.bin", "rootfs.tar.bz2"]
 						text += 'oe_kernel.bin, oe_rootfs.bin'
-					elif (MODEL_NAME == "hd51" or MODEL_NAME == "sf4008" or MODEL_NAME == "vs1500" or MODEL_NAME == "et11000"):
+					elif (MODEL_NAME == "hd51" or MODEL_NAME == "sf4008" or MODEL_NAME == "vs1500" or MODEL_NAME == "et11000" or MODEL_NAME == "h7"):
 						backup_files = [("kernel1.bin"), ("rootfs.tar.bz2"), ("kernel.bin")]
 						no_backup_files = ["kernel_cfe_auto.bin", "rootfs.bin", "root_cfe_auto.jffs2", "root_cfe_auto.bin"]
 						text += 'kernel.bin/kernel1.bin, rootfs.tar.bz2'
@@ -1591,7 +1591,7 @@ def WakeupDayOfWeek():
 class GreatingManualBackup(MessageBox):
 	def __init__(self, session, dir):
 		try:
-			if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500":
+			if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500"  or MODEL_NAME == "h7":
 				list = [ (_("Yes"), True), (_("Yes") + _(" as recovery"), "recovery"), (_("No"), False) ]
 				MessageBox.__init__(self, session, text = _("Do you really want to create a full backup of directory %s ?") % dir, list=list)
 			else:
@@ -1614,7 +1614,7 @@ def msgManualBackupClosed(ret, curdir=None):
 					cmd = DREAM_BACKUP_SCRIPT
 				if BOX_NAME == 'vu' and (MODEL_NAME == "solo4k" or MODEL_NAME == "uno4k" or MODEL_NAME == "ultimo4k"):
 					cmd = VU4K_BACKUP_SCRIPT
-				if MODEL_NAME == "hd51" or MODEL_NAME == "sf4008" or MODEL_NAME == "vs1500" or MODEL_NAME == "et11000":
+				if MODEL_NAME == "hd51" or MODEL_NAME == "sf4008" or MODEL_NAME == "vs1500" or MODEL_NAME == "et11000" or MODEL_NAME == "h7":
 					cmd = HD51_BACKUP_SCRIPT
 				cmd += " %s" % curdir
 				if os.path.exists(zip_bin):
