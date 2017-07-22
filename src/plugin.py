@@ -179,7 +179,7 @@ def check_hdd(dir=""):
 		if Standby.inStandby is None:
 			_session and _session.open(MessageBox, _("AFB\nNot found mount device for create full backup!"), type = MessageBox.TYPE_ERROR)
 		return False
-	if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500" or "h7":
+	if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500" or MODEL_NAME == "h7":
 		if Freespace(dir) < 1500000:
 			if Standby.inStandby is None:
 				_session and _session.open(MessageBox, _("AFB\nNot enough free space on device!\nYou need at least 1500Mb free space!"), type = MessageBox.TYPE_ERROR)
