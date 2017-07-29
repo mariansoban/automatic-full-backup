@@ -1,0 +1,827 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: automatic-full-backup\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-13 18:11+0300\n"
+"PO-Revision-Date: 2017-07-29 12:05+0300\n"
+"Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
+"Language-Team: Vytenis P.  vyteniui@gmail.com\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.3\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: plugin.py:1200
+#, python-format
+msgid ""
+"\n"
+"Pack in zip archive current folder and add to '%s' OMB?"
+msgstr ""
+"\n"
+"Suglausti šį katalogą į zip archyvą ir įtraukti į '%s' OMB?"
+
+#: plugin.py:871 plugin.py:1178
+msgid ""
+"\n"
+"The found files:"
+msgstr ""
+"\n"
+"Surasti failai:"
+
+#: plugin.py:828
+#, python-format
+msgid ""
+"\n"
+"You are using  built-in multiboot from %s sections!"
+msgstr ""
+"\n"
+"Jūs naudojate integruotą atvaizdų multiįkėlimą iš %s!"
+
+#: plugin.py:826
+msgid ""
+"\n"
+"You are using dual multiboot!"
+msgstr ""
+"\n"
+"Jūs naudojate atvaizdų multiįkėlimą!"
+
+#: plugin.py:877 plugin.py:1188
+#, python-format
+msgid "  %s (maybe error)"
+msgstr "  %s (galbūt klaida)"
+
+#: plugin.py:874 plugin.py:1182 plugin.py:1185
+#, python-format
+msgid "  %s (maybe ok)"
+msgstr "  %s (galbūt gerai)"
+
+#: MultiBootSwitcher.py:270
+msgid " (unknown mode)"
+msgstr " (nežinomas režimas)"
+
+#: plugin.py:599 plugin.py:1628
+msgid " - OK show/nide"
+msgstr " - 'OK' rodyti/nerodyti"
+
+#: plugin.py:585 plugin.py:586 plugin.py:1591
+msgid " as recovery"
+msgstr " kaip atkūrimas"
+
+#: plugin.py:880 plugin.py:1191
+msgid " nothing!"
+msgstr " nieko!"
+
+#: plugin.py:49
+msgid " ver. "
+msgstr " vers. "
+
+#: plugin.py:1228
+#, python-format
+msgid "'%s' archive was successfully added to '%s' OMB!"
+msgstr "'%s' archyvas sėkmingai įtrauktas į '%s' OMB!"
+
+#: plugin.py:1025
+msgid "'ofgwrite' not installed!"
+msgstr "'ofgwrite' neįdiegtas!"
+
+#: plugin.py:1202
+msgid "'zip' not installed!"
+msgstr "'zip' neįdiegtas!"
+
+#: MultiBootSwitcher.py:92
+msgid ""
+"*** boxmode=1 (Standard) ***\n"
+"\n"
+"+++ Features +++\n"
+"3840x2160p60 10-bit HEVC, 3840x2160p60 8-bit VP9, 1920x1080p60 8-bit AVC,\n"
+"MAIN only (no PIP), Limited display usages, UHD only (no SD),\n"
+"No multi-PIP, No transcoding\n"
+"\n"
+"--- Restrictions ---\n"
+"Decoder 0: 3840x2160p60 10-bit HEVC, 3840x2160p60 8-bit VP9, 1920x1080p60 8-"
+"bit AVC\n"
+"OSD Grafic 0: 1080p60 32 bit ARGB\n"
+"Display 0 Encode Restrictions: 3840x2160p60 12-bit 4:2:0 (HDMI),\n"
+"3840x2160p60 12-bit 4:2:2 (HDMI), 3840x2160p60 8-bit 4:4:4 (HDMI),\n"
+"1920x1080p60 (component), Only one display format at a time\n"
+"\n"
+"If you want 1080p60 component, HDMI also needs to be 1080p60."
+msgstr ""
+"*** režimas = 1 (įprastinis) ***\n"
+"\n"
+"+++ Savybės +++\n"
+"3840x2160p60 10 bitų HEVC, 3840x2160p60 8 bitų VP9, 1920x1080p60 8 bitų "
+"AVC,\n"
+"TIK PAGRINDINIS (be PIP), apribotas monitoriaus naudojimas, tik UHD (ne "
+"SD),\n"
+"be kelių PIP, neperkoduojant\n"
+"\n"
+"--- Apribojimai ---\n"
+"Dekoderis 0: 3840x2160p60 10 bitų HEVC, 3840x2160p60 8 bitų VP9, "
+"1920x1080p60 8 bitų AVC\n"
+"Ekrano grafika 0: 1080p60 32 bitų ARGB\n"
+"Ekrano 0 kodavimo ribojimai: 3840x2160p60 12 bitų 4:2:0 (HDMI),\n"
+"3840x2160p60 12 bitų 4:2:2 (HDMI), 3840x2160p60 8 bitų 4:4:4 (HDMI),\n"
+"1920x1080p60 (komponentas), vienu metu tik vieno formato\n"
+"\n"
+"Jei norite 1080p60 komponento, HDMI taip pat turi būti 1080p60."
+
+#: MultiBootSwitcher.py:101
+msgid ""
+"*** boxmode=12 (Experimental) ***\n"
+"\n"
+"+++ Features +++\n"
+"3840x2160p50 10-bit decode for MAIN, 1080p25/50i PIP support, HDMI input (if "
+"available),\n"
+" UHD display only, No SD display, No transcoding\n"
+"\n"
+"--- Restrictions ---\n"
+"Decoder 0: 3840x2160p50 10-bit HEVC, 3840x2160p50 8-bit VP9,\n"
+"1920x1080p50 8-bit AVC/MPEG\n"
+"Decoder 1: 1920x1080p25/50i 10-bit HEVC, 1920x1080p25/50i 8-bit VP9/AVC/"
+"MPEG2,\n"
+"HDMI In (if available), 3840x2160p50\n"
+"OSD Graphic 0 (UHD): 1080p50 32-bit ARGB\n"
+"Window 0 (MAIN/UHD): Limited display capabilities, 1080i50 10-bit de-"
+"interlacing\n"
+"Multi-PIP mode (3x): Enigma2 supported no multi-PIP\n"
+"Window 1 (PIP/UHD) (Enigma2 PIP Mode): Up to 1/2 x 1/2 screen display, "
+"576i50 de-interlacing\n"
+"Display 0 (UHD) Encode Restrictions: 3840x2160p50"
+msgstr ""
+"*** režimas = 12 (eksperimentinis) ***\n"
+"\n"
+"+++ Savybės +++\n"
+"3840x2160p50 10 bitų PAGRINDINIS atkodavimas, 1080p25/50i PIP palaikymas, "
+"HDMI įvestis (jei yra),\n"
+" TIK UHD ekranas (ne SD), be perkodavimo\n"
+"\n"
+"--- Apribojimai ---\n"
+"Dekoderis 0: 3840x2160p50 10 bitų HEVC, 3840x2160p50 8 bitų VP9,\n"
+"1920x1080p50 8 bitų AVC/MPEG\n"
+"Dekoderis 1: 1920x1080p25/50i 10 bitų HEVC, 1920x1080p25/50i 8 bitų VP9/AVC/"
+"MPEG2,\n"
+"HDMI įvestis (jei yra), 3840x2160p50\n"
+"Ekrano grafika 0 (UHD): 1080p50 32 bitų ARGB\n"
+"Langas 0 (pagrindinis/UHD): ribotų galimybių, 1080i50 10 bitų perpynimai\n"
+"Kelių PiP langų režimas (3x): Enigma2 nepalaiko kelių PiP\n"
+"Langas 1 (PIP\\ UHD) (Enigma2 PiP režimas): iki 1/2 x 1/2 ekrano, 576i50 "
+"perpynimas\n"
+"Ekrano 0 (UHD) iškodavimo apribojimai: 3840x2160p50"
+
+#: MultiBootSwitcher.py:194
+msgid "2160p50 with PiP"
+msgstr "2160p50 su PiP"
+
+#: MultiBootSwitcher.py:194
+msgid "2160p60 without PiP (default)"
+msgstr "2160p60 be PiP (numatytasis)"
+
+#: plugin.py:369
+msgid "< Needs create file *(any name).fbackup in USB device >"
+msgstr ""
+"<USB katalogų viršūnėje reikia sukurti failą (bet koks pavadinimas).fbackup >"
+
+#: plugin.py:928
+msgid ""
+"A recording is currently running. Please stop the recording before trying to "
+"start a flashing."
+msgstr "Dabar vyksta įrašymas. Prieš atvaizdo įdiegimą, nutraukite įrašymą."
+
+#: plugin.py:185
+msgid ""
+"AFB\n"
+"Not enough free space on device!\n"
+"You need at least 1500Mb free space!"
+msgstr ""
+"AFB\n"
+"Įrenginyje epakanka laisvos vietos!\n"
+"Reikia mažiausiai 1500 Mb laisvos vietos!"
+
+#: plugin.py:190
+msgid ""
+"AFB\n"
+"Not enough free space on device!\n"
+"You need at least 300Mb free space!"
+msgstr ""
+"AFB\n"
+"Įrenginyje epakanka laisvos vietos!\n"
+"Reikia mažiausiai 300 Mb laisvos vietos!"
+
+#: plugin.py:180
+msgid ""
+"AFB\n"
+"Not found mount device for create full backup!"
+msgstr ""
+"AFB\n"
+"Nepajungta jokia laikmena pilnai kopijai išsaugoti!"
+
+#: plugin.py:1125 plugin.py:1134 plugin.py:1140
+msgid "Add to OMB"
+msgstr "Įtraukti į OMB"
+
+#: MultiBootSwitcher.py:446
+msgid "Alternative Image 1 partition for boot repair not found."
+msgstr "Alternatyvaus atvaizdo 1 skaidinio įkrovai sutvarkyti nerasta."
+
+#: plugin.py:1699
+msgid "Automatic Full Backup"
+msgstr "Automatinė pilna atsarginė kopija"
+
+#: plugin.py:362
+msgid "Automatic cleanup backups"
+msgstr "Automatinis atsarginių kopijų valymas"
+
+#: plugin.py:367
+msgid "Automatic full backup"
+msgstr "Automatinė pilna atsarginė kopija"
+
+#: plugin.py:359
+msgid "Automatic start time"
+msgstr "Automatiško paleidimo laikas"
+
+#: plugin.py:580 plugin.py:585
+msgid "Background mode"
+msgstr "Foniniu režimu"
+
+#: plugin.py:366
+msgid "Backup location"
+msgstr "Atsarginės kopijos saugojimo vieta"
+
+#: plugin.py:361
+msgid "Behaviour in deep standby"
+msgstr "Elgsena, esant giliame budėjime"
+
+#: MultiBootSwitcher.py:444
+#, python-format
+msgid "Can not repair file %s"
+msgstr "Sutvarkyti failo %s nepavyko"
+
+#: MultiBootSwitcher.py:450
+#, python-format
+msgid "Can not write file %s"
+msgstr "Įrašyti failo %s nepavyko"
+
+#: MultiBootSwitcher.py:48 plugin.py:379 plugin.py:712 plugin.py:1073
+#: plugin.py:1538
+msgid "Cancel"
+msgstr "Atšaukti"
+
+#: MultiBootSwitcher.py:444 MultiBootSwitcher.py:446 MultiBootSwitcher.py:450
+#: MultiBootSwitcher.py:456
+msgid "Caution, next boot is starts with these settings!"
+msgstr "Atsargiai, su šiais nustatymais pasileidžia kita įkrova!"
+
+#: plugin.py:360
+msgid "Choice days for create backup"
+msgstr "Pasirinkite dienas atsarginei kopijai sukurti"
+
+#: MultiBootSwitcher.py:457
+msgid "Command line error!"
+msgstr "Komandų eilutės klaida!"
+
+#: plugin.py:599 plugin.py:1628
+msgid "Console log"
+msgstr "Konsolės žurnalas"
+
+#: plugin.py:581 plugin.py:586
+msgid "Console mode"
+msgstr "Konsolės režimas"
+
+#: plugin.py:1683
+msgid "Create a full backup image"
+msgstr "Sukurti atvaizdo pilną kopiją"
+
+#: plugin.py:589
+msgid "Create backup"
+msgstr "Sukurti atsarginę kopiją"
+
+#: MultiBootSwitcher.py:282
+#, python-format
+msgid "Current bootsettings: %s (%s)%s"
+msgstr "Dabartiniai įkrovos nustatymai: %s (%s)%s"
+
+#: MultiBootSwitcher.py:85
+#, python-format
+msgid "Current load boxmode: %s"
+msgstr "Dabartinis įkrovos režimas:%s"
+
+#: plugin.py:1551
+msgid "Days Profile"
+msgstr "Dienų profilis"
+
+#: plugin.py:517
+msgid "Disabled"
+msgstr "Išjungta"
+
+#: plugin.py:1592 plugin.py:1594 plugin.py:1596
+#, python-format
+msgid "Do you really want to create a full backup of directory %s ?"
+msgstr "Jūs tikrai norite sukurti katalogo %s pilną atsarginę kopiją?"
+
+#: plugin.py:689
+msgid "Do you really want to stop the creation of backup?"
+msgstr "Jūs tikrai norite nutraukti atsarginės kopijos kūrimą?"
+
+#: plugin.py:1044 plugin.py:1248
+#, python-format
+msgid "Do you really want to unpack %s ?"
+msgstr "Ar tikrai norite išskleisti %s?"
+
+#: MultiBootSwitcher.py:437
+msgid "Do you want to reboot now with selected image?"
+msgstr "Ar norite iš naujo paleisti imtuvą su pasirinktu atvaizdu?"
+
+#: MultiBootSwitcher.py:447 MultiBootSwitcher.py:451 MultiBootSwitcher.py:457
+msgid "Do you want to reboot now?"
+msgstr "Ar norite paleisti iš naujo dabar?"
+
+#: plugin.py:624
+msgid "Done"
+msgstr "Atlikta"
+
+#: plugin.py:1213
+msgid "Error creating zip archive!"
+msgstr "Klaida, kuriant zip archyvą!"
+
+#: MultiBootSwitcher.py:456
+#, python-format
+msgid "Error in file %s"
+msgstr "Klaida faile %s"
+
+#: MultiBootSwitcher.py:388
+#, python-format
+msgid ""
+"Error reading image from file '/boot/%s'!\n"
+"Please flashing another image for this partition."
+msgstr ""
+"Klaida, skaitant atvaizdą iš failo '/boot/%s'!\n"
+"Pasirinkite šiam skirsniui kitą atvaizdą."
+
+#: plugin.py:680
+msgid "Error unmounting devices!"
+msgstr "Klaida, atjungiant įrenginius!"
+
+#: plugin.py:668 plugin.py:918
+msgid "Exit"
+msgstr "Uždaryti"
+
+#: plugin.py:668
+msgid "Exit and eject device"
+msgstr "Užverti ir išimti prietaisą"
+
+#: plugin.py:622
+msgid "Failed"
+msgstr "Nepavyko"
+
+#: MultiBootSwitcher.py:394
+#, python-format
+msgid "File '/boot/%s' copy to '/boot/STARTUP' failed!"
+msgstr "Failo '/boot/%s' nukopijuoti į '/boot/STARTUP' nepavyko!"
+
+#: MultiBootSwitcher.py:154
+msgid "File not found - rename failed!"
+msgstr "Failas nerastas - pervadinti nepavyko!"
+
+#: plugin.py:936
+msgid "Flashing: "
+msgstr "Diegiama: "
+
+#: plugin.py:1146
+msgid "For backup your receiver files are needed:\n"
+msgstr "Atsarginei kopijai sukurti reikalingi failai:\n"
+
+#: plugin.py:838
+msgid "For flashing your receiver files are needed:\n"
+msgstr "Įdiegimui reikalingi failai:\n"
+
+#: plugin.py:910 plugin.py:992
+msgid "Fourth partition"
+msgstr "Ketvirtas skaidinys"
+
+#: plugin.py:132
+msgid "Friday"
+msgstr "penktadienis"
+
+#: plugin.py:1687
+msgid "Full backup for all recievers"
+msgstr "Visų imtuvų pilna atsarginė kopija"
+
+#: plugin.py:336
+msgid "FullBackup Configuration"
+msgstr "Pilnos atsarginės kopijos nuostatos"
+
+#: MultiBootSwitcher.py:276
+#, python-format
+msgid "Image %s"
+msgstr "Atvaizdas: %s"
+
+#: plugin.py:1490
+msgid ""
+"In the next few seconds to start Automatic Full Backup!\n"
+"Options control panel will not be available 5-7 minutes.\n"
+"Run backup now?"
+msgstr ""
+"Per artimiausias keletą sekundžių prasidės automatinis pilnos atsarginės "
+"kopijos kūrimas!\n"
+"Nustatymų valdymas nebus galimas 5-7 minutes.\n"
+"Sukurti atsarginę kopiją dabar?"
+
+#: MultiBootSwitcher.py:288 plugin.py:226
+msgid "Install util-linux-blkid?"
+msgstr "Įdiegti util-linux-blkid?"
+
+#: plugin.py:513
+msgid "Last backup date"
+msgstr "Paskutinės atsarginės kopijos data"
+
+#: plugin.py:381
+msgid "Manual"
+msgstr "Rankiniu būdu"
+
+#: plugin.py:128
+msgid "Monday"
+msgstr "pirmadienis"
+
+#: MultiBootSwitcher.py:45
+msgid "MultiBoot STARTUP switcher"
+msgstr "Atvaizdų multiįkėlimo PALEIDIMO pasirinkimas"
+
+#: plugin.py:1637
+msgid "MultiBoot switcher"
+msgstr "Atvaizdų multiįkėlimo pasirinkimas"
+
+#: plugin.py:1000
+msgid "NOT found files for flashing!\n"
+msgstr "Failų diegimui NERASTA!\n"
+
+#: MultiBootSwitcher.py:156
+msgid "Name already exists - rename failed!"
+msgstr "Šis pavadinimas jau yra - pervadinti nepavyko!"
+
+#: MultiBootSwitcher.py:442
+msgid "Next boot will start from Image 1."
+msgstr "Kita įkrova įsikels atvaizdas 1."
+
+#: plugin.py:1591
+msgid "No"
+msgstr "Ne"
+
+#: plugin.py:508
+msgid "No backup present"
+msgstr "Atsarginių kopijų nėra"
+
+#: plugin.py:503 plugin.py:572
+msgid "Not selected directory backup"
+msgstr "Nepasirinktas katalogas kopijavimui"
+
+#: plugin.py:888 plugin.py:956
+msgid "Only kernel"
+msgstr "Tik branduolį"
+
+#: plugin.py:887 plugin.py:949
+msgid "Only root"
+msgstr "Tik pagrindinį"
+
+#: plugin.py:377
+msgid "Open multiBoot switcher"
+msgstr "Atvaizdų multiįkėlimo pasirinkimas"
+
+#: MultiBootSwitcher.py:132
+msgid "Please enter new name:"
+msgstr "Įrašykite naują pavadinimą:"
+
+#: plugin.py:1206
+msgid ""
+"Please wait!\n"
+"Greating zip archive..."
+msgstr ""
+"Truputį palaukite!\n"
+"Kuriamas zip archyvas..."
+
+#: plugin.py:1018
+msgid "Please: DO NOT reboot your STB and turn off the power.\n"
+msgstr "NEPALEIDINĖKITE aparato iš naujo ir NEIŠJUNKITE maitinimo įtampos.\n"
+
+#: plugin.py:97 plugin.py:138
+msgid "Press OK"
+msgstr "Spauskite 'OK'"
+
+#: plugin.py:1668
+msgid "Read error current dir, sorry."
+msgstr "Klaida, skaitant šį katalogą."
+
+#: MultiBootSwitcher.py:50
+msgid "Rename"
+msgstr "Pervadinti"
+
+#: MultiBootSwitcher.py:139
+msgid "Rename failed!"
+msgstr "Pervadinti nepavyko!"
+
+#: plugin.py:385
+msgid "Restore backup"
+msgstr "Atkurti atsarginę kopiją"
+
+#: plugin.py:805 plugin.py:821 plugin.py:832
+msgid "Run flash"
+msgstr "Pradėti diegimą"
+
+#: plugin.py:611
+msgid "Running"
+msgstr "Vyksta"
+
+#: plugin.py:133
+msgid "Saturday"
+msgstr "šeštadienis"
+
+#: MultiBootSwitcher.py:49 plugin.py:380 plugin.py:1539
+msgid "Save"
+msgstr "Išsaugoti"
+
+#: plugin.py:368
+msgid "Scan at automount for create backup"
+msgstr "Atsarginei kopijai sukurti, nuskaityti autopajungimo metu"
+
+#: plugin.py:900 plugin.py:974
+msgid "Second partition"
+msgstr "Antras skaidinys"
+
+#: plugin.py:894 plugin.py:968
+msgid "Second partition (only kernel)"
+msgstr "Antras skaidinys (tik branduolį)"
+
+#: plugin.py:893 plugin.py:965
+msgid "Second partition (only root)"
+msgstr "Antras skaidinys (tik pagrindinį)"
+
+#: plugin.py:892 plugin.py:962
+msgid "Second partition (root and kernel)"
+msgstr "Antras skaidinys (pagrindinį ir branduolį)"
+
+#: MultiBootSwitcher.py:150 MultiBootSwitcher.py:326 MultiBootSwitcher.py:328
+#, python-format
+msgid "Select Image: %s"
+msgstr "Pasirinkite atvaizdą: %s"
+
+#: plugin.py:667
+msgid "Select action:"
+msgstr "Pasirinkite veiksmą:"
+
+#: plugin.py:1072
+msgid "Select backup for add to OpenMultiboot"
+msgstr "Pasirinkite atsarginę kopiją įtraukimui į OpenMultiboot"
+
+#: MultiBootSwitcher.py:316
+#, python-format
+msgid "Select bootoption: %s"
+msgstr "Įkrovos parinktis: %s"
+
+#: MultiBootSwitcher.py:318
+msgid "Select bootoption: not supported - see info"
+msgstr "Įkrovos parinktis: negalima. Plačiau - informacijoje"
+
+#: plugin.py:837
+msgid "Select parameter for start flash!\n"
+msgstr "Pasirinkite diegimo parametrus!\n"
+
+#: plugin.py:711
+msgid "Select the folder with backup"
+msgstr "Pasirinkite katalogą su atsargine kopija"
+
+#: plugin.py:588
+msgid "Select the option to create a backup:"
+msgstr "Parinktys atsarginei kopijai sukurti:"
+
+#: plugin.py:363
+msgid "Show message during the start"
+msgstr "Prasidedant, pranešti žinute"
+
+#: plugin.py:376
+msgid "Show multiBoot switcher in menu shutdown"
+msgstr "Atvaizdų multiįkėlimo pasirinkimą rodyti išjungimo meniu"
+
+#: plugin.py:1005
+msgid "Show only found image and mtd partitions.\n"
+msgstr "Rodyti tik rastą atvaizdą ir MTD skaidinius.\n"
+
+#: plugin.py:885 plugin.py:939
+msgid "Simulate (no write)"
+msgstr "Imituoti (be įrašymo)"
+
+#: plugin.py:909 plugin.py:989
+msgid "Simulate fourth partition (no write)"
+msgstr "Imituoti ketvirtą skaidinį (be įrašymo)"
+
+#: plugin.py:891 plugin.py:899 plugin.py:959 plugin.py:971
+msgid "Simulate second partition (no write)"
+msgstr "Imituoti antrą skaidinį (be įrašymo)"
+
+#: plugin.py:904 plugin.py:980
+msgid "Simulate third partition (no write)"
+msgstr "Imituoti trečią skaidinį (be įrašymo)"
+
+#: plugin.py:537
+msgid ""
+"Sorry!\n"
+"This boot is not flash image!"
+msgstr ""
+"Atleiskite!\n"
+"Ši įkrova nėra įdiegiamas atvaizdas!"
+
+#: plugin.py:886 plugin.py:942
+msgid "Standard (root and kernel)"
+msgstr "Standartinis (atvaizdas ir branduolys)"
+
+#: plugin.py:1484
+msgid ""
+"Starting Automatic Full Backup!\n"
+"Options control panel will not be available 5-7 minutes.\n"
+"Please wait ..."
+msgstr ""
+"Pradedamas automatinis pilnos atsarginės kopijos kūrimas!\n"
+"Nustatymų valdymas nebus galimas 5-7 minutes.\n"
+"Palaukite..."
+
+#: plugin.py:134
+msgid "Sunday"
+msgstr "sekmadienis"
+
+#: plugin.py:678
+msgid "The device was successfully unmounted!"
+msgstr "Įrenginys sėkmingai atjungtas!"
+
+#: plugin.py:1019
+msgid "The image or kernel will be flashing and auto booted in few minutes.\n"
+msgstr ""
+"Atvaizdas, arba branduolys bus įdiegtas ir automatiškai pasileis po kelių "
+"minučių.\n"
+
+#: plugin.py:905 plugin.py:983
+msgid "Third partition"
+msgstr "Trečias skaidinys"
+
+#: plugin.py:131
+msgid "Thursday"
+msgstr "ketvirtadienis"
+
+#: plugin.py:129
+msgid "Tuesday"
+msgstr "antradienis"
+
+#: MultiBootSwitcher.py:278
+msgid "Unable to read image number"
+msgstr "Nepavyksta perskaityti atvaizdo numerio"
+
+#: plugin.py:803 plugin.py:1041 plugin.py:1123 plugin.py:1245
+msgid "Unzip"
+msgstr "Išskleisti"
+
+#: plugin.py:829
+msgid ""
+"Warning!\n"
+"Use at your own risk! Make always a backup before use!\n"
+"Don't use it if you use multiple ubi volumes in ubi layer!"
+msgstr ""
+"Įspėjimas!\n"
+"Naudokite savo atsakomybe! Prieš naudojimą, visada padarykite atsarginę "
+"kopiją!\n"
+"Nenaudokite jo, jei naudojate keliatomius UBI!"
+
+#: MultiBootSwitcher.py:298
+msgid "Warning!Please install util-linux-blkid."
+msgstr "Įspėjimas! Įdiekite util-linux-blkid."
+
+#: plugin.py:130
+msgid "Wednesday"
+msgstr "trečiadienis"
+
+#: MultiBootSwitcher.py:451
+msgid "Write error!"
+msgstr "Įrašymo klaida!"
+
+#: MultiBootSwitcher.py:447
+msgid "Wrong Bootsettings detected!"
+msgstr "Neteisingi įkrovos nustatymai!"
+
+#: plugin.py:1591
+msgid "Yes"
+msgstr "taip"
+
+#: plugin.py:1561
+msgid ""
+"You may not use this settings!\n"
+"At least one day a week should be included!"
+msgstr ""
+"Jūs negalite naudoti šių nustatymų!\n"
+"Turi būti įtraukta bent viena savaitės diena!"
+
+#: plugin.py:1017
+msgid "Your STB will freeze during the flashing process.\n"
+msgstr "Diegimo metu jūsų imtuvas nustos reaguoti į komandas.\n"
+
+#: MultiBootSwitcher.py:123
+#, python-format
+msgid ""
+"Your box needs Bootloaderversion(s)\n"
+"\n"
+"%s\n"
+"\n"
+"to make compatible with Bootoptions!"
+msgstr ""
+"Kad atitiktų įkrovos nustatymus,\n"
+"Jūsų imtuvui reikia įkrovos programos versijos\n"
+"\n"
+"%s"
+
+#: plugin.py:468 plugin.py:534 plugin.py:575
+msgid "Your reciever not supported!"
+msgstr "Jūsų imtuvui netinkama!"
+
+#: plugin.py:113
+msgid "cleanup disabled"
+msgstr "valymas išjungtas"
+
+#: plugin.py:715 plugin.py:797 plugin.py:1076 plugin.py:1117
+#, python-format
+msgid "current:  %s"
+msgstr "dabar: %s"
+
+#: plugin.py:99
+msgid "disabled"
+msgstr "išjungta"
+
+#: plugin.py:105
+msgid "no"
+msgstr "ne"
+
+#: MultiBootSwitcher.py:328
+msgid "no image found"
+msgstr "nėra atvaizdo"
+
+#: plugin.py:1011
+msgid "ofgwrite flashing ready.\n"
+msgstr "ofgwrite įdiegimui parengtas.\n"
+
+#: plugin.py:1016
+msgid "ofgwrite will stop enigma2 now to run the flash.\n"
+msgstr "ofgwrite dabar sustabdys enigma2 ir pradės diegimą.\n"
+
+#: plugin.py:116
+msgid "older than 1 week"
+msgstr "senesnius, nei 1 savaitės"
+
+#: plugin.py:114
+msgid "older than 2 days"
+msgstr "senesnius, nei 2 dienų"
+
+#: plugin.py:117
+msgid "older than 2 weeks"
+msgstr "senesnius, nei 2 savaičių"
+
+#: plugin.py:115
+msgid "older than 3 days"
+msgstr "senesnius, nei 3 dienų"
+
+#: plugin.py:120
+msgid "older than 3 months"
+msgstr "senesnius, nei 3 mėnesių"
+
+#: plugin.py:118
+msgid "older than 3 weeks"
+msgstr "senesnius, nei 3 savaičių"
+
+#: plugin.py:119
+msgid "older than 4 weeks"
+msgstr "senesnius, nei 4 savaičių"
+
+#: MultiBootSwitcher.py:113
+msgid "placeholder message 2"
+msgstr "vietos rezervavimo žinutė 2"
+
+#: plugin.py:1012
+msgid "please press exit to go back to the menu.\n"
+msgstr "Kad grįžtumėte į meniu, spauskite 'EXIT'.\n"
+
+#: plugin.py:106
+msgid "type info"
+msgstr "informacijos tipas"
+
+#: plugin.py:107
+msgid "type yes/no"
+msgstr "tipas taip/ne"
+
+#: MultiBootSwitcher.py:248
+msgid "unknown"
+msgstr "nežinoma"
+
+#: plugin.py:101
+msgid "wake up and shutdown after backup"
+msgstr "pažadinti ir išjungti po atsarginės kopijos sukūrimo"
+
+#: plugin.py:100
+msgid "wake up for backup"
+msgstr "pažadinti atsarginei kopijai sukurti"
