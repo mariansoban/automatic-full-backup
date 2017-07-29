@@ -97,7 +97,7 @@ msgstr "Dagen profiel"
 msgid "Disabled"
 msgstr "Gedeactiveerd"
 
-msgid "Do you really want to create a full backup of directory %s ?"
+msgid "Do you really want to create a full backup in directory %s ?"
 msgstr "Wil je echt een volledige backup maken van de map %s ?"
 
 msgid "Do you really want to unpack %s ?"

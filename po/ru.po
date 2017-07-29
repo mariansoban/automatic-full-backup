@@ -109,7 +109,7 @@ msgstr "Профили дней"
 msgid "Disabled"
 msgstr "Отключено"
 
-msgid "Do you really want to create a full backup of directory %s ?"
+msgid "Do you really want to create a full backup in directory %s ?"
 msgstr "Вы действительно хотите создать полный бекап в директорию %s ?"
 
 msgid "Do you really want to stop the creation of backup?"

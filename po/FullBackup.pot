@@ -268,7 +268,7 @@ msgstr ""
 
 #: plugin.py:1592 plugin.py:1594 plugin.py:1596
 #, python-format
-msgid "Do you really want to create a full backup of directory %s ?"
+msgid "Do you really want to create a full backup in directory %s ?"
 msgstr ""
 
 #: plugin.py:689

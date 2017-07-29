@@ -1593,11 +1593,11 @@ class GreatingManualBackup(MessageBox):
 		try:
 			if MODEL_NAME == "hd51" or MODEL_NAME == "vs1500"  or MODEL_NAME == "h7":
 				list = [ (_("Yes"), True), (_("Yes") + _(" as recovery"), "recovery"), (_("No"), False) ]
-				MessageBox.__init__(self, session, text = _("Do you really want to create a full backup of directory %s ?") % dir, list=list)
+				MessageBox.__init__(self, session, text = _("Do you really want to create a full backup in directory %s ?") % dir, list=list)
 			else:
-				MessageBox.__init__(self, session, _("Do you really want to create a full backup of directory %s ?") % dir, MessageBox.TYPE_YESNO)
+				MessageBox.__init__(self, session, _("Do you really want to create a full backup in directory %s ?") % dir, MessageBox.TYPE_YESNO)
 		except:
-			MessageBox.__init__(self, session, _("Do you really want to create a full backup of directory %s ?") % dir, MessageBox.TYPE_YESNO)
+			MessageBox.__init__(self, session, _("Do you really want to create a full backup in directory %s ?") % dir, MessageBox.TYPE_YESNO)
 		self.skinName = "MessageBox"
 
 def msgManualBackupClosed(ret, curdir=None):

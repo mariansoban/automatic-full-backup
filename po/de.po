@@ -98,7 +98,7 @@ msgstr "Tages Profil"
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-msgid "Do you really want to create a full backup of directory %s ?"
+msgid "Do you really want to create a full backup in directory %s ?"
 msgstr "Möchten sie ein Voll-Backup vom Verzeichnis %s erstellen ?"
 
 msgid "Do you really want to unpack %s ?"
