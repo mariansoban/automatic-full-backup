@@ -408,7 +408,7 @@ msgstr ""
 msgid " as recovery"
 msgstr " как 'Recovery'"
 
-msgid " - OK show/nide"
+msgid " - OK show/hide"
 msgstr " - ОК скрыть/показать"
 
 msgid ""

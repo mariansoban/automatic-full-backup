@@ -596,7 +596,7 @@ class FullBackupConfig(ConfigListScreen,Screen):
 			elif ret == "background_recovery":
 				self.backgroundMode(recovery=True)
 			elif ret == "console_recovery" or ret == "console":
-				text = _('Console log') + _(' - OK show/nide')
+				text = _('Console log') + _(' - OK show/hide')
 				cmd = backupCommand()
 				if ret == "console_recovery":
 					cmd += " %s" % "recovery"
