@@ -63,7 +63,7 @@ msgid " (unknown mode)"
 msgstr " (nežinomas režimas)"
 
 #: plugin.py:599 plugin.py:1628
-msgid " - OK show/nide"
+msgid " - OK show/hide"
 msgstr " - 'OK' rodyti/nerodyti"
 
 #: plugin.py:585 plugin.py:586 plugin.py:1591
@@ -323,7 +323,7 @@ msgid "Do you really want to create a full backup of directory %s ?"
 msgstr "Jūs tikrai norite sukurti katalogo %s pilną atsarginę kopiją?"
 
 #: plugin.py:689
-msgid "Do you really want to stop the creation of backup?"
+msgid "Do you really want to stop the creation in backup?"
 msgstr "Jūs tikrai norite nutraukti atsarginės kopijos kūrimą?"
 
 #: plugin.py:1044 plugin.py:1248
