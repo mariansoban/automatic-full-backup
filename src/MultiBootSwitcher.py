@@ -147,7 +147,7 @@ class MultiBootSwitcher(ConfigListScreen, Screen):
 						self.getCurrent()
 						return
 					self.list[self.selection] = newname
-					self["config"].setText(_("Select Image: %s") %newname)
+					self["config"].setText(_("Select Image: %s") % (self.list[self.selection] + self.getNumberPartition()))
 			else:
 				if not os.path.exists('/boot/%s' % self.oldname):
 					self.getCurrent()
@@ -323,7 +323,7 @@ class MultiBootSwitcher(ConfigListScreen, Screen):
 		if not self.MultiBootSelector:
 			return
 		if len(self.list):
-			self["config"].setText(_("Select Image: %s") % self.list[self.selection])
+			self["config"].setText(_("Select Image: %s") % (self.list[self.selection] + self.getNumberPartition()))
 		elif 'left' in self["actions"].actions:
 			self["config"].setText(_("Select Image: %s") % _("no image found"))
 			del self["actions"].actions['left']
@@ -331,6 +331,26 @@ class MultiBootSwitcher(ConfigListScreen, Screen):
 			del self["actions"].actions['green']
 			del self["actions"].actions['yellow']
 			#del self["actions"].actions['ok']
+
+	def getNumberPartition(self):
+		part = ""
+		if len(self.list):
+			try:
+				cur = self.readlineFile('/boot/%s' % self.list[self.selection])
+				if cur:
+					temp = cur.split(' ')
+					device = temp[4].split("=")[1]
+					if '/dev/mmcblk0p3' in device:
+						part = " (I)"
+					elif '/dev/mmcblk0p5' in device:
+						part = " (II)"
+					elif '/dev/mmcblk0p7' in device:
+						part = " (III)"
+					elif '/dev/mmcblk0p9' in device:
+						part = " (IV)"
+			except:
+				pass
+		return part
 
 	def checkBootEntry(self, ENTRY):
 		try:
