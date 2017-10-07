@@ -266,7 +266,7 @@ if [ -n "$RECOVERY" ] && [ $RECOVERY = "recovery" ] ; then
 			/usr/bin/mcopy -i ${WORKDIR}/boot.img -v ${WORKDIR}/STARTUP_4 ::
 			dd conv=notrunc if=${WORKDIR}/boot.img of=${EMMC_IMAGE} bs=${BLOCK_SIZE} seek=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* ${BLOCK_SECTOR})
 		else
-			dd conv=notrunc if=${WORKDIR}/boot.img of=${EMMC_IMAGE} bs=${BLOCK_SIZE} seek=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* ${BLOCK_SECTOR})
+			dd conv=notrunc if=/dev/${MTDBOOT} of=${EMMC_IMAGE} bs=${BLOCK_SIZE} seek=$(expr ${IMAGE_ROOTFS_ALIGNMENT} \* ${BLOCK_SECTOR})
 		fi
 		MTDROOTFS=$(readlink /dev/root)
 		if [ $MTDROOTFS = "mmcblk0p3" ]; then
