@@ -46,7 +46,7 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-PLUGIN_VERSION = _(" ver. ") + "5.6"
+PLUGIN_VERSION = _(" ver. ") + "5.7"
 
 BOX_NAME = "none"
 MODEL_NAME = "none"
@@ -202,19 +202,19 @@ def runBlkid():
 			for line in ret:
 				if '/dev/mmcblk0p3' in line:
 					if 'TYPE' not in line:
-						os.system('mkfs.ext2 -F /dev/mmcblk0p3')
+						os.system('mkfs.ext4 -F /dev/mmcblk0p3')
 					list.append(('mmcblk0p3'))
 				if '/dev/mmcblk0p5' in line:
 					if 'TYPE' not in line:
-						os.system('mkfs.ext2 -F /dev/mmcblk0p5')
+						os.system('mkfs.ext4 -F /dev/mmcblk0p5')
 					list.append(('mmcblk0p5'))
 				if '/dev/mmcblk0p7' in line:
 					if 'TYPE' not in line:
-						os.system('mkfs.ext2 -F /dev/mmcblk0p7')
+						os.system('mkfs.ext4 -F /dev/mmcblk0p7')
 					list.append(('mmcblk0p7'))
 				if '/dev/mmcblk0p9' in line:
 					if 'TYPE' not in line:
-						os.system('mkfs.ext2 -F /dev/mmcblk0p9')
+						os.system('mkfs.ext4 -F /dev/mmcblk0p9')
 					list.append(('mmcblk0p9'))
 				if '/dev/mmcblk0p10' in line:
 					if 'TYPE' not in line and 'swap' in line:

@@ -5,4 +5,4 @@ mount -t tmpfs tmpfs /newroot
 chmod 755 /usr/lib/enigma2/python/Plugins/Extensions/FullBackup/bin/armv7l/ofgwrite_bin
 chmod 755 /usr/lib/enigma2/python/Plugins/Extensions/FullBackup/bin/armv7l/ofgwrite_test
 cp /usr/lib/enigma2/python/Plugins/Extensions/FullBackup/bin/armv7l/ofgwrite_bin /newroot/
-/newroot/ofgwrite_bin $*
+/newroot/ofgwrite_bin "$@"
