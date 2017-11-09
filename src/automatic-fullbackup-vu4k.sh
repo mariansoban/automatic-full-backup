@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-VERSION="vu4k models- 25/11/2016\ncreator of the script Dimitrij (http://forums.openpli.org)\n"
+VERSION="vu4k models- 09/11/2017\ncreator of the script Dimitrij (http://forums.openpli.org)\n"
 DIRECTORY="$1"
 START=$(date +%s)
 DATE=`date +%Y%m%d_%H%M`
@@ -48,6 +48,10 @@ if [ -f /proc/stb/info/vumodel ] ; then
 		KERNELNAME="kernel_auto.bin"
 	elif [ $MODEL = "uno4k" ] ; then
 		echo "Found VU+ Uno 4K\n"
+		MTD_KERNEL="mmcblk0p1"
+		KERNELNAME="kernel_auto.bin"
+	elif [ $MODEL = "uno4kse" ] ; then
+		echo "Found VU+ Uno 4K se\n"
 		MTD_KERNEL="mmcblk0p1"
 		KERNELNAME="kernel_auto.bin"
 	elif [ $MODEL = "ultimo4k" ] ; then
@@ -125,7 +129,6 @@ if [ $TYPE = "VU" ] ; then
 	mv "$WORKDIR/$KERNELNAME" "$MAINDEST/$KERNELNAME"
 	mv "$WORKDIR/$ROOTFSTYPE" "$MAINDEST/$ROOTFSTYPE"
 	echo "$MODEL-$IMAGEVERSION" > "$MAINDEST/imageversion"
-	if [ $MODEL = "uno4k" ] ; then
 		echo "rename this file to 'force.update' when need confirmation" > "$MAINDEST/noforce.update"
 	else
 		echo "This file forces a reboot after the update" > "$MAINDEST/reboot.update"
