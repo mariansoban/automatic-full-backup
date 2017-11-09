@@ -129,6 +129,7 @@ if [ $TYPE = "VU" ] ; then
 	mv "$WORKDIR/$KERNELNAME" "$MAINDEST/$KERNELNAME"
 	mv "$WORKDIR/$ROOTFSTYPE" "$MAINDEST/$ROOTFSTYPE"
 	echo "$MODEL-$IMAGEVERSION" > "$MAINDEST/imageversion"
+	if [ $MODEL = "uno4k" ] || [ $MODEL = "uno4kse" ] ; then
 		echo "rename this file to 'force.update' when need confirmation" > "$MAINDEST/noforce.update"
 	else
 		echo "This file forces a reboot after the update" > "$MAINDEST/reboot.update"
