@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-VERSION="20/04/2016\ncreators of the script Pedro_Newbie and Dimitrij (http://forums.openpli.org)\n"
+VERSION="20/11/2017\ncreators of the script Pedro_Newbie and Dimitrij (http://forums.openpli.org)\n"
 DIRECTORY="$1"
 START=$(date +%s)
 DATE=`date +%Y%m%d_%H%M`
@@ -117,7 +117,7 @@ if [ -f /proc/stb/info/boxtype ] ; then
 		TYPE=EDISION
 		MKUBIFS_ARGS="-m 2048 -e 126976 -c 4096 -F"
 		UBINIZE_ARGS="-m 2048 -p 128KiB"
-		SHOWNAME="Edision OS mega / mini(+)"
+		SHOWNAME="Edision OS mega / mini(+) / nino"
 		MAINDEST="$DIRECTORY/$MODEL"
 		EXTRA="$DIRECTORY/automatic_fullbackup/$DATE"
 		echo "Destination        = $MAINDEST\n"

@@ -1,7 +1,7 @@
 #!/bin/sh
 #### BACKUP IMAGE ####
 
-VERSION="ARM - 18/07/2017\ncreator of the script Dimitrij (http://forums.openpli.org)\n"
+VERSION="ARM - 20/11/2017\ncreator of the script Dimitrij (http://forums.openpli.org)\n"
 DIRECTORY="$1"
 START=$(date +%s)
 DATE=`date +%Y%m%d_%H%M`
@@ -16,6 +16,18 @@ ROOTFSTYPE="rootfs.tar.bz2"
 IMAGETYPE="disk.img"
 WORKDIR="$DIRECTORY/bi"
 RESIZE2FS=/sbin/resize2fs
+
+getaddr() {
+	python - $1 $2<<-"EOF"
+		from sys import argv
+		filename = argv[1]
+		address = int(argv[2])
+		fh = open(filename,'rb')
+		header = fh.read(2048)
+		fh.close()
+		print "%d" % ( (ord(header[address+2]) <<16 ) | (ord(header[address+1]) << 8) |  ord(header[address]) )
+	EOF
+}
 
 if [ -f /etc/issue ] ; then
 	ISSUE=`cat /etc/issue | grep . | tail -n 1 ` 
@@ -315,12 +327,13 @@ else
 fi
 
 
-dd if=/dev/$MTD_KERNEL of=$WORKDIR/$KERNELNAME > /dev/null 2>&1
+dd if=/dev/$MTD_KERNEL of=$WORKDIR/kernel.dump
+ADDR=$(getaddr $WORKDIR/kernel.dump 44)
+dd if=$WORKDIR/kernel.dump of=$WORKDIR/$KERNELNAME bs=$ADDR count=1 && rm $WORKDIR/kernel.dump
 echo "Kernel resides on /dev/$MTD_KERNEL\n" 
 
 echo "Start creating rootfs.tar\n"
-$MKFS -cf $WORKDIR/rootfs.tar -C /tmp/bi/root --exclude=/var/nmbd/* .
-$BZIP2 $WORKDIR/rootfs.tar
+$MKFS -jcf $WORKDIR/$ROOTFSTYPE -C /tmp/bi/root .
 
 TSTAMP="$(date "+%Y-%m-%d-%Hh%Mm")"
 

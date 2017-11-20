@@ -46,7 +46,7 @@ def _(txt):
 		t = gettext.gettext(txt)
 	return t
 
-PLUGIN_VERSION = _(" ver. ") + "5.7"
+PLUGIN_VERSION = _(" ver. ") + "5.8"
 
 BOX_NAME = "none"
 MODEL_NAME = "none"
